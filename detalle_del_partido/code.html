@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface": "#f9f9f9",
+                            "status-ok": "#27AE60",
+                            "status-error": "#EB5757",
+                            "outline": "#757963",
+                            "on-secondary": "#ffffff",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "outline-variant": "#c5c9af",
+                            "on-primary-container": "#5c7000",
+                            "text-secondary": "#8A8A8A",
+                            "error": "#ba1a1a",
+                            "inverse-primary": "#b2d424",
+                            "on-surface": "#1a1c1c",
+                            "tertiary": "#506071",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "primary-fixed": "#cdf143",
+                            "on-secondary-fixed-variant": "#474646",
+                            "surface-container-high": "#e8e8e8",
+                            "secondary": "#5f5e5e",
+                            "on-tertiary": "#ffffff",
+                            "on-background": "#1a1c1c",
+                            "border-subtle": "#E5E5E5",
+                            "surface-container": "#eeeeee",
+                            "on-tertiary-container": "#5a6a7b",
+                            "on-surface-variant": "#454935",
+                            "secondary-fixed": "#e5e2e1",
+                            "inverse-on-surface": "#f1f1f1",
+                            "background": "#f9f9f9",
+                            "on-primary-fixed": "#171e00",
+                            "primary-container": "#d4f84a",
+                            "on-error": "#ffffff",
+                            "on-tertiary-fixed": "#0c1d2b",
+                            "on-secondary-container": "#656464",
+                            "surface-variant": "#e2e2e2",
+                            "surface-dim": "#dadada",
+                            "tertiary-fixed-dim": "#b7c8dc",
+                            "error-container": "#ffdad6",
+                            "primary": "#536600",
+                            "on-error-container": "#93000a",
+                            "surface-container-low": "#f3f3f3",
+                            "tertiary-fixed": "#d3e4f8",
+                            "primary-fixed-dim": "#b2d424",
+                            "surface-bright": "#f9f9f9",
+                            "status-pending": "#F2994A",
+                            "on-primary": "#ffffff",
+                            "surface-container-lowest": "#ffffff",
+                            "secondary-container": "#e5e2e1",
+                            "on-tertiary-fixed-variant": "#384858",
+                            "on-primary-fixed-variant": "#3e4c00",
+                            "surface-tint": "#536600",
+                            "inverse-surface": "#2f3131",
+                            "text-primary": "#111111",
+                            "tertiary-container": "#daebff",
+                            "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "stack-sm": "12px",
+                            "stack-md": "24px",
+                            "inline-gutter": "16px",
+                            "stack-lg": "32px",
+                            "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                            "label-caps": ["Inter"],
+                            "headline-lg": ["Hanken Grotesk"],
+                            "headline-lg-mobile": ["Hanken Grotesk"],
+                            "label-muted": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-xl": ["Hanken Grotesk"],
+                            "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-muted": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "headline-xl": ["44px", {"lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased pb-32 min-h-screen">
+<!-- Top Navigation (Mobile) -->
+<header class="md:hidden flex justify-between items-center px-container-margin py-stack-sm w-full bg-surface z-50 sticky top-0">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high hover:bg-surface-variant transition-colors" onclick="window.history.back()">
+<span class="material-symbols-outlined text-text-primary">arrow_back</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface">Detalle Partido</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-text-primary">share</span>
+</button>
+</header>
+<!-- Top Navigation (Web) -->
+<header class="hidden md:flex justify-between items-center px-container-margin py-stack-sm w-full bg-surface border-b border-border-subtle z-50 sticky top-0">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high hover:bg-surface-variant transition-colors" onclick="window.history.back()">
+<span class="material-symbols-outlined text-text-primary">arrow_back</span>
+</button>
+<span class="text-headline-lg font-headline-lg font-bold text-on-surface">Padel Pro</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-text-primary cursor-pointer">share</span>
+</div>
+</header>
+<main class="max-w-4xl mx-auto md:mt-8">
+<!-- Hero Image -->
+<section class="relative w-full h-[353px] md:h-[442px] md:rounded-xl overflow-hidden shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A professional padel court viewed from a slightly elevated angle, illuminated by bright stadium lights under a clear evening sky. The blue court surface contrasts sharply with the white lines. The mood is highly energetic and competitive, fitting a high-performance sports tech app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7w_FlGQ3chxlsOdgh1i3saXIonGTX1NUOy7hrtzjFmDEMDp9tvrgn6CYQ1Q2RXjQYuLO-a-jc_ku-6ZlwSxHcQyA-Ux_Qx2gZSHzBU_Z_ptRw2cTm4bvLjCWoAZqDauO8Ec4qg-4beKFEHMVN3gVVWpO_ehCOPFy-aFvf8hCrujKqqCGLJOjLwSpLHdNVe6iMC_XRMbNZiU8MyBbBjI2GD6ZyBYriiiKCIxrE9PC-LcPTKwRl_wA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-container-margin md:p-stack-lg w-full">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface/20 backdrop-blur-md rounded-full mb-3 text-on-primary">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="text-label-caps font-label-caps uppercase text-white">Kondor Sede</span>
+</div>
+<h2 class="text-headline-xl font-headline-xl text-white mb-1">Cancha 2</h2>
+</div>
+</section>
+<!-- Main Content -->
+<div class="px-container-margin py-stack-lg md:px-0">
+<!-- Key Info Bar -->
+<div class="flex flex-wrap gap-4 items-center bg-surface-container-high p-4 rounded-xl mb-stack-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-text-secondary uppercase">Fecha y Hora</p>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Viernes 25 Ago, 19:30hs</p>
+</div>
+</div>
+<div class="w-px h-10 bg-border-subtle hidden sm:block"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-text-secondary uppercase">Duración</p>
+<p class="text-body-md font-body-md font-semibold text-on-surface">90 min</p>
+</div>
+</div>
+</div>
+<!-- Level & Price Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-stack-lg">
+<div class="border border-border-subtle p-4 rounded-xl flex items-start gap-4 bg-surface">
+<span class="material-symbols-outlined text-primary text-[28px]">trending_up</span>
+<div>
+<h3 class="text-label-caps font-label-caps text-text-secondary uppercase mb-1">Nivel Requerido</h3>
+<p class="text-body-lg font-body-lg font-semibold text-on-surface">Nivel 4.5+</p>
+<p class="text-label-muted font-label-muted text-text-secondary">Intermedio / Avanzado</p>
+</div>
+</div>
+<div class="border border-border-subtle p-4 rounded-xl flex items-start gap-4 bg-surface">
+<span class="material-symbols-outlined text-primary text-[28px]">payments</span>
+<div>
+<h3 class="text-label-caps font-label-caps text-text-secondary uppercase mb-1">Precio</h3>
+<p class="text-body-lg font-body-lg font-semibold text-on-surface">$3.000</p>
+<p class="text-label-muted font-label-muted text-text-secondary">por persona</p>
+</div>
+</div>
+</div>
+<!-- Players Grid -->
+<section class="mb-stack-lg">
+<div class="flex justify-between items-end mb-stack-sm">
+<h3 class="text-headline-lg-mobile font-headline-lg-mobile font-bold">Jugadores (2/4)</h3>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Player 1 -->
+<div class="bg-surface-container-high rounded-xl p-4 flex flex-col items-center justify-center text-center border border-transparent">
+<img class="w-16 h-16 rounded-full object-cover mb-3" data-alt="A clean, high-contrast close-up portrait of a young athletic male with dark hair, smiling slightly. He is wearing a dark sports t-shirt. The background is a minimalist light gray to match a clean app UI. Professional studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa9zY_TNKk3b_Tzan5pjLRL4etN9haLKbjul-jFC7YL8b-Oz6oJ4N4z6YLogWy8Qxog9_T9SCAfk8Xfs6hQZ8cea6AD6wDjknfD7fJnMhOGLR5EOQL7UKAl1xCQy1C3uis_5b3mBVh0BF4J564l421TlwY5xcFM35h6Z1pD4SYsNwERYoJR3cMqZEdxor4NZbc9aoU1AQq3JlhuIhGFTdABzevBlyK4Z7XN7oOr2hByQFORPHYG8I"/>
+<span class="text-body-md font-body-md font-semibold text-on-surface">Mateo R.</span>
+<span class="text-label-muted font-label-muted text-text-secondary mt-1 bg-surface px-2 py-0.5 rounded-full">Nivel 4.5</span>
+</div>
+<!-- Player 2 -->
+<div class="bg-surface-container-high rounded-xl p-4 flex flex-col items-center justify-center text-center border border-transparent">
+<img class="w-16 h-16 rounded-full object-cover mb-3" data-alt="A clean, high-contrast close-up portrait of an athletic male with short brown hair, looking focused. He is wearing a white sports top. The background is a minimalist light gray to match a clean app UI. Professional studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOhYhXwnF6yUIfmhh4TGIpSUli6KUi2oIkfllyeFD7-tnIrIGdHg7cpEPy8qCzBY8ZVVicSE2M9Wwcvhunmls1szmlTCPQkOjgY9l0zXMms6y-GiqEegBNiQ95lZ_3rxEuEOSqtzV9gFN34s1POQZrOcHoLH_wu9iNwC0Va9T1LSFo8ni-NQnT9EZ0PxzumjgFxTnOIg0dDAHlN22zTUfVEm4N5Gy4HBvydk-9Ln4FtLYYsORBODg"/>
+<span class="text-body-md font-body-md font-semibold text-on-surface">Lucas G.</span>
+<span class="text-label-muted font-label-muted text-text-secondary mt-1 bg-surface px-2 py-0.5 rounded-full">Nivel 5.0</span>
+</div>
+<!-- Empty Spot 1 -->
+<div class="bg-surface border border-dashed border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-text-secondary mb-3">
+<span class="material-symbols-outlined text-[24px]">person_add</span>
+</div>
+<span class="text-body-md font-body-md text-text-secondary">Lugar Libre</span>
+</div>
+<!-- Empty Spot 2 -->
+<div class="bg-surface border border-dashed border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-text-secondary mb-3">
+<span class="material-symbols-outlined text-[24px]">person_add</span>
+</div>
+<span class="text-body-md font-body-md text-text-secondary">Lugar Libre</span>
+</div>
+</div>
+</section>
+<!-- Chat Preview -->
+<section class="border border-border-subtle rounded-xl p-4 mb-8 bg-surface">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+<h4 class="text-body-lg font-body-lg font-semibold">Chat del Partido</h4>
+</div>
+<span class="bg-surface-container-high text-label-caps font-label-caps px-2 py-1 rounded text-on-surface">1 NUEVO</span>
+</div>
+<div class="flex gap-3 items-start bg-surface-container-low p-3 rounded-lg">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar placeholder for a chat interface, showing a generic abstract human silhouette in minimalist high-contrast gray and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_i112hRrb-zifleG5pKWW8HajxgWCktVKp8k5nbtlAoSpACJ4FjarDk2dqwQpXlbTfTturlu8-TVemVhqzDvMrqAUEIhLe0O_jq4lPVWkC3jCCPUoa_nHBY-PeNTeeCHMu2qW-JUgQECkfMuZDX48u1dw4coqDRXcK-vzsNlgdpop45QxEg_Ts1F-mpmvJdeMVBSgODd_OJHssIvTbmZdZmA-ojKyEtS7SM76jeoCwM4KCoU9k6E"/>
+<div>
+<p class="text-label-caps font-label-caps text-text-secondary mb-0.5">Mateo R.</p>
+<p class="text-body-md font-body-md text-on-surface">Llevo pelotas nuevas! Nos vemos 19:15?</p>
+</div>
+</div>
+<button class="w-full mt-3 text-center text-label-caps font-label-caps text-primary uppercase hover:underline">Abrir Chat Completo</button>
+</section>
+</div>
+</main>
+<!-- Floating Action Area -->
+<div class="fixed bottom-0 left-0 w-full p-container-margin bg-surface/90 backdrop-blur-md border-t border-border-subtle z-40 flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="hidden sm:block">
+<p class="text-label-caps font-label-caps text-text-secondary uppercase">Total a pagar ahora</p>
+<p class="text-headline-lg font-headline-lg font-bold text-on-surface">$3.000</p>
+</div>
+<button class="w-full sm:w-auto bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase py-4 px-8 rounded-full shadow-lg hover:bg-inverse-primary transition-colors flex items-center justify-center gap-2">
+<span>Unirme al Partido</span>
+<span class="material-symbols-outlined">sports_tennis</span>
+</button>
+</div>
+</body></html>

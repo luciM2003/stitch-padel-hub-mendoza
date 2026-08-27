@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Padel Pro - Hola Mateo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Hanken+Grotesk:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "primary": "#536600",
+                        "on-surface": "#1a1c1c",
+                        "status-pending": "#F2994A",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#5c7000",
+                        "inverse-surface": "#2f3131",
+                        "text-secondary": "#8A8A8A",
+                        "primary-fixed": "#cdf143",
+                        "on-background": "#1a1c1c",
+                        "inverse-primary": "#b2d424",
+                        "on-tertiary-fixed": "#0c1d2b",
+                        "surface": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3e4c00",
+                        "secondary-fixed": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#454935",
+                        "tertiary": "#506071",
+                        "border-subtle": "#E5E5E5",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-container": "#656464",
+                        "surface-container": "#eeeeee",
+                        "status-ok": "#27AE60",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#5a6a7b",
+                        "on-tertiary-fixed-variant": "#384858",
+                        "secondary-container": "#e5e2e1",
+                        "tertiary-fixed-dim": "#b7c8dc",
+                        "status-error": "#EB5757",
+                        "text-primary": "#111111",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#536600",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline": "#757963",
+                        "primary-fixed-dim": "#b2d424",
+                        "outline-variant": "#c5c9af",
+                        "primary-container": "#d4f84a",
+                        "secondary": "#5f5e5e",
+                        "on-primary-fixed": "#171e00",
+                        "tertiary-container": "#daebff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d3e4f8",
+                        "on-secondary-fixed": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "4xl": "2rem"
+                    },
+                    "spacing": {
+                        "inline-gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "container-margin": "20px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-muted": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-muted": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar (Mobile & Desktop Hybrid) -->
+<header class="flex justify-between items-center px-container-margin py-stack-md w-full bg-surface docked full-width top-0 sticky z-40 flat no shadows">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest border border-border-subtle">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, well-lit portrait of a young athletic man smiling casually, suitable for a fitness app profile picture. Modern light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8"/>
+</div>
+<div>
+<p class="text-label-muted font-label-muted text-secondary">Good morning,</p>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-text-primary">Hola, Mateo 👋</h1>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<main class="px-container-margin flex flex-col gap-stack-lg max-w-5xl mx-auto mt-4">
+<!-- Próxima Reserva Card -->
+<section class="flex flex-col gap-stack-sm">
+<div class="bg-text-primary rounded-4xl p-6 text-on-primary relative overflow-hidden flex flex-col justify-between min-h-[220px] shadow-2xl">
+<!-- Abstract Map/Texture Background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" data-alt="A subtle, dark topographical map pattern or abstract geometric grid in charcoal grey, adding texture to a black background without distracting from foreground elements. High contrast modern aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBClleIFW6FwHVCRoWGbmvTEBxI2PWZ8nkn_MChdyxQYkOHirtHcXIOrE37kL9jRaWlzvTtxvxYfSIRkWMmTGlB4G8avU0VoM9kYsxl-D72kSAdonstgZDAkcrB-ABuOAitvBPnc_d2U91iWyFaMJ9ilATefoEDOgP0MUbQ68PdhlvgO6h_MV5UYxFVkN69_r5STivUWpX5vU713N6nDUJDG0FENySvgWzVOZap5-3aiwUaAiI3oqs')"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<span class="inline-block px-3 py-1 bg-surface-container-highest/20 rounded-full text-label-caps font-label-caps text-on-primary backdrop-blur-sm mb-2">Próxima Reserva</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-on-primary">Hoy 20:30hs</h2>
+</div>
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-text-primary" style="font-variation-settings: 'FILL' 1;">sports_tennis</span>
+</div>
+</div>
+<div class="relative z-10 bg-inverse-surface/80 backdrop-blur-md rounded-2xl p-4 flex items-center justify-between border border-secondary-fixed-dim/20 mt-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-primary">Kondor Sede</p>
+<p class="text-label-muted font-label-muted text-secondary-fixed-dim">Cancha 3 • Dobles</p>
+</div>
+</div>
+<button class="bg-primary-fixed text-text-primary px-4 py-2 rounded-full text-label-caps font-label-caps font-bold hover:bg-inverse-primary transition-colors">
+                        Ver Detalle
+                    </button>
+</div>
+</div>
+</section>
+<!-- Quick Actions Bento -->
+<section class="grid grid-cols-2 gap-inline-gutter">
+<!-- Reservar Ahora -->
+<button class="bg-primary-container rounded-3xl p-5 flex flex-col items-start justify-between h-36 hover:scale-[0.98] transition-transform active:opacity-80">
+<div class="w-10 h-10 bg-text-primary rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">add</span>
+</div>
+<div class="text-left">
+<h3 class="text-body-md font-body-md font-bold text-text-primary">Reservar ahora</h3>
+<p class="text-label-muted font-label-muted text-on-surface-variant mt-1">Canchas libres</p>
+</div>
+</button>
+<!-- Partidos Abiertos -->
+<button class="bg-surface-container-low rounded-3xl p-5 flex flex-col items-start justify-between h-36 border border-border-subtle hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="w-10 h-10 bg-surface-container-highest rounded-full flex items-center justify-center mb-4 text-text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">groups</span>
+</div>
+<div class="text-left">
+<h3 class="text-body-md font-body-md font-bold text-text-primary">Partidos Abiertos</h3>
+<p class="text-label-muted font-label-muted text-secondary mt-1">Únete a jugar</p>
+</div>
+</button>
+</section>
+<!-- Sedes Cercanas -->
+<section class="flex flex-col gap-stack-sm mb-8">
+<div class="flex justify-between items-end mb-2">
+<h2 class="text-body-lg font-body-lg font-bold text-text-primary">Sedes cercanas</h2>
+<button class="text-label-caps font-label-caps text-secondary hover:text-text-primary transition-colors">Ver todas</button>
+</div>
+<div class="flex overflow-x-auto gap-inline-gutter hide-scrollbar pb-4 -mx-container-margin px-container-margin snap-x">
+<!-- Sede 1 -->
+<div class="min-w-[240px] max-w-[280px] bg-surface rounded-2xl overflow-hidden border border-border-subtle snap-start flex-shrink-0 group cursor-pointer hover:shadow-lg transition-all">
+<div class="h-32 w-full relative">
+<img alt="Kondor Sede" class="w-full h-full object-cover" data-alt="A modern, high-end indoor padel tennis court with bright professional lighting and pristine blue artificial turf. Shot from a wide angle, capturing the spaciousness of the sports facility. Bright, clean light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpcKn0qimTLTen2Vm1tJkjiOzyUVRrhpd4XibL4sWwm8eyxpFLy9knvljBuS3dyq0CSgoes7_LcANlA6Ec2WEoMK_IoUtmE85xKshhyfKevW2_DgMcTawoVK79yo9tQEXck6eiFHr03VN-QDU1AKxExqD-jp4UTYGmoAZtmM4tMTx8LIyIkU9lazWMPtit-iJJwJ29sacGXRWWKdscmac48ArMd_1Dgx3gmDXoRRlwn2Y236aE7b0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-status-ok" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-caps font-label-caps text-text-primary">4.8</span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<h3 class="text-body-md font-body-md font-bold text-text-primary group-hover:text-primary transition-colors">Kondor Sede</h3>
+<p class="text-label-muted font-label-muted text-secondary">A 2.5 km • 6 Canchas</p>
+</div>
+</div>
+<!-- Sede 2 -->
+<div class="min-w-[240px] max-w-[280px] bg-surface rounded-2xl overflow-hidden border border-border-subtle snap-start flex-shrink-0 group cursor-pointer hover:shadow-lg transition-all">
+<div class="h-32 w-full relative">
+<img alt="Padel Duendes" class="w-full h-full object-cover" data-alt="An outdoor padel club on a sunny day with modern glass walls around the courts. Players in the background. Bright, high-contrast, modern sports lifestyle aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDss6FyvqNfNVu_HZrJSmuUJtacSPw0hpDAfxPUsvj8HqyHi9Ik7v-IS_Pdxa8Jjo7WcHRx2uNQ9OqZlgrsGcd-uG7bHXYQVyw7pc3NHMEIEJqASAyZHa2aKVivBfTgf0oNpKjL1bn3LE7--LIC-nxzpZ4_ETz2nYSf5OBB0obJ3Oc6RAkQBBiT8Fi6RbO_7tYtlK9YHUgfgq75mcc4c7gh_SYTHFkVOmR-834-TNqFstj0MuGo_kM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-status-ok" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-caps font-label-caps text-text-primary">4.5</span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<h3 class="text-body-md font-body-md font-bold text-text-primary group-hover:text-primary transition-colors">Padel Duendes</h3>
+<p class="text-label-muted font-label-muted text-secondary">A 4.1 km • 4 Canchas</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-end pb-6 pt-2 px-6 w-full fixed bottom-0 z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center gap-1">
+<div class="flex items-center justify-center bg-primary dark:bg-primary-fixed text-on-primary dark:text-on-primary-fixed rounded-full w-12 h-12 mb-2 shadow-md scale-110 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<span class="text-[10px] font-label-caps text-primary-fixed-dim opacity-0 absolute -bottom-4">Home</span> <!-- Hidden label for active state to keep pill clean, but accessible -->
+</button>
+<!-- Padel (Inactive) -->
+<button class="flex flex-col items-center gap-1 group">
+<div class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sports_tennis</span>
+</div>
+<span class="text-[10px] font-label-caps text-secondary">Padel</span>
+</button>
+<!-- Events (Inactive) -->
+<button class="flex flex-col items-center gap-1 group">
+<div class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">event_note</span>
+</div>
+<span class="text-[10px] font-label-caps text-secondary">Eventos</span>
+</button>
+<!-- Profile (Inactive) -->
+<button class="flex flex-col items-center gap-1 group">
+<div class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</div>
+<span class="text-[10px] font-label-caps text-secondary">Perfil</span>
+</button>
+</nav>
+</body></html>

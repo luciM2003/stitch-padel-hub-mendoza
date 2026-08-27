@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Administrador - Padel Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#384858",
+                        "on-secondary-container": "#656464",
+                        "on-primary-fixed-variant": "#3e4c00",
+                        "surface-tint": "#536600",
+                        "on-primary": "#ffffff",
+                        "status-error": "#EB5757",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c9af",
+                        "primary-fixed-dim": "#b2d424",
+                        "text-secondary": "#8A8A8A",
+                        "on-error-container": "#93000a",
+                        "text-primary": "#111111",
+                        "on-background": "#1a1c1c",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary": "#5f5e5e",
+                        "surface-container": "#eeeeee",
+                        "on-primary-fixed": "#171e00",
+                        "inverse-surface": "#2f3131",
+                        "status-pending": "#F2994A",
+                        "on-tertiary-fixed": "#0c1d2b",
+                        "inverse-primary": "#b2d424",
+                        "secondary-container": "#e5e2e1",
+                        "primary": "#536600",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#5c7000",
+                        "status-ok": "#27AE60",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "tertiary-fixed-dim": "#b7c8dc",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#454935",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed": "#d3e4f8",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#d4f84a",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#474646",
+                        "tertiary": "#506071",
+                        "tertiary-container": "#daebff",
+                        "border-subtle": "#E5E5E5",
+                        "primary-fixed": "#cdf143",
+                        "surface-dim": "#dadada",
+                        "surface-bright": "#f9f9f9",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface": "#f9f9f9",
+                        "outline": "#757963",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#5a6a7b",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "kondor": "28px"
+                    },
+                    "spacing": {
+                        "inline-gutter": "16px",
+                        "stack-sm": "12px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-muted": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-muted": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-text-primary font-body-md min-h-screen flex antialiased">
+<!-- Sidebar -->
+<aside class="w-64 bg-surface-container-lowest border-r border-border-subtle h-screen sticky top-0 flex flex-col hidden md:flex z-40 transition-all duration-300" id="sidebar">
+<div class="p-stack-md flex items-center justify-between">
+<span class="font-headline-lg text-headline-lg font-bold tracking-tighter text-on-surface">Padel Pro</span>
+<button class="text-text-secondary hover:text-text-primary" onclick="document.getElementById('sidebar').classList.toggle('w-20')">
+<span class="material-symbols-outlined">menu_open</span>
+</button>
+</div>
+<nav class="flex-1 px-inline-gutter py-stack-sm space-y-2 overflow-y-auto">
+<a class="flex items-center gap-4 p-3 bg-primary-container text-on-primary-container rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="sidebar-text whitespace-nowrap">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-text-secondary hover:bg-surface-container-low hover:text-text-primary rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="sidebar-text whitespace-nowrap">Reservas</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-text-secondary hover:bg-surface-container-low hover:text-text-primary rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined">sports_tennis</span>
+<span class="sidebar-text whitespace-nowrap">Canchas</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-text-secondary hover:bg-surface-container-low hover:text-text-primary rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="sidebar-text whitespace-nowrap">Clientes</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-text-secondary hover:bg-surface-container-low hover:text-text-primary rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="sidebar-text whitespace-nowrap">Caja</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-text-secondary hover:bg-surface-container-low hover:text-text-primary rounded-lg font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="sidebar-text whitespace-nowrap">Configuración</span>
+</a>
+</nav>
+<div class="p-stack-md border-t border-border-subtle mt-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young adult with a subtle smile, facing forward. The lighting is soft and studio-quality, emphasizing clear, bright features. The background is a minimalist, out-of-focus light gray that blends perfectly with a clean digital interface aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY"/>
+</div>
+<div class="sidebar-text overflow-hidden">
+<p class="font-label-caps text-label-caps text-text-primary truncate">Admin User</p>
+<p class="font-label-muted text-label-muted text-text-secondary truncate">admin@padelpro.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+<!-- Top App Bar (Mobile Nav Alternative) & Header -->
+<header class="bg-surface sticky top-0 z-30 px-container-margin py-stack-md flex justify-between items-end border-b border-border-subtle md:border-none">
+<div>
+<h1 class="font-headline-lg text-headline-lg md:text-headline-xl md:font-headline-xl text-on-surface mb-1">¡Qué hacés, Admin!</h1>
+<p class="font-body-md text-body-md text-text-secondary">Hoy es <span class="font-semibold text-text-primary">Jueves, 24 de Octubre</span>. Dale que venimos bien.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="w-12 h-12 rounded-full bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-text-primary hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-3 h-3 bg-primary-container rounded-full border-2 border-surface-container-lowest"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-container-margin md:p-stack-lg space-y-stack-lg">
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-inline-gutter">
+<!-- Metric Card 1 -->
+<div class="bg-inverse-surface rounded-kondor p-stack-md flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl group-hover:bg-primary-container/20 transition-all"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<h3 class="font-label-caps text-label-caps text-surface-container-high uppercase">Ocupación Hoy</h3>
+<span class="material-symbols-outlined text-primary-container">monitoring</span>
+</div>
+<div class="relative z-10 flex items-baseline gap-2">
+<span class="font-headline-xl text-[56px] leading-none font-extrabold text-primary-container">85%</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-inverse-surface rounded-kondor p-stack-md flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-on-primary/5 rounded-full blur-2xl group-hover:bg-on-primary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<h3 class="font-label-caps text-label-caps text-surface-container-high uppercase">Ingresos del Día</h3>
+<span class="material-symbols-outlined text-on-primary">payments</span>
+</div>
+<div class="relative z-10 flex items-baseline gap-2">
+<span class="font-headline-xl text-[48px] leading-none font-extrabold text-on-primary">$450k</span>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-inverse-surface rounded-kondor p-stack-md flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl group-hover:bg-primary-container/20 transition-all"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<h3 class="font-label-caps text-label-caps text-surface-container-high uppercase">Reservas Activas</h3>
+<span class="material-symbols-outlined text-primary-container">calendar_today</span>
+</div>
+<div class="relative z-10 flex items-baseline gap-2">
+<span class="font-headline-xl text-[56px] leading-none font-extrabold text-primary-container">12</span>
+</div>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-inverse-surface rounded-kondor p-stack-md flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-on-primary/5 rounded-full blur-2xl group-hover:bg-on-primary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<h3 class="font-label-caps text-label-caps text-surface-container-high uppercase">Nuevos Clientes</h3>
+<span class="material-symbols-outlined text-on-primary">person_add</span>
+</div>
+<div class="relative z-10 flex items-baseline gap-2">
+<span class="font-headline-xl text-[56px] leading-none font-extrabold text-on-primary">4</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-inline-gutter items-start">
+<!-- Next Turns Table -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-kondor p-stack-md shadow-sm border border-border-subtle">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Próximos Turnos</h2>
+<button class="font-label-caps text-label-caps text-primary hover:text-primary-container transition-colors uppercase">Ver Todos</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="py-3 px-4 font-label-caps text-label-caps text-text-secondary font-semibold uppercase">Hora</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-text-secondary font-semibold uppercase">Cancha</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-text-secondary font-semibold uppercase">Cliente</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-text-secondary font-semibold uppercase">Estado</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-semibold">18:00</td>
+<td class="py-4 px-4">Cancha 1 (Cristal)</td>
+<td class="py-4 px-4">Martín P.</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-ok/10 text-status-ok font-label-caps text-[10px] uppercase">Confirmado</span>
+</td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-semibold">18:30</td>
+<td class="py-4 px-4">Cancha 3 (Muro)</td>
+<td class="py-4 px-4">Sofía L.</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-pending/10 text-status-pending font-label-caps text-[10px] uppercase">Pendiente P.</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-semibold">19:30</td>
+<td class="py-4 px-4">Cancha 2 (Cristal)</td>
+<td class="py-4 px-4">Lucas G.</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-ok/10 text-status-ok font-label-caps text-[10px] uppercase">Confirmado</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Weekly Chart Stub -->
+<div class="bg-surface-container-lowest rounded-kondor p-stack-md shadow-sm border border-border-subtle h-full flex flex-col">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-stack-md">Ocupación Semanal</h2>
+<div class="flex-1 min-h-[250px] flex items-end gap-2 justify-between pt-8">
+<!-- Simple CSS Bar Chart -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 60%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Lu</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 75%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Ma</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 50%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Mi</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-primary-container transition-colors rounded-t-sm" style="height: 90%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-primary font-bold uppercase">Ju</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 100%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Vi</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 85%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Sa</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
+<div class="w-full bg-inverse-surface group-hover:bg-primary transition-colors rounded-t-sm" style="height: 40%"></div>
+</div>
+<span class="font-label-caps text-[10px] text-text-secondary uppercase">Do</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Optional: Handle sidebar transition for text hiding */
+        .w-20 .sidebar-text {
+            display: none;
+        }
+        .w-20 nav a {
+            justify-content: center;
+        }
+    </style>
+</body></html>

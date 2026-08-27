@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestión de Clientes - Padel Pro Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#d4f84a",
+                      "status-ok": "#27AE60",
+                      "surface-container": "#eeeeee",
+                      "on-tertiary-container": "#5a6a7b",
+                      "surface": "#f9f9f9",
+                      "surface-bright": "#f9f9f9",
+                      "secondary-fixed": "#e5e2e1",
+                      "tertiary-fixed": "#d3e4f8",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c5c9af",
+                      "surface-dim": "#dadada",
+                      "surface-tint": "#536600",
+                      "on-secondary": "#ffffff",
+                      "status-pending": "#F2994A",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "tertiary-fixed-dim": "#b7c8dc",
+                      "on-primary-fixed-variant": "#3e4c00",
+                      "surface-container-high": "#e8e8e8",
+                      "on-primary-fixed": "#171e00",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "text-primary": "#111111",
+                      "surface-variant": "#e2e2e2",
+                      "error": "#ba1a1a",
+                      "tertiary": "#506071",
+                      "on-secondary-fixed-variant": "#474646",
+                      "on-background": "#1a1c1c",
+                      "surface-container-highest": "#e2e2e2",
+                      "primary-fixed": "#cdf143",
+                      "status-error": "#EB5757",
+                      "on-tertiary": "#ffffff",
+                      "outline": "#757963",
+                      "on-primary-container": "#5c7000",
+                      "tertiary-container": "#daebff",
+                      "on-surface-variant": "#454935",
+                      "inverse-surface": "#2f3131",
+                      "background": "#f9f9f9",
+                      "primary": "#536600",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#384858",
+                      "inverse-primary": "#b2d424",
+                      "on-tertiary-fixed": "#0c1d2b",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#b2d424",
+                      "on-surface": "#1a1c1c",
+                      "secondary": "#5f5e5e",
+                      "surface-container-low": "#f3f3f3",
+                      "on-secondary-container": "#656464",
+                      "text-secondary": "#8A8A8A",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-error-container": "#93000a",
+                      "border-subtle": "#E5E5E5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "24px",
+                      "container-margin": "20px",
+                      "stack-lg": "32px",
+                      "inline-gutter": "16px",
+                      "stack-sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-muted": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-muted": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "44px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+          }
+      </style>
+</head>
+<body class="bg-background text-text-primary font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Mobile Top App Bar -->
+<header class="md:hidden flex justify-between items-center px-container-margin py-stack-sm w-full bg-surface z-40 sticky top-0">
+<div class="flex items-center gap-inline-gutter">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A detailed, realistic headshot of an athletic young adult padel player. The lighting is clean and bright, reflecting a modern sports-tech aesthetic. The background is a crisp white, ensuring high contrast. High resolution, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW_6NGqbmbshoPKoC-QQborubi7Z-KwDp1rOvmaqQDYhGDTICGkeguWyaTxUx4gjBl3NZYFGXD84pw3gpsStkO4s4GJGl7G48buD51vmvPyaVeG8T0GsFU0ovnl3NG4F-QFUwn2wBj4zrSTcNAdXLVAwqsN9ScS1-HbofNq7lvLsivKAduRfZOYTZ1VF1wAu98wLepkCXCH285JIVpmU9dWLe_OMwgnlmsr4wTNNt2l76E0Aan-fk"/>
+</div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface">Padel Pro</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Desktop Sidebar (Semantic substitution for nav) -->
+<aside class="hidden md:flex flex-col w-64 bg-surface border-r border-border-subtle h-screen sticky top-0 p-container-margin shrink-0">
+<div class="mb-stack-lg flex items-center gap-inline-gutter px-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A detailed, realistic headshot of an athletic young adult padel player. The lighting is clean and bright, reflecting a modern sports-tech aesthetic. The background is a crisp white, ensuring high contrast. High resolution, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg1e_SufaXHcQvaemwes3rzhpDMqxGuW_b-KdY6jGxyPzrelSFkyeOjlQLrQS4j7OCPaurlEL2s_0p8w4u6fu8KyHJgCcijbd761sc23VmUY_g6cdDY7dJ5gPpR1O7DUxG76IYnOSHCfHQfiGFdDd4FzJCxfL-DdhgB6TMNdjxb1koI58RKBv0eoGNNqLsGahDBU9__Jjrqk9ZwC79wQnuLS0LahIjYNCR8qbK3HcFiawSDagFsKM"/>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Padel Pro</h1>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-inline-gutter px-4 py-3 rounded-lg text-secondary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-inline-gutter px-4 py-3 rounded-lg text-secondary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">sports_tennis</span>
+<span class="font-body-md">Canchas</span>
+</a>
+<a class="flex items-center gap-inline-gutter px-4 py-3 rounded-lg bg-surface-container-high text-primary font-bold" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Clientes</span>
+</a>
+<a class="flex items-center gap-inline-gutter px-4 py-3 rounded-lg text-secondary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Pagos</span>
+</a>
+<a class="flex items-center gap-inline-gutter px-4 py-3 rounded-lg text-secondary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Ajustes</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-container-margin md:p-stack-lg overflow-x-hidden mb-24 md:mb-0">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-stack-md">
+<div>
+<h2 class="text-headline-xl font-headline-xl text-text-primary mb-2">Gestión de Clientes</h2>
+<p class="text-body-md font-body-md text-text-secondary">Administra jugadores, niveles y estado de cuenta.</p>
+</div>
+<button class="bg-primary-container text-text-primary font-body-md font-bold px-6 py-3 rounded-full hover:bg-primary-fixed-dim transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                    Nuevo Cliente
+                </button>
+</div>
+<!-- Search and Filter Bar -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-border-subtle flex flex-col md:flex-row gap-4 mb-stack-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="w-full bg-surface pl-12 pr-4 py-3 rounded-lg border border-border-subtle focus:outline-none focus:border-primary-container font-body-md text-text-primary placeholder:text-text-secondary" placeholder="Buscar por nombre, teléfono o email..." type="text"/>
+</div>
+<div class="flex gap-4">
+<select class="bg-surface px-4 py-3 rounded-lg border border-border-subtle font-body-md text-text-primary focus:outline-none focus:border-primary-container appearance-none pr-10 relative">
+<option value="">Nivel (Todos)</option>
+<option value="1">Principiante (1.0-3.0)</option>
+<option value="2">Intermedio (3.5-4.5)</option>
+<option value="3">Avanzado (5.0-7.0)</option>
+</select>
+<select class="bg-surface px-4 py-3 rounded-lg border border-border-subtle font-body-md text-text-primary focus:outline-none focus:border-primary-container appearance-none pr-10 relative">
+<option value="">Estado de Pago</option>
+<option value="ok">Al Día</option>
+<option value="debt">Con Deuda</option>
+</select>
+</div>
+</div>
+<!-- Client Grid/Table (Bento style on desktop) -->
+<div class="grid grid-cols-1 gap-inline-gutter">
+<!-- Client Card 1 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:border-primary-container transition-colors">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img alt="Carlos Ruiz" class="w-full h-full object-cover" data-alt="A portrait of a male padel player in his 30s. He looks confident. Clean white background, high-contrast modern sports aesthetic. Studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKCwcn9u00UUakWfn5L2aQeQ2VeHJ35q_heUlRgoxtuJr319Orw7sNpbZW7sgOT09SII1Bp7_dKzc7jdbOO2AExsPXX9a2971MwfCdBOr1iqx5ec5KIBP_PGlgbQzYySsW4kST__eOiW2KP2DqFcvDU7eIGm5BNXIXky07sNq-LeDR638CnVwLE7xnjghN9LAMS2uf0IfutMgKeanwJLCWeB3PGq627Ei53naaLlbAEgejIlwiuNo"/>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg font-bold text-text-primary">Carlos Ruiz</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-text-secondary" style="font-size: 16px;">phone</span>
+<span class="text-label-muted font-label-muted text-text-secondary">+34 600 123 456</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-center gap-6 flex-1 justify-start md:justify-around w-full md:w-auto">
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Nivel</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-body-md font-bold text-text-primary">4.5</span>
+</div>
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Partidos</span>
+<span class="text-body-md font-bold text-text-primary">42</span>
+</div>
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Estado</span>
+<span class="inline-flex items-center gap-1 text-status-ok bg-status-ok/10 px-3 py-1 rounded-full text-label-caps font-label-caps">
+<span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                                AL DÍA
+                            </span>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto justify-end border-t md:border-t-0 border-border-subtle pt-4 md:pt-0 mt-4 md:mt-0">
+<button class="w-10 h-10 rounded-full bg-[#25D366]/10 text-[#25D366] flex items-center justify-center hover:bg-[#25D366]/20 transition-colors" title="Contactar por WhatsApp">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-high text-text-primary flex items-center justify-center hover:bg-surface-variant transition-colors" title="Editar Perfil">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+</div>
+</div>
+<!-- Client Card 2 (Debt) -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:border-error/30 transition-colors">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img alt="Laura Gómez" class="w-full h-full object-cover" data-alt="A portrait of a female padel player in her 20s. She is smiling slightly. Clean white background, high-contrast modern sports aesthetic. Studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJMx4GQzIDRBczVahkKTwTD4sAsHPuef5wM-ulP2Q9niMCfxBZ58xw5ZhbZt9t3TsRdBrEy6_0IaTiG40RQSdYF0cd-_JGngUY3eRKtlznEyW3fzOX6T_0U_gPcpKL6Xod3p1WZgES9z9k0ngkCfNutlCGoruCH5mtGNECeKVqzehFCA6tFuEBolsfH78MEyoqYkwbLI3cRMcRGKOp3Nn4-ETHyjczyC6ZxX6Xkw9jPAFKMFjYpfs"/>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg font-bold text-text-primary">Laura Gómez</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-text-secondary" style="font-size: 16px;">phone</span>
+<span class="text-label-muted font-label-muted text-text-secondary">+34 611 987 654</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-center gap-6 flex-1 justify-start md:justify-around w-full md:w-auto">
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Nivel</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-body-md font-bold text-text-primary">3.0</span>
+</div>
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Partidos</span>
+<span class="text-body-md font-bold text-text-primary">15</span>
+</div>
+<div class="text-center">
+<span class="block text-label-caps font-label-caps text-text-secondary uppercase mb-1">Estado</span>
+<span class="inline-flex items-center gap-1 text-status-error bg-status-error/10 px-3 py-1 rounded-full text-label-caps font-label-caps">
+<span class="material-symbols-outlined" style="font-size: 14px;">warning</span>
+                                DEUDA €45
+                            </span>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto justify-end border-t md:border-t-0 border-border-subtle pt-4 md:pt-0 mt-4 md:mt-0">
+<button class="w-10 h-10 rounded-full bg-[#25D366]/10 text-[#25D366] flex items-center justify-center hover:bg-[#25D366]/20 transition-colors" title="Contactar por WhatsApp">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-high text-text-primary flex items-center justify-center hover:bg-surface-variant transition-colors" title="Editar Perfil">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-stack-md flex justify-center items-center gap-2">
+<button class="w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-text-secondary hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary-container text-text-primary font-body-md font-bold flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-text-secondary hover:bg-surface-container-high font-body-md">2</button>
+<button class="w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-text-secondary hover:bg-surface-container-high font-body-md">3</button>
+<button class="w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-text-secondary hover:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation (JSON Defined) -->
+<nav class="md:hidden flex justify-around items-end pb-6 pt-2 px-6 w-full fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg">
+<a class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="sports_tennis">sports_tennis</span>
+</a>
+<a class="flex items-center justify-center bg-primary dark:bg-primary-fixed text-on-primary dark:text-on-primary-fixed rounded-full w-12 h-12 mb-4 shadow-md opacity-80 scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+</nav>
+</body></html>

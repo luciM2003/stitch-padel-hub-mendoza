@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Padel Pro - Player Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#e5e2e1",
+                      "primary": "#536600",
+                      "surface-bright": "#f9f9f9",
+                      "secondary-fixed": "#e5e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "status-ok": "#27AE60",
+                      "on-surface-variant": "#454935",
+                      "outline-variant": "#c5c9af",
+                      "on-tertiary-fixed-variant": "#384858",
+                      "on-secondary-fixed-variant": "#474646",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-container": "#eeeeee",
+                      "primary-fixed": "#cdf143",
+                      "tertiary-fixed": "#d3e4f8",
+                      "text-secondary": "#8A8A8A",
+                      "tertiary-container": "#daebff",
+                      "primary-container": "#d4f84a",
+                      "surface-container-highest": "#e2e2e2",
+                      "status-error": "#EB5757",
+                      "on-surface": "#1a1c1c",
+                      "error-container": "#ffdad6",
+                      "outline": "#757963",
+                      "inverse-primary": "#b2d424",
+                      "on-secondary": "#ffffff",
+                      "status-pending": "#F2994A",
+                      "on-primary-fixed": "#171e00",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#5c7000",
+                      "on-tertiary-fixed": "#0c1d2b",
+                      "on-tertiary": "#ffffff",
+                      "background": "#f9f9f9",
+                      "on-background": "#1a1c1c",
+                      "text-primary": "#111111",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b2d424",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "tertiary": "#506071",
+                      "on-primary-fixed-variant": "#3e4c00",
+                      "inverse-surface": "#2f3131",
+                      "on-secondary-container": "#656464",
+                      "on-tertiary-container": "#5a6a7b",
+                      "tertiary-fixed-dim": "#b7c8dc",
+                      "surface-container-high": "#e8e8e8",
+                      "surface": "#f9f9f9",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "surface-variant": "#e2e2e2",
+                      "surface-dim": "#dadada",
+                      "secondary": "#5f5e5e",
+                      "surface-tint": "#536600",
+                      "surface-container-low": "#f3f3f3",
+                      "border-subtle": "#E5E5E5",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "stack-md": "24px",
+                      "container-margin": "20px",
+                      "stack-sm": "12px",
+                      "inline-gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-xl": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-muted": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "44px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-muted": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24 selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 bg-surface dark:bg-surface flex justify-between items-center px-container-margin py-stack-sm w-full z-40 sticky">
+<div class="flex items-center gap-inline-gutter hover:bg-surface-container-high transition-colors rounded-full p-1 cursor-pointer">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A high-quality, close-up portrait of a young athletic male with short hair, wearing a high-performance minimalist white sportswear shirt. The background is a clean, bright out-of-focus padel court. The lighting is natural, bright, and flattering, emphasizing a healthy, active lifestyle within a modern sports context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbta5o8gUiEawdwajMDy3rHHNWbD86sdpjUMRRokj-RZZme5yQk6M51mwshb8feTD620s2gyWjISWIQvZxWTaQ_KCoMihM_40Tym58o6AgN8UPQTBnpsjXnx-FMPUuYRBN6OrV6UxQy3GwVy4uhduUvP_ASUOy7oT1CUkkjcSzmViP-y4lopXKqQT3pylR_p02DK-SH1HsOdKK757a4Ec4WXD0AGXMeXgjxpd7T3-z1yPB5nhrGg"/>
+</div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface dark:text-on-surface">Padel Pro</h1>
+<button aria-label="Settings" class="hover:bg-surface-container-high transition-colors rounded-full p-2 flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-95 transition-all text-secondary dark:text-secondary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="px-container-margin py-stack-md flex flex-col gap-stack-lg max-w-2xl mx-auto">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center gap-stack-sm mt-4">
+<div class="relative">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-surface-container shadow-md" data-alt="A striking portrait of a male padel player in mid-action, wearing sleek, high-contrast dark athletic gear against a bright, minimalist white background. The player holds a professional padel racket. The lighting is dramatic studio lighting, casting soft shadows, highlighting physical fitness and performance focus in a clean, modern sports-tech style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdl56wQuhbAKUQoVNMPDfngkjD8_5iUylW7Eeviwugi4w3ABvUJLF4v0HeP7s5-OMnNgfDgPbTkzYm5kfUO9ep2E2HTvGYjzGQJ9PzKqWgyQ8taSiJbHj7PWM-N6oME4oBMfpUJQgXusHOTxcjLnfTR7BWCuVB95ECesDjdy1tXedzfxWxrZBZDbbVWM0DM7BqZZZk232FMBKd99jSUq7V37z0HoBnOnbX-1O1u5ZJNQEaIjvdjYw"/>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary font-headline-lg-mobile text-headline-lg-mobile font-bold w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+                    4.5
+                </div>
+</div>
+<div class="mt-2">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface">Mateo R.</h2>
+<p class="text-body-md font-body-md text-text-secondary mt-1 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                    Madrid, ES
+                 </p>
+</div>
+<div class="flex gap-inline-gutter mt-2">
+<span class="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Aggressive</span>
+<span class="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Right-Handed</span>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Matches Played -->
+<div class="bg-inverse-surface text-on-secondary rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="z-10 relative">
+<span class="material-symbols-outlined text-outline-variant mb-2 opacity-70" data-icon="sports_tennis" data-weight="fill" style="font-variation-settings: 'FILL' 1;">sports_tennis</span>
+<h3 class="text-label-caps font-label-caps text-secondary-fixed uppercase tracking-wider">Matches</h3>
+</div>
+<div class="text-headline-xl font-headline-xl font-extrabold z-10 relative mt-4">142</div>
+<!-- Decorative background element -->
+<div class="absolute -bottom-4 -right-4 w-24 h-24 bg-surface-variant rounded-full opacity-10"></div>
+</div>
+<!-- Win Rate -->
+<div class="bg-inverse-surface text-on-secondary rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="z-10 relative">
+<span class="material-symbols-outlined text-primary-fixed mb-2 opacity-90" data-icon="emoji_events" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<h3 class="text-label-caps font-label-caps text-primary-fixed uppercase tracking-wider">Win Rate</h3>
+</div>
+<div class="text-headline-xl font-headline-xl font-extrabold z-10 relative mt-4">68<span class="text-body-lg font-body-lg ml-1 text-secondary-fixed-dim">%</span></div>
+</div>
+<!-- Recent Form (Full Width) -->
+<div class="col-span-2 bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-label-caps font-label-caps text-secondary uppercase tracking-wider">Recent Form</h3>
+<span class="text-label-muted font-label-muted text-text-secondary">Last 5 matches</span>
+</div>
+<div class="flex justify-between items-center px-4">
+<div class="w-10 h-10 rounded-full bg-status-ok text-on-primary flex items-center justify-center font-bold font-body-md text-body-md shadow-sm">W</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="w-10 h-10 rounded-full bg-status-ok text-on-primary flex items-center justify-center font-bold font-body-md text-body-md shadow-sm">W</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="w-10 h-10 rounded-full bg-status-error text-on-primary flex items-center justify-center font-bold font-body-md text-body-md shadow-sm opacity-80">L</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="w-10 h-10 rounded-full bg-status-ok text-on-primary flex items-center justify-center font-bold font-body-md text-body-md shadow-sm">W</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="w-10 h-10 rounded-full bg-status-ok text-on-primary flex items-center justify-center font-bold font-body-md text-body-md shadow-sm">W</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity List -->
+<section class="flex flex-col gap-4">
+<h3 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface mb-2">Recent Activity</h3>
+<!-- Activity Item 1 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 flex items-center gap-4 hover:border-surface-variant transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined" data-icon="sports_score">sports_score</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-body-md font-body-md font-bold text-on-surface">Match Won vs. Diego L.</h4>
+<p class="text-label-muted font-label-muted text-text-secondary">Club Padel Madrid • 6-4, 7-5</p>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="text-label-muted font-label-muted text-text-secondary block">Yesterday</span>
+<span class="text-primary font-bold text-sm">+25 pts</span>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 flex items-center gap-4 hover:border-surface-variant transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-body-md font-body-md font-bold text-on-surface">Booked Court</h4>
+<p class="text-label-muted font-label-muted text-text-secondary">Indoor Pro Center • Court 3</p>
+</div>
+<div class="text-right">
+<span class="text-label-muted font-label-muted text-text-secondary">2 days ago</span>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 flex items-center gap-4 hover:border-surface-variant transition-colors cursor-pointer opacity-70">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined" data-icon="sports_score">sports_score</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-body-md font-body-md font-bold text-on-surface">Match Lost vs. Carlos M.</h4>
+<p class="text-label-muted font-label-muted text-text-secondary">Sunset Padel Club • 3-6, 4-6</p>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="text-label-muted font-label-muted text-text-secondary block">4 days ago</span>
+<span class="text-status-error font-bold text-sm">-10 pts</span>
+</div>
+</div>
+<button class="w-full py-4 mt-2 text-label-caps font-label-caps text-on-surface uppercase tracking-widest border border-border-subtle rounded-full hover:bg-surface-container-high transition-colors">
+                View All History
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg flex justify-around items-end pb-6 pt-2 px-6">
+<a aria-label="Home" class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</a>
+<a aria-label="Matches" class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="sports_tennis">sports_tennis</span>
+</a>
+<a aria-label="Events" class="flex items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+</a>
+<a aria-label="Profile" class="flex items-center justify-center bg-primary dark:bg-primary-fixed text-on-primary dark:text-on-primary-fixed rounded-full w-12 h-12 mb-4 shadow-md scale-110 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+</a>
+</nav>
+</body></html>

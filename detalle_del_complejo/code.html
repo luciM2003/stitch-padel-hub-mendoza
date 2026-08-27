@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Padel Pro - Kondor Sede</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "primary": "#536600",
+                        "on-surface": "#1a1c1c",
+                        "status-pending": "#F2994A",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#5c7000",
+                        "inverse-surface": "#2f3131",
+                        "text-secondary": "#8A8A8A",
+                        "primary-fixed": "#cdf143",
+                        "on-background": "#1a1c1c",
+                        "inverse-primary": "#b2d424",
+                        "on-tertiary-fixed": "#0c1d2b",
+                        "surface": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3e4c00",
+                        "secondary-fixed": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#454935",
+                        "tertiary": "#506071",
+                        "border-subtle": "#E5E5E5",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-container": "#656464",
+                        "surface-container": "#eeeeee",
+                        "status-ok": "#27AE60",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#5a6a7b",
+                        "on-tertiary-fixed-variant": "#384858",
+                        "secondary-container": "#e5e2e1",
+                        "tertiary-fixed-dim": "#b7c8dc",
+                        "status-error": "#EB5757",
+                        "text-primary": "#111111",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#536600",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline": "#757963",
+                        "primary-fixed-dim": "#b2d424",
+                        "outline-variant": "#c5c9af",
+                        "primary-container": "#d4f84a",
+                        "secondary": "#5f5e5e",
+                        "on-primary-fixed": "#171e00",
+                        "tertiary-container": "#daebff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d3e4f8",
+                        "on-secondary-fixed": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inline-gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "container-margin": "20px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-muted": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-muted": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Hide scrollbar for horizontal scroll areas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation (Task-focused, so a back button instead of full shell) -->
+<header class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md px-container-margin py-stack-sm flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex space-x-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero Gallery -->
+<section class="w-full h-72 md:h-96 relative">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-quality photograph of a modern indoor padel court complex. The scene is brightly lit with professional sports lighting, highlighting the clean blue turf and glass walls of the courts. The overall aesthetic is clean, athletic, and premium, fitting a high-end sports facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMXfsZLQR0if5I6K4mD6ILzTxcKwhF9Wt5J-K00xhYbBUmXYo6XOQtritXv5XXUtheSbaCOZRU-C-EwChC40m3fbTJlcDsPae0T99dq174XEN3N7pxfqobbUkSKiP9k3O6S_md9OsyB2Ip1Eyi_Vlg4-lZC2h-gPu8f2xhffbtpd1o84qTX-kcE_JZR0JbvxxFknrEp0brNhsc0vSyowWcJp8w19DPQwMH1_iVXNj5jiyipW9amOc"/>
+<!-- Gradient Overlay for smooth transition -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<!-- Floating Image Indicators -->
+<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+<div class="w-6 h-1.5 bg-primary-fixed rounded-full"></div>
+<div class="w-1.5 h-1.5 bg-surface-container-high rounded-full opacity-50"></div>
+<div class="w-1.5 h-1.5 bg-surface-container-high rounded-full opacity-50"></div>
+</div>
+</section>
+<!-- Complex Info -->
+<section class="px-container-margin -mt-6 relative z-10">
+<div class="flex justify-between items-end mb-2">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Kondor Sede</h1>
+<div class="flex items-center space-x-1 bg-surface-container-highest px-3 py-1 rounded-full">
+<span class="font-label-caps text-label-caps text-on-surface">4.9</span>
+<span class="material-symbols-outlined text-[#F2C94C] text-sm icon-fill">star</span>
+</div>
+</div>
+<div class="flex items-center text-text-secondary space-x-2 mb-stack-md">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-body-md text-body-md">Mendoza, Argentina</span>
+</div>
+<!-- Description -->
+<p class="font-body-md text-body-md text-secondary mb-stack-md">
+                Premium indoor facility with 6 professional glass courts, pro-shop, and cafe. Top-tier lighting and climate control.
+            </p>
+</section>
+<!-- Court Types Filter (Horizontal Scroll) -->
+<section class="pl-container-margin mb-stack-md">
+<div class="flex space-x-3 overflow-x-auto hide-scrollbar pr-container-margin py-2">
+<!-- Active Chip -->
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps transition-transform active:scale-95">
+                    Todos
+                </button>
+<!-- Inactive Chips -->
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-variant transition-colors active:scale-95">
+                    Techada
+                </button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-variant transition-colors active:scale-95">
+                    Blindex
+                </button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-variant transition-colors active:scale-95">
+                    Muro
+                </button>
+</div>
+</section>
+<!-- Court List -->
+<section class="px-container-margin space-y-4">
+<!-- Court Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 items-center border border-border-subtle shadow-sm hover:border-outline-variant transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Close up view of a blue padel court surface with white lines and a glass wall in the background, bright lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg5tkOwDzs9jzmdLWHoFIJq69wWZi73txiU1sdCsra3Fv04nSgnq4LcZoXSKcEHfJtKz3wpEs2G5tX8N3D1BK0yFvpKZ27wxIlox1kIlpekWv7MEPoYgGmiS6Lw0N_t3Z-bRBb_DUSyhS0d3UvCCTFY3dgl4aWQMLaat9Du2_QP3J3todq6hFKcYI6o-sPVVekjuV5lOJb8GE6sX1BOKlOu6SbRljZ7dflhyeR9ANGI30Dm2bWlPY"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Cancha 1</h3>
+<span class="bg-status-ok/10 text-status-ok font-label-caps text-label-caps px-2 py-0.5 rounded-full">Libre</span>
+</div>
+<p class="font-label-muted text-label-muted text-secondary mb-2">Techada • Panorámica</p>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+<span class="font-label-muted text-label-muted text-on-surface">Próx. turno: 18:00</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface group-hover:bg-primary-fixed group-hover:text-on-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Court Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 items-center border border-border-subtle shadow-sm hover:border-outline-variant transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A padel court featuring heavy glass walls (Blindex), lit by bright overhead lights, creating a high-contrast athletic environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHpKsl1VQscoeMJhaKKt5pqe7Kit0J_56vbs4eYM_t7PgohbabsVjPTFYkkHhNQk06sfM-mYmEnrFvszYTSUUuL64PVaKPwlI3m0zWqok9OloF7XXNrXvdO0ahh7qHOE0ced05Vsd15y2MtPOALYQvx459H99NIEoUdFYZNPKc1mZrsCZBl-5vjWoSeGTi3SVPHl9MMwdjpFKzrhTl2CRIvORFq4J3BMaYcoLYKdnox_8SCrZhqd4"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Cancha 2</h3>
+<span class="bg-status-pending/10 text-status-pending font-label-caps text-label-caps px-2 py-0.5 rounded-full">Ocupada</span>
+</div>
+<p class="font-label-muted text-label-muted text-secondary mb-2">Blindex • Descubierta</p>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+<span class="font-label-muted text-label-muted text-on-surface">Libre 20:30</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface group-hover:bg-primary-fixed group-hover:text-on-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Court Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 items-center border border-border-subtle shadow-sm hover:border-outline-variant transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A traditional padel court with concrete walls painted blue, standard lighting, clean and ready for play." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXj-XDeD9GyINKtDVmbyu5QWJ7FQEDoYQNu6-PHunwwfI1tR-ET08iAcUIcmeXEAi_Ji18FhNJ27Xj347nuCK5lLZX75OhgzphkbBvB4djidFliErumkoMKJSViC9vmHwB8WA74hkWHA0m0ZUFJbNaWsoU8943EzZaMy4wJT55X5TzR5d5m8-V0OiuL8kFhOlnwpYWRpgigml1OCVdnQP_PjJZ8PHT1B-CQghWG1jlBRPZRW-OCtw"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Cancha 3</h3>
+<span class="bg-status-ok/10 text-status-ok font-label-caps text-label-caps px-2 py-0.5 rounded-full">Libre</span>
+</div>
+<p class="font-label-muted text-label-muted text-secondary mb-2">Muro • Techada</p>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+<span class="font-label-muted text-label-muted text-on-surface">Próx. turno: 17:00</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface group-hover:bg-primary-fixed group-hover:text-on-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-border-subtle p-container-margin z-50 flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-secondary mb-1">Desde</p>
+<p class="font-body-md text-body-md font-bold text-on-surface">$12.000 <span class="font-label-muted text-label-muted text-secondary font-normal">/turno</span></p>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps px-8 py-4 rounded-full flex items-center space-x-2 hover:bg-primary-fixed-dim transition-colors active:scale-95">
+<span>Seleccionar Horario</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Court Booking - Schedule Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "primary": "#536600",
+                        "on-surface": "#1a1c1c",
+                        "status-pending": "#F2994A",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#5c7000",
+                        "inverse-surface": "#2f3131",
+                        "text-secondary": "#8A8A8A",
+                        "primary-fixed": "#cdf143",
+                        "on-background": "#1a1c1c",
+                        "inverse-primary": "#b2d424",
+                        "on-tertiary-fixed": "#0c1d2b",
+                        "surface": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3e4c00",
+                        "secondary-fixed": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#454935",
+                        "tertiary": "#506071",
+                        "border-subtle": "#E5E5E5",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-container": "#656464",
+                        "surface-container": "#eeeeee",
+                        "status-ok": "#27AE60",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#5a6a7b",
+                        "on-tertiary-fixed-variant": "#384858",
+                        "secondary-container": "#e5e2e1",
+                        "tertiary-fixed-dim": "#b7c8dc",
+                        "status-error": "#EB5757",
+                        "text-primary": "#111111",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#536600",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline": "#757963",
+                        "primary-fixed-dim": "#b2d424",
+                        "outline-variant": "#c5c9af",
+                        "primary-container": "#d4f84a",
+                        "secondary": "#5f5e5e",
+                        "on-primary-fixed": "#171e00",
+                        "tertiary-container": "#daebff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d3e4f8",
+                        "on-secondary-fixed": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inline-gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "container-margin": "20px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-muted": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-muted": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pb-[100px]">
+<!-- Top Navigation (Mobile App Pattern) -->
+<header class="flex items-center justify-between px-container-margin py-stack-md">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile">Schedule</h1>
+<div class="w-10 h-10"></div> <!-- Placeholder for balance -->
+</header>
+<main class="flex-1 px-container-margin">
+<!-- Date Selector (Horizontal Scroll) -->
+<section class="mb-stack-lg">
+<div class="flex items-center justify-between mb-stack-sm">
+<h2 class="font-body-lg text-body-lg font-semibold">March 2024</h2>
+<button class="text-primary font-label-caps text-label-caps">SEE CALENDAR</button>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<!-- Inactive Date -->
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[90px] rounded-xl bg-surface-container-lowest border border-border-subtle shrink-0 transition-colors">
+<span class="font-label-muted text-label-muted text-text-secondary uppercase mb-1">Sun</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">20</span>
+</button>
+<!-- Active Date -->
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[90px] rounded-xl bg-primary-fixed text-on-primary-fixed shrink-0 shadow-sm transition-transform active:scale-95">
+<span class="font-label-muted text-label-muted uppercase mb-1">Mon</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">21</span>
+</button>
+<!-- Inactive Date -->
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[90px] rounded-xl bg-surface-container-lowest border border-border-subtle shrink-0 transition-colors">
+<span class="font-label-muted text-label-muted text-text-secondary uppercase mb-1">Tue</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">22</span>
+</button>
+<!-- Inactive Date -->
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[90px] rounded-xl bg-surface-container-lowest border border-border-subtle shrink-0 transition-colors">
+<span class="font-label-muted text-label-muted text-text-secondary uppercase mb-1">Wed</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">23</span>
+</button>
+<!-- Inactive Date -->
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[90px] rounded-xl bg-surface-container-lowest border border-border-subtle shrink-0 transition-colors">
+<span class="font-label-muted text-label-muted text-text-secondary uppercase mb-1">Thu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">24</span>
+</button>
+</div>
+</section>
+<!-- Court Details Overview -->
+<section class="mb-stack-lg flex gap-4 items-center bg-inverse-surface text-on-primary p-4 rounded-xl">
+<div class="w-16 h-16 rounded-lg bg-surface-container-high overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A brightly lit indoor padel court with modern blue turf, surrounded by clean glass walls, high contrast modern sports photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0WaB8rfzp47GmDKBYBeks3laLezMr3z8fICWkhGeoGiKHptih3hTImVRH-2jwbpgLqRpni96oASvjsw6-Kr3c9VZs49tJ5j5RShRS2VmCqAj5Tlbvh-QuyiKD7z2-Oxo473nobxF5c7avClhdDNKkmJIGJeqvJByrL-7YkmwJxp6j4MCu7HBOQSjzgVF4GyxcWMry4_VPZM-7UycshgSspA33WsM2pFIDQCzL-Hf3uK5JPP2JW8M"/>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg font-semibold text-white">Court 1 - Indoor</h3>
+<p class="font-label-muted text-label-muted text-surface-container-high flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+                    Double • Cristal
+                </p>
+</div>
+</section>
+<!-- Time Slots Grid -->
+<section>
+<div class="flex items-center justify-between mb-stack-sm">
+<h2 class="font-body-lg text-body-lg font-semibold">Available Slots</h2>
+<span class="font-label-muted text-label-muted text-text-secondary">90 min sessions</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Occupied Slot -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-high border border-surface-container-highest opacity-60 cursor-not-allowed">
+<span class="font-body-lg text-body-lg font-semibold text-text-secondary">08:00</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">OCUPADO</span>
+</div>
+<!-- Occupied Slot -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-high border border-surface-container-highest opacity-60 cursor-not-allowed">
+<span class="font-body-lg text-body-lg font-semibold text-text-secondary">09:30</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">OCUPADO</span>
+</div>
+<!-- Available Slot (Libre) -->
+<button class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-border-subtle text-left transition-all active:scale-95">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">11:00</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">LIBRE</span>
+</button>
+<!-- Selected Slot -->
+<button class="flex flex-col p-4 rounded-xl bg-primary-fixed border border-primary-fixed text-on-primary-fixed text-left shadow-md transition-all active:scale-95 relative overflow-hidden">
+<span class="font-body-lg text-body-lg font-semibold">12:30</span>
+<span class="font-label-caps text-label-caps mt-1 opacity-90">SELECCIONADO</span>
+<span class="material-symbols-outlined absolute top-4 right-4 text-[20px]">check_circle</span>
+</button>
+<!-- Available Slot (Libre) -->
+<button class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-border-subtle text-left transition-all active:scale-95">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">14:00</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">LIBRE</span>
+</button>
+<!-- Promo Slot -->
+<button class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-primary-fixed/50 text-left transition-all active:scale-95 relative">
+<div class="absolute -top-2 -right-2 bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full font-label-caps text-[10px]">
+                        PROMO
+                    </div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">15:30</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">LIBRE</span>
+</button>
+<!-- Available Slot (Libre) -->
+<button class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-border-subtle text-left transition-all active:scale-95">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">17:00</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">LIBRE</span>
+</button>
+<!-- Occupied Slot -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-high border border-surface-container-highest opacity-60 cursor-not-allowed">
+<span class="font-body-lg text-body-lg font-semibold text-text-secondary">18:30</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">OCUPADO</span>
+</div>
+<!-- Occupied Slot -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-high border border-surface-container-highest opacity-60 cursor-not-allowed">
+<span class="font-body-lg text-body-lg font-semibold text-text-secondary">20:00</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">OCUPADO</span>
+</div>
+<!-- Available Slot (Libre) -->
+<button class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-border-subtle text-left transition-all active:scale-95">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">21:30</span>
+<span class="font-label-caps text-label-caps text-text-secondary mt-1">LIBRE</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Sticky Footer Action -->
+<div class="fixed bottom-0 left-0 w-full p-container-margin bg-surface-bright/90 backdrop-blur-md border-t border-border-subtle z-40">
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-body-lg text-body-lg font-semibold py-4 rounded-full flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+            Siguiente: Extras
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Padel Pro - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "primary": "#536600",
+                        "on-surface": "#1a1c1c",
+                        "status-pending": "#F2994A",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#5c7000",
+                        "inverse-surface": "#2f3131",
+                        "text-secondary": "#8A8A8A",
+                        "primary-fixed": "#cdf143",
+                        "on-background": "#1a1c1c",
+                        "inverse-primary": "#b2d424",
+                        "on-tertiary-fixed": "#0c1d2b",
+                        "surface": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3e4c00",
+                        "secondary-fixed": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#454935",
+                        "tertiary": "#506071",
+                        "border-subtle": "#E5E5E5",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-container": "#656464",
+                        "surface-container": "#eeeeee",
+                        "status-ok": "#27AE60",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#5a6a7b",
+                        "on-tertiary-fixed-variant": "#384858",
+                        "secondary-container": "#e5e2e1",
+                        "tertiary-fixed-dim": "#b7c8dc",
+                        "status-error": "#EB5757",
+                        "text-primary": "#111111",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#536600",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline": "#757963",
+                        "primary-fixed-dim": "#b2d424",
+                        "outline-variant": "#c5c9af",
+                        "primary-container": "#d4f84a",
+                        "secondary": "#5f5e5e",
+                        "on-primary-fixed": "#171e00",
+                        "tertiary-container": "#daebff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d3e4f8",
+                        "on-secondary-fixed": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inline-gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "container-margin": "20px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-muted": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-muted": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["44px", {"lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface h-screen flex flex-col antialiased">
+<!-- Top Navigation (Suppressed based on rules for Transactional/Login screens) -->
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col justify-center px-container-margin py-stack-lg max-w-md mx-auto w-full relative z-10">
+<!-- Header Section -->
+<div class="mb-stack-lg text-center">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-stack-sm tracking-tight">Bienvenido al Club</h1>
+<p class="font-body-md text-body-md text-text-secondary">Ingresa tu número para comenzar a jugar.</p>
+</div>
+<!-- Form Section -->
+<form class="space-y-stack-md w-full">
+<!-- Phone Input Container -->
+<div class="flex flex-col space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface uppercase" for="phone">Número de Teléfono</label>
+<div class="relative flex items-center border border-border-subtle rounded-xl bg-surface-container-lowest overflow-hidden focus-within:border-outline focus-within:ring-1 focus-within:ring-outline transition-all">
+<!-- Prefix / Flag Area -->
+<div class="flex items-center pl-4 pr-3 py-3 border-r border-border-subtle bg-surface-container-low text-on-surface font-body-md text-body-md select-none">
+<span aria-hidden="true" class="mr-2 text-xl">🇦🇷</span>
+<span>+54</span>
+</div>
+<!-- Input Field -->
+<input autocomplete="tel" class="flex-grow w-full border-none bg-transparent py-4 px-4 font-body-lg text-body-lg text-on-surface placeholder-text-secondary focus:ring-0 focus:outline-none" id="phone" name="phone" placeholder="11 2345 6789" required="" type="tel"/>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary-container text-on-primary-fixed font-body-lg text-body-lg font-bold py-4 rounded-full flex items-center justify-center space-x-2 transition-transform active:scale-[0.98]" type="submit">
+<span>Continuar</span>
+<span aria-hidden="true" class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative flex items-center my-stack-lg">
+<div class="flex-grow border-t border-border-subtle"></div>
+<span class="flex-shrink-0 mx-4 font-label-muted text-label-muted text-text-secondary">o</span>
+<div class="flex-grow border-t border-border-subtle"></div>
+</div>
+<!-- Secondary Action (Google) -->
+<button class="w-full bg-surface-container-highest text-on-surface font-body-md text-body-md font-semibold py-4 rounded-full flex items-center justify-center space-x-3 transition-transform active:scale-[0.98]" type="button">
+<!-- Minimal Google Icon SVG placeholder for layout accuracy -->
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span>Continuar con Google</span>
+</button>
+</main>
+<!-- Bottom Navigation (Suppressed based on rules for Transactional/Login screens) -->
+</body></html>

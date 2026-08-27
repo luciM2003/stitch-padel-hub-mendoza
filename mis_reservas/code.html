@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis Reservas - Padel Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#e5e2e1",
+                    "primary": "#536600",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-lowest": "#ffffff",
+                    "status-ok": "#27AE60",
+                    "on-surface-variant": "#454935",
+                    "outline-variant": "#c5c9af",
+                    "on-tertiary-fixed-variant": "#384858",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-container": "#eeeeee",
+                    "primary-fixed": "#cdf143",
+                    "tertiary-fixed": "#d3e4f8",
+                    "text-secondary": "#8A8A8A",
+                    "tertiary-container": "#daebff",
+                    "primary-container": "#d4f84a",
+                    "surface-container-highest": "#e2e2e2",
+                    "status-error": "#EB5757",
+                    "on-surface": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "outline": "#757963",
+                    "inverse-primary": "#b2d424",
+                    "on-secondary": "#ffffff",
+                    "status-pending": "#F2994A",
+                    "on-primary-fixed": "#171e00",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#5c7000",
+                    "on-tertiary-fixed": "#0c1d2b",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9f9",
+                    "on-background": "#1a1c1c",
+                    "text-primary": "#111111",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b2d424",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "tertiary": "#506071",
+                    "on-primary-fixed-variant": "#3e4c00",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-container": "#656464",
+                    "on-tertiary-container": "#5a6a7b",
+                    "tertiary-fixed-dim": "#b7c8dc",
+                    "surface-container-high": "#e8e8e8",
+                    "surface": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "secondary": "#5f5e5e",
+                    "surface-tint": "#536600",
+                    "surface-container-low": "#f3f3f3",
+                    "border-subtle": "#E5E5E5",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-md": "24px",
+                    "container-margin": "20px",
+                    "stack-sm": "12px",
+                    "inline-gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "label-caps": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-xl": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-muted": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "36px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-xl": [
+                            "44px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "label-muted": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary-fixed flat no shadows sticky top-0 z-40 w-full flex justify-between items-center px-container-margin py-stack-sm">
+<div class="flex items-center gap-4">
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover border border-border-subtle" data-alt="A professional headshot of a young athlete, well-lit with a bright, clean background. The aesthetic is high-performance sports tech. High contrast, sharp focus, minimal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAK8gAzOIJP8zQu1gbJRVX6xFNLzKNW0HpMmL83eb2lAMfuCZfjgMQa161dlhR5a_NiLdhzQOUS13pYsGis2GTM6qUrdiNh_aHVdE6WPaCkogzCGH4_s3yk2VhswnsFdBdghXOSe6e1Sz7KbdlzEB2wx9yT3oStqTFOHeYR7wCZCQQ3FFISCX0M7qEdQva-uy4AjnpVvF8BlXuPMxhs9PA2mzaMP8ITA-R_eC7XvX_WSWpDMGK8tc"/>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface dark:text-on-surface tracking-tight">Mis Reservas</h1>
+</div>
+<button class="hover:bg-surface-container-high transition-colors w-10 h-10 rounded-full flex items-center justify-center opacity-80 hover:scale-95 transition-all text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="px-container-margin mt-stack-md max-w-3xl mx-auto">
+<!-- Tabs -->
+<div class="flex gap-4 mb-stack-lg overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-6 py-2 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps whitespace-nowrap transition-colors">Próximas</button>
+<button class="px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-high transition-colors">Historial</button>
+</div>
+<!-- Bookings List -->
+<div class="flex flex-col gap-stack-md">
+<!-- Booking Card 1 (Upcoming - High Contrast) -->
+<div class="bg-on-surface text-surface-container-lowest rounded-[32px] overflow-hidden relative group">
+<div class="h-48 relative">
+<img alt="Kondor Sede Court" class="w-full h-full object-cover" data-alt="A pristine indoor padel court viewed from a dynamic low angle. The lighting is architectural and dramatic, highlighting the sleek blue artificial turf and glass walls. A subtle dark gradient overlay covers the bottom half. Sports tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIYfa94opgRV4Xln3lR0x0FFs3Of7PUNoR1EgSqnnaknKX8GsfrACUyuS4-2w8SMjH_9alAmk3UHzBjKaN27Eo39Qt0JP8B7ITVXhOmVW719Sm4VhPZjkmaSjvOTOj2KzP6VCjw7CuqH0-Pw9KvTUEISU-l73sTdRISzN3h_irbu31ZyqpCICW7b6HILJ7sbnSyH-63JknDVosaWvB2_qwGZUBEyRzp3qCnMdoIZDyqfpX9_V9mh4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-label-caps font-label-caps flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                        En 2 horas
+                    </div>
+<div class="absolute bottom-4 left-6">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white mb-1">Kondor Sede Norte</h2>
+<p class="text-body-md font-body-md text-surface-dim opacity-90 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            Cancha 3 - Indoor
+                        </p>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-6 pb-6 border-b border-surface-variant/20">
+<div>
+<p class="text-label-caps font-label-caps text-surface-dim opacity-70 mb-1">FECHA</p>
+<p class="text-body-lg font-body-lg text-white">Hoy, 18 Oct</p>
+</div>
+<div class="text-right">
+<p class="text-label-caps font-label-caps text-surface-dim opacity-70 mb-1">HORA</p>
+<p class="text-body-lg font-body-lg text-white">19:00 - 20:30</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface-container-low/10 text-white rounded-full py-3 px-4 text-body-md font-body-md font-semibold hover:bg-surface-container-low/20 transition-colors border border-surface-variant/20">
+                            Ver Detalle
+                        </button>
+<button class="flex-1 bg-primary-fixed text-on-primary-fixed rounded-full py-3 px-4 text-body-md font-body-md font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">person_add</span>
+                            Invitar
+                        </button>
+</div>
+</div>
+</div>
+<!-- Booking Card 2 (Upcoming - Standard) -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-[32px] overflow-hidden">
+<div class="h-32 relative">
+<img alt="Club Central Court" class="w-full h-full object-cover" data-alt="An outdoor padel court bathed in bright, clear morning sunlight. The blue surface contrasts sharply with the white net and glass surroundings. Clean, modern sports photography. A subtle dark gradient overlay at the very bottom." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgrdVEm58zQL4fazTcgnupwdYeiRJZzUDPD3dvqwig1_x5eVpYC21OTYfXFB5hP78ijA-IOmYIFcHu6vKFCgBjKMWS3Ay-7l0FIvPL3sIRdt3LKC24sfco3sniLyMq6tbuK63Da2UDKQNGNjGfuBIDWPXRuN-hMs6elbDd2OmnEA5B2RH5C4jNgVbGsbHxkFTfal46G_wbsG_G4v69U2eYR2tfKr_T59pjqjpko-QXsNKsX4_t02Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white mb-1">Club Central Padel</h2>
+<p class="text-body-md font-body-md text-surface-dim opacity-90 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            Cancha 1 - Outdoor
+                        </p>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-6 pb-6 border-b border-border-subtle">
+<div>
+<p class="text-label-caps font-label-caps text-secondary mb-1">FECHA</p>
+<p class="text-body-lg font-body-lg text-on-surface">Sáb, 21 Oct</p>
+</div>
+<div class="text-right">
+<p class="text-label-caps font-label-caps text-secondary mb-1">HORA</p>
+<p class="text-body-lg font-body-lg text-on-surface">10:00 - 11:30</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface text-on-surface rounded-full py-3 px-4 text-body-md font-body-md font-semibold border border-border-subtle hover:bg-surface-container-low transition-colors">
+                            Ver Detalle
+                        </button>
+<button class="flex-1 bg-on-surface text-surface-container-lowest rounded-full py-3 px-4 text-body-md font-body-md font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                            Invitar
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md fixed bottom-0 w-full z-50 rounded-t-xl border-t border-border-subtle dark:border-outline-variant shadow-lg flex justify-around items-end pb-6 pt-2 px-6">
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-label-muted font-label-muted mt-1 hidden">Home</span>
+</a>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">sports_tennis</span>
+<span class="text-label-muted font-label-muted mt-1 hidden">Play</span>
+</a>
+<!-- Active (Mis Reservas maps to event_note) -->
+<div class="flex flex-col items-center">
+<a class="flex items-center justify-center bg-primary dark:bg-primary-fixed text-on-primary dark:text-on-primary-fixed rounded-full w-12 h-12 mb-4 shadow-md scale-110 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">event_note</span>
+</a>
+</div>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant w-12 h-12 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-label-muted font-label-muted mt-1 hidden">Profile</span>
+</a>
+</nav>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</body></html>
