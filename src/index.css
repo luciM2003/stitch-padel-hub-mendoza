@@ -2,10 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Paleta clara/oscura. Cada variable es un triplete "R G B" para que los modificadores de
+   opacidad de Tailwind (ej. bg-surface/50) sigan funcionando. Ver tailwind.config.js. */
+:root {
+  --color-background: 249 249 249;
+  --color-on-background: 26 28 28;
+  --color-surface: 249 249 249;
+  --color-surface-dim: 218 218 218;
+  --color-surface-bright: 249 249 249;
+  --color-surface-container-lowest: 255 255 255;
+  --color-surface-container-low: 243 243 243;
+  --color-surface-container: 238 238 238;
+  --color-surface-container-high: 232 232 232;
+  --color-surface-container-highest: 226 226 226;
+  --color-surface-variant: 226 226 226;
+  --color-surface-tint: 83 102 0;
+  --color-on-surface: 26 28 28;
+  --color-on-surface-variant: 69 73 53;
+  --color-outline: 117 121 99;
+  --color-outline-variant: 197 201 175;
+  --color-inverse-primary: 178 212 36;
+  --color-primary: 83 102 0;
+  --color-on-primary: 255 255 255;
+  --color-primary-container: 212 248 74;
+  --color-on-primary-container: 92 112 0;
+  --color-secondary: 95 94 94;
+  --color-on-secondary: 255 255 255;
+  --color-secondary-container: 229 226 225;
+  --color-on-secondary-container: 101 100 100;
+  --color-tertiary: 80 96 113;
+  --color-on-tertiary: 255 255 255;
+  --color-tertiary-container: 218 235 255;
+  --color-on-tertiary-container: 90 106 123;
+  --color-error: 186 26 26;
+  --color-on-error: 255 255 255;
+  --color-error-container: 255 218 214;
+  --color-on-error-container: 147 0 10;
+  --color-text-primary: 17 17 17;
+  --color-text-secondary: 138 138 138;
+  --color-border-subtle: 229 229 229;
+}
+
+:root[data-theme="dark"],
+:root.dark {
+  --color-background: 18 18 18;
+  --color-on-background: 233 234 228;
+  --color-surface: 18 18 18;
+  --color-surface-dim: 18 18 18;
+  --color-surface-bright: 56 56 56;
+  --color-surface-container-lowest: 13 13 13;
+  --color-surface-container-low: 26 28 28;
+  --color-surface-container: 30 32 32;
+  --color-surface-container-high: 40 42 42;
+  --color-surface-container-highest: 51 51 51;
+  --color-surface-variant: 69 73 53;
+  --color-surface-tint: 178 212 36;
+  --color-on-surface: 226 227 220;
+  --color-on-surface-variant: 197 201 175;
+  --color-outline: 143 146 133;
+  --color-outline-variant: 69 73 53;
+  --color-inverse-primary: 83 102 0;
+  --color-primary: 178 212 36;
+  --color-on-primary: 43 54 0;
+  --color-primary-container: 62 76 0;
+  --color-on-primary-container: 212 248 74;
+  --color-secondary: 200 198 197;
+  --color-on-secondary: 49 48 48;
+  --color-secondary-container: 71 70 70;
+  --color-on-secondary-container: 229 226 225;
+  --color-tertiary: 183 200 220;
+  --color-on-tertiary: 26 44 59;
+  --color-tertiary-container: 56 72 88;
+  --color-on-tertiary-container: 218 235 255;
+  --color-error: 255 180 171;
+  --color-on-error: 105 0 5;
+  --color-error-container: 147 0 10;
+  --color-on-error-container: 255 218 214;
+  --color-text-primary: 241 241 241;
+  --color-text-secondary: 168 168 168;
+  --color-border-subtle: 51 51 51;
+}
+
 body {
   font-family: "Inter", sans-serif;
-  background-color: #f9f9f9;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-on-background));
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.input {
+  @apply w-full px-4 py-3 rounded-lg border border-border-subtle bg-surface text-text-primary focus:outline-none focus:border-primary-container transition-colors;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -24,20 +111,20 @@ body {
 .time-col {
   position: sticky;
   left: 0;
-  background: #f9f9f9;
+  background: rgb(var(--color-background));
   z-index: 10;
 }
 .header-row {
   position: sticky;
   top: 0;
-  background: #f9f9f9;
+  background: rgb(var(--color-background));
   z-index: 20;
 }
 .corner-cell {
   position: sticky;
   top: 0;
   left: 0;
-  background: #f9f9f9;
+  background: rgb(var(--color-background));
   z-index: 30;
 }
 

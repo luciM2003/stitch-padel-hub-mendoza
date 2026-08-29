@@ -32,7 +32,7 @@ export default function MisReservas() {
       <header className="bg-surface text-primary sticky top-0 z-40 w-full flex justify-between items-center px-container-margin py-stack-sm">
         <div className="flex items-center gap-4">
           <img
-            alt="User profile photo"
+            alt="Foto de perfil del usuario"
             className="w-10 h-10 rounded-full object-cover border border-border-subtle"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAK8gAzOIJP8zQu1gbJRVX6xFNLzKNW0HpMmL83eb2lAMfuCZfjgMQa161dlhR5a_NiLdhzQOUS13pYsGis2GTM6qUrdiNh_aHVdE6WPaCkogzCGH4_s3yk2VhswnsFdBdghXOSe6e1Sz7KbdlzEB2wx9yT3oStqTFOHeYR7wCZCQQ3FFISCX0M7qEdQva-uy4AjnpVvF8BlXuPMxhs9PA2mzaMP8ITA-R_eC7XvX_WSWpDMGK8tc"
           />
@@ -74,10 +74,10 @@ export default function MisReservas() {
 
         {tab === "proximas" ? (
           <div className="flex flex-col gap-stack-md animate-item">
-            <div className="bg-on-surface text-surface-container-lowest rounded-[32px] overflow-hidden relative group">
+            <div className="bg-ink-fixed text-on-ink-fixed rounded-[32px] overflow-hidden relative group">
               <div className="h-48 relative overflow-hidden">
                 <img
-                  alt="Kondor Sede Court"
+                  alt="Cancha de Kondor Sede"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIYfa94opgRV4Xln3lR0x0FFs3Of7PUNoR1EgSqnnaknKX8GsfrACUyuS4-2w8SMjH_9alAmk3UHzBjKaN27Eo39Qt0JP8B7ITVXhOmVW719Sm4VhPZjkmaSjvOTOj2KzP6VCjw7CuqH0-Pw9KvTUEISU-l73sTdRISzN3h_irbu31ZyqpCICW7b6HILJ7sbnSyH-63JknDVosaWvB2_qwGZUBEyRzp3qCnMdoIZDyqfpX9_V9mh4"
                 />
@@ -88,26 +88,26 @@ export default function MisReservas() {
                 </div>
                 <div className="absolute bottom-4 left-6">
                   <h2 className="text-headline-lg-mobile font-headline-lg-mobile text-white mb-1">Kondor Sede Norte</h2>
-                  <p className="text-body-md font-body-md text-surface-dim opacity-90 flex items-center gap-1">
+                  <p className="text-body-md font-body-md text-on-ink-fixed opacity-90 flex items-center gap-1">
                     <span className="material-symbols-outlined text-[16px]">location_on</span>
-                    Cancha 3 - Indoor
+                    Cancha 3 - Techada
                   </p>
                 </div>
               </div>
               <div className="p-6">
-                <div className="flex justify-between items-center mb-6 pb-6 border-b border-surface-variant/20">
+                <div className="flex justify-between items-center mb-6 pb-6 border-b border-white/20">
                   <div>
-                    <p className="text-label-caps font-label-caps text-surface-dim opacity-70 mb-1">FECHA</p>
+                    <p className="text-label-caps font-label-caps text-on-ink-fixed opacity-70 mb-1">FECHA</p>
                     <p className="text-body-lg font-body-lg text-white">Hoy, 18 Oct</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-label-caps font-label-caps text-surface-dim opacity-70 mb-1">HORA</p>
+                    <p className="text-label-caps font-label-caps text-on-ink-fixed opacity-70 mb-1">HORA</p>
                     <p className="text-body-lg font-body-lg text-white">19:00 - 20:30</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <button
-                    className="flex-1 bg-surface-container-low/10 text-white rounded-full py-3 px-4 text-body-md font-body-md font-semibold hover:bg-surface-container-low/20 active:scale-95 transition-all border border-surface-variant/20"
+                    className="flex-1 bg-white/10 text-white rounded-full py-3 px-4 text-body-md font-body-md font-semibold hover:bg-white/20 active:scale-95 transition-all border border-white/20"
                     onClick={() => navigate("/detalle-del-partido")}
                   >
                     Ver Detalle
@@ -126,7 +126,7 @@ export default function MisReservas() {
             <div className="bg-surface-container-lowest border border-border-subtle rounded-[32px] overflow-hidden">
               <div className="h-32 relative overflow-hidden">
                 <img
-                  alt="Club Central Court"
+                  alt="Cancha de Club Central Padel"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgrdVEm58zQL4fazTcgnupwdYeiRJZzUDPD3dvqwig1_x5eVpYC21OTYfXFB5hP78ijA-IOmYIFcHu6vKFCgBjKMWS3Ay-7l0FIvPL3sIRdt3LKC24sfco3sniLyMq6tbuK63Da2UDKQNGNjGfuBIDWPXRuN-hMs6elbDd2OmnEA5B2RH5C4jNgVbGsbHxkFTfal46G_wbsG_G4v69U2eYR2tfKr_T59pjqjpko-QXsNKsX4_t02Q"
                 />
@@ -135,7 +135,7 @@ export default function MisReservas() {
                   <h2 className="text-headline-lg-mobile font-headline-lg-mobile text-white mb-1">Club Central Padel</h2>
                   <p className="text-body-md font-body-md text-surface-dim opacity-90 flex items-center gap-1">
                     <span className="material-symbols-outlined text-[16px]">location_on</span>
-                    Cancha 1 - Outdoor
+                    Cancha 1 - Descubierta
                   </p>
                 </div>
               </div>

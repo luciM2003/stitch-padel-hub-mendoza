@@ -212,7 +212,7 @@ export default function PartidosAbiertos() {
               </div>
               <div className="flex md:flex-col justify-end md:justify-center pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-border-subtle pl-0 md:pl-6">
                 <button
-                  className="w-full md:w-auto px-8 py-3 bg-inverse-surface text-on-secondary font-label-caps text-label-caps rounded-full hover:bg-black active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full md:w-auto px-8 py-3 bg-inverse-surface text-on-ink-fixed font-label-caps text-label-caps rounded-full hover:bg-black active:scale-95 transition-all flex items-center justify-center gap-2"
                   onClick={() => navigate("/detalle-del-partido")}
                 >
                   Sumarse <span className="material-symbols-outlined text-[18px]">chevron_right</span>

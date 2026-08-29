@@ -1,17 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-
-const items = [
-  { key: "home", to: "/home-jugador", icon: "home" },
-  { key: "play", to: "/partidos-abiertos", icon: "sports_tennis" },
-  { key: "events", to: "/mis-reservas", icon: "event_note" },
-  { key: "profile", to: "/perfil-de-usuario", icon: "person" },
-];
+import { playerNav } from "../config/nav.js";
 
 export default function BottomNav() {
   const { pathname } = useLocation();
   return (
     <nav className="md:hidden flex justify-around items-end pb-6 pt-2 px-6 w-full fixed bottom-0 left-0 right-0 z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg">
-      {items.map((item) => {
+      {playerNav.map((item) => {
         const active = pathname === item.to;
         return (
           <Link key={item.key} to={item.to} className="flex flex-col items-center gap-1 active:scale-90 transition-transform">

@@ -120,7 +120,7 @@ export default function DetalleDelComplejo() {
             <span className="font-body-md text-body-md">Mendoza, Argentina</span>
           </div>
           <p className="font-body-md text-body-md text-secondary mb-stack-md">
-            Premium indoor facility with 6 professional glass courts, pro-shop, and cafe. Top-tier lighting and climate control.
+            Complejo premium techado con 6 canchas de cristal profesionales, pro-shop y cafetería. Iluminación de primer nivel y climatización.
           </p>
         </section>
 

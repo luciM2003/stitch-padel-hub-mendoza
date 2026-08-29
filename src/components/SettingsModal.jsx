@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal.jsx";
 import { useToast } from "./Toast.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
+import { useTheme } from "../theme/ThemeContext.jsx";
 
 const info = {
   "Privacidad y seguridad": "Tus datos y reservas son visibles solo para vos y los clubes donde jugás. Podés pedir la eliminación de tu cuenta escribiendo a soporte@padelhub.app.",
@@ -11,11 +13,13 @@ const info = {
 export default function SettingsModal({ open, onClose }) {
   const navigate = useNavigate();
   const showToast = useToast();
+  const { signOut } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const [notifs, setNotifs] = useState(true);
-  const [modoOscuro, setModoOscuro] = useState(false);
   const [expanded, setExpanded] = useState(null);
 
-  function logout() {
+  async function logout() {
+    await signOut();
     onClose();
     navigate("/");
   }
@@ -26,8 +30,8 @@ export default function SettingsModal({ open, onClose }) {
   }
 
   function toggleModo() {
-    setModoOscuro((v) => !v);
-    showToast(!modoOscuro ? "Modo oscuro activado" : "Modo claro activado");
+    toggleTheme();
+    showToast(!isDark ? "Modo oscuro activado" : "Modo claro activado");
   }
 
   return (
@@ -51,9 +55,9 @@ export default function SettingsModal({ open, onClose }) {
           className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-container-low transition-colors text-left"
         >
           <span className="material-symbols-outlined text-text-secondary">dark_mode</span>
-          <span className="text-body-md font-body-md text-on-surface flex-1">Apariencia</span>
+          <span className="text-body-md font-body-md text-on-surface flex-1">Apariencia (modo oscuro)</span>
           <span
-            className={"w-11 h-6 rounded-full flex items-center px-0.5 transition-colors " + (modoOscuro ? "bg-primary justify-end" : "bg-surface-container-high justify-start")}
+            className={"w-11 h-6 rounded-full flex items-center px-0.5 transition-colors " + (isDark ? "bg-primary justify-end" : "bg-surface-container-high justify-start")}
           >
             <span className="w-5 h-5 rounded-full bg-white shadow-sm"></span>
           </span>

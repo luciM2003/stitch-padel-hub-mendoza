@@ -63,7 +63,7 @@ export default function DetalleDelPartido() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-container-margin md:p-stack-lg w-full">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface/20 backdrop-blur-md rounded-full mb-3 text-on-primary">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/30 backdrop-blur-md rounded-full mb-3 text-white">
               <span className="material-symbols-outlined text-[16px]">location_on</span>
               <span className="text-label-caps font-label-caps uppercase text-white">Kondor Sede</span>
             </div>

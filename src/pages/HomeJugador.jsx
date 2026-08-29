@@ -46,13 +46,13 @@ export default function HomeJugador() {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest border border-border-subtle">
               <img
-                alt="User Profile"
+                alt="Perfil de usuario"
                 className="w-full h-full object-cover"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8"
               />
             </div>
             <div>
-              <p className="text-label-muted font-label-muted text-secondary">Good morning,</p>
+              <p className="text-label-muted font-label-muted text-secondary">Buen día,</p>
               <h1 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-text-primary">Hola, Mateo 👋</h1>
             </div>
           </div>
@@ -69,17 +69,17 @@ export default function HomeJugador() {
 
         <main className="px-container-margin flex flex-col gap-stack-lg max-w-6xl mx-auto mt-4">
           <section className="flex flex-col gap-stack-sm">
-            <div className="bg-text-primary rounded-4xl p-6 md:p-10 text-on-primary relative overflow-hidden flex flex-col justify-between min-h-[220px] shadow-2xl hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] transition-shadow duration-300">
+            <div className="bg-ink-fixed rounded-4xl p-6 md:p-10 text-on-ink-fixed relative overflow-hidden flex flex-col justify-between min-h-[220px] shadow-2xl hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] transition-shadow duration-300">
               <div
                 className="absolute -top-24 -right-24 w-72 h-72 rounded-full opacity-20 pointer-events-none blur-3xl"
                 style={{ background: "radial-gradient(circle, #D4F84A 0%, transparent 70%)" }}
               ></div>
               <div className="relative z-10 flex justify-between items-start">
                 <div>
-                  <span className="inline-block px-3 py-1 bg-surface-container-highest/20 rounded-full text-label-caps font-label-caps text-on-primary backdrop-blur-sm mb-2">
+                  <span className="inline-block px-3 py-1 bg-surface-container-highest/20 rounded-full text-label-caps font-label-caps text-on-ink-fixed backdrop-blur-sm mb-2">
                     Próxima Reserva
                   </span>
-                  <h2 className="text-headline-lg-mobile font-headline-lg-mobile text-on-primary">Hoy 20:30hs</h2>
+                  <h2 className="text-headline-lg-mobile font-headline-lg-mobile text-on-ink-fixed">Hoy 20:30hs</h2>
                 </div>
                 <div className="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center">
                   <span className="material-symbols-outlined text-text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -95,12 +95,12 @@ export default function HomeJugador() {
                     </span>
                   </div>
                   <div>
-                    <p className="text-body-md font-body-md font-semibold text-on-primary">Kondor Sede</p>
+                    <p className="text-body-md font-body-md font-semibold text-on-ink-fixed">Kondor Sede</p>
                     <p className="text-label-muted font-label-muted text-secondary-fixed-dim">Cancha 3 • Dobles</p>
                   </div>
                 </div>
                 <button
-                  className="bg-primary-fixed text-text-primary px-4 py-2 rounded-full text-label-caps font-label-caps font-bold hover:bg-inverse-primary active:scale-95 transition-all"
+                  className="bg-primary-fixed text-on-primary-fixed px-4 py-2 rounded-full text-label-caps font-label-caps font-bold hover:bg-inverse-primary active:scale-95 transition-all"
                   onClick={() => navigate("/detalle-del-partido")}
                 >
                   Ver Detalle

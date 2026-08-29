@@ -4,6 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Padel Hub Mendoza</title>
+    <script>
+      (function () {
+        try {
+          var guardado = localStorage.getItem("padelhub-theme");
+          var oscuro = guardado ? guardado === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (oscuro) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"

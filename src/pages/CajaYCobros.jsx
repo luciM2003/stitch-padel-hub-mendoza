@@ -2,21 +2,9 @@ import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
+import SettingsModal from "../components/SettingsModal.jsx";
 import { useToast } from "../components/Toast.jsx";
-
-const sidebarLinks = [
-  { icon: "dashboard", label: "Dashboard", to: "/dashboard-administrador" },
-  { icon: "calendar_month", label: "Reservas", to: "/timeline-de-canchas" },
-  { icon: "point_of_sale", label: "Caja y Cobros", to: "/caja-y-cobros" },
-  { icon: "group", label: "Clientes", to: "/gestion-de-clientes" },
-];
-
-const mobileNavItems = [
-  { icon: "home", to: "/dashboard-administrador" },
-  { icon: "sports_tennis", to: "/timeline-de-canchas" },
-  { icon: "event_note", to: "/caja-y-cobros" },
-  { icon: "person", to: "/gestion-de-clientes" },
-];
+import { adminNav, adminMobileNav } from "../config/nav.js";
 
 const transaccionesIniciales = [
   { hora: "14:30", concepto: "Turno 1.5hs - Juan Pérez", cancha: "Cancha 2 (Techada)", metodo: "Mercado Pago", icono: "qr_code_scanner", monto: 12000 },
@@ -42,6 +30,7 @@ export default function CajaYCobros() {
   const [showIngreso, setShowIngreso] = useState(false);
   const [showCerrar, setShowCerrar] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [verMasHistorial, setVerMasHistorial] = useState(false);
   const [form, setForm] = useState({ concepto: "", monto: "", metodo: "Efectivo" });
   const [filtroMetodo, setFiltroMetodo] = useState("Todos");
@@ -54,6 +43,20 @@ export default function CajaYCobros() {
       ),
     [transacciones, busqueda, filtroMetodo]
   );
+
+  const resumenPorMetodo = useMemo(() => {
+    const total = transacciones.reduce((s, t) => s + t.monto, 0);
+    const sumaDe = (metodos) => transacciones.filter((t) => metodos.includes(t.metodo)).reduce((s, t) => s + t.monto, 0);
+    const porcentaje = (monto) => (total ? Math.round((monto / total) * 100) : 0);
+    const efectivo = sumaDe(["Efectivo"]);
+    const mercadoPago = sumaDe(["Mercado Pago"]);
+    const tarjetas = sumaDe(["Débito", "Transferencia"]);
+    return {
+      efectivo: { monto: efectivo, pct: porcentaje(efectivo) },
+      mercadoPago: { monto: mercadoPago, pct: porcentaje(mercadoPago) },
+      tarjetas: { monto: tarjetas, pct: porcentaje(tarjetas) },
+    };
+  }, [transacciones]);
 
   function descargarReporte() {
     const header = "Hora,Concepto,Cancha,Metodo,Monto\n";
@@ -100,7 +103,7 @@ export default function CajaYCobros() {
       <header className="md:hidden bg-surface flex justify-between items-center px-container-margin py-stack-sm w-full top-0 z-40 relative">
         <div className="flex items-center gap-inline-gutter">
           <img
-            alt="User profile photo"
+            alt="Foto de perfil del usuario"
             className="w-10 h-10 rounded-full object-cover border border-border-subtle"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcm2Tj-NZhRKj0saeGx6cGby006npMGHcTEqwgUComVk0XfaiB4IiJpLtgBghhh8HXm0yrBZumLOZRokZ6XrqaGce-0SRAsMsYVZpXyuvb4H863f81IHMJTVK42TxLm0zDcGNmlewgxpJkkOtIqZKjr8C6yxoC1LyHc9SWetqzGbKaC3WA66if8nz2OOTP5psue5KBkWvOLS04ne-PXiYjr6VWFckHKxNYAugqWf1g1QAsUEzGxNQ"
           />
@@ -124,28 +127,36 @@ export default function CajaYCobros() {
           <h1 className="text-headline-lg font-headline-lg font-bold text-text-primary tracking-tight">Padel Pro</h1>
         </div>
         <div className="flex flex-col gap-2 flex-grow">
-          {sidebarLinks.map((item) => {
+          {adminNav.map((item) => {
             const active = item.to === pathname;
-            return (
-              <Link
-                key={item.label}
-                to={item.to}
-                className={
-                  "flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-95 " +
-                  (active ? "bg-primary-container text-text-primary font-bold" : "text-text-secondary hover:bg-surface-container")
-                }
-              >
+            const classes =
+              "flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-95 " +
+              (active ? "bg-primary-container text-text-primary font-bold" : "text-text-secondary hover:bg-surface-container");
+            const content = (
+              <>
                 <span className="material-symbols-outlined" style={active ? { fontVariationSettings: "'FILL' 1" } : undefined}>
                   {item.icon}
                 </span>
                 <span className="font-body-md text-body-md">{item.label}</span>
+              </>
+            );
+            if (item.action === "settings") {
+              return (
+                <button key={item.key} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
+                  {content}
+                </button>
+              );
+            }
+            return (
+              <Link key={item.key} to={item.to} className={classes}>
+                {content}
               </Link>
             );
           })}
         </div>
         <div className="mt-auto flex items-center gap-3 px-4 py-3 border-t border-border-subtle pt-4">
           <img
-            alt="User profile photo"
+            alt="Foto de perfil del usuario"
             className="w-10 h-10 rounded-full object-cover border border-border-subtle"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDst4I8x_Eax7n8gmPcCCwJpiPq1DZE_WYLfdOd-MVqZUW9o3Jcs5oV7qXd149mwL93U_tKjCm9Jthw75sjdsnRiQQJkhmiDeynHNakzTCmfh9eWOlJzK3m0JXV8mvM89Y8_lNGM1jxuO_CAxdDzZXYqrIQs-bTw4BXU2ljZqL7-Q6h19fBZxgHkZgj_oeuqBUE4HE7RmV3aidAcKT6Apu8Vv27FjGupROFkrOr425Kf9hVdHRTxZU"
           />
@@ -165,7 +176,7 @@ export default function CajaYCobros() {
           <div className="flex items-center gap-3 w-full md:w-auto">
             <button
               onClick={descargarReporte}
-              className="flex-1 md:flex-none px-6 py-3 bg-text-primary text-on-primary rounded-full font-label-caps text-label-caps tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-black active:scale-95 transition-all"
+              className="flex-1 md:flex-none px-6 py-3 bg-ink-fixed text-on-ink-fixed rounded-full font-label-caps text-label-caps tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-black active:scale-95 transition-all"
             >
               <span className="material-symbols-outlined text-sm">download</span>
               Reporte
@@ -204,8 +215,8 @@ export default function CajaYCobros() {
                   <span className="material-symbols-outlined text-text-secondary">payments</span>
                 </div>
                 <div className="mt-4">
-                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">$45,000</p>
-                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">36% del total</p>
+                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">{fmt(resumenPorMetodo.efectivo.monto)}</p>
+                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">{resumenPorMetodo.efectivo.pct}% del total</p>
                 </div>
               </div>
               <div className="animate-item bg-surface-container-low p-5 rounded-xl border border-border-subtle flex flex-col justify-between" style={{ animationDelay: "110ms" }}>
@@ -214,8 +225,8 @@ export default function CajaYCobros() {
                   <span className="material-symbols-outlined text-text-secondary">qr_code_scanner</span>
                 </div>
                 <div className="mt-4">
-                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">$55,500</p>
-                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">45% del total</p>
+                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">{fmt(resumenPorMetodo.mercadoPago.monto)}</p>
+                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">{resumenPorMetodo.mercadoPago.pct}% del total</p>
                 </div>
               </div>
               <div className="animate-item bg-surface-container-low p-5 rounded-xl border border-border-subtle flex flex-col justify-between" style={{ animationDelay: "160ms" }}>
@@ -224,8 +235,8 @@ export default function CajaYCobros() {
                   <span className="material-symbols-outlined text-text-secondary">credit_card</span>
                 </div>
                 <div className="mt-4">
-                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">$24,000</p>
-                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">19% del total</p>
+                  <p className="text-headline-lg font-headline-lg font-bold text-text-primary">{fmt(resumenPorMetodo.tarjetas.monto)}</p>
+                  <p className="text-label-muted font-label-muted text-text-secondary mt-1">{resumenPorMetodo.tarjetas.pct}% del total</p>
                 </div>
               </div>
               <button
@@ -323,11 +334,11 @@ export default function CajaYCobros() {
       </main>
 
       <nav className="md:hidden bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md fixed bottom-0 w-full z-50 rounded-t-xl border-t border-border-subtle dark:border-outline-variant shadow-lg flex justify-around items-end pb-6 pt-2 px-6">
-        {mobileNavItems.map((item) => {
+        {adminMobileNav.map((item) => {
           const active = pathname === item.to;
           return (
             <Link
-              key={item.icon}
+              key={item.key}
               to={item.to}
               className={
                 active
@@ -342,6 +353,7 @@ export default function CajaYCobros() {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
 
       <Modal open={showFiltro} onClose={() => setShowFiltro(false)} title="Filtrar por método">
         <div className="flex flex-col gap-1">

@@ -3,29 +3,31 @@ import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/BottomNav.jsx";
 import PlayerSidebar from "../components/PlayerSidebar.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
+import PerfilTorneosSection from "../components/PerfilTorneosSection.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 const actividadBase = [
   {
     icon: "sports_score",
-    title: "Match Won vs. Diego L.",
+    title: "Victoria vs. Diego L.",
     desc: "Club Padel Madrid • 6-4, 7-5",
-    time: "Yesterday",
+    time: "Ayer",
     extra: "+25 pts",
     extraColor: "text-primary",
     to: "/detalle-del-partido",
   },
   {
     icon: "event_available",
-    title: "Booked Court",
-    desc: "Indoor Pro Center • Court 3",
-    time: "2 days ago",
+    title: "Cancha reservada",
+    desc: "Indoor Pro Center • Cancha 3",
+    time: "Hace 2 días",
     to: "/detalle-del-complejo",
   },
   {
     icon: "sports_score",
-    title: "Match Lost vs. Carlos M.",
+    title: "Derrota vs. Carlos M.",
     desc: "Sunset Padel Club • 3-6, 4-6",
-    time: "4 days ago",
+    time: "Hace 4 días",
     extra: "-10 pts",
     extraColor: "text-status-error",
     opaco: true,
@@ -36,7 +38,7 @@ const actividadBase = [
 const actividadExtra = [
   {
     icon: "sports_score",
-    title: "Match Won vs. Sofía P.",
+    title: "Victoria vs. Sofía P.",
     desc: "Kondor Sede • 6-2, 6-3",
     time: "1 semana atrás",
     extra: "+22 pts",
@@ -45,7 +47,7 @@ const actividadExtra = [
   },
   {
     icon: "event_available",
-    title: "Booked Court",
+    title: "Cancha reservada",
     desc: "Club Central Padel • Cancha 1",
     time: "2 semanas atrás",
     to: "/detalle-del-complejo",
@@ -54,6 +56,7 @@ const actividadExtra = [
 
 export default function PerfilDeUsuario() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [showSettings, setShowSettings] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
@@ -75,7 +78,7 @@ export default function PerfilDeUsuario() {
         </div>
         <h1 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface">Padel Pro</h1>
         <button
-          aria-label="Settings"
+          aria-label="Configuración"
           onClick={() => setShowSettings(true)}
           className="hover:bg-surface-container-high transition-colors rounded-full p-2 flex items-center justify-center opacity-80 hover:opacity-100 active:scale-90 transition-all text-secondary"
         >
@@ -102,28 +105,28 @@ export default function PerfilDeUsuario() {
             </p>
           </div>
           <div className="flex gap-inline-gutter mt-2">
-            <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Aggressive</span>
-            <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Right-Handed</span>
+            <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Agresivo</span>
+            <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Diestro</span>
           </div>
         </section>
 
         <section className="grid grid-cols-2 gap-4 animate-item" style={{ animationDelay: "80ms" }}>
-          <div className="bg-inverse-surface text-on-secondary rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:-translate-y-1 transition-transform">
+          <div className="bg-inverse-surface text-on-ink-fixed rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:-translate-y-1 transition-transform">
             <div className="z-10 relative">
-              <span className="material-symbols-outlined text-outline-variant mb-2 opacity-70" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span className="material-symbols-outlined text-on-ink-fixed mb-2 opacity-70" style={{ fontVariationSettings: "'FILL' 1" }}>
                 sports_tennis
               </span>
-              <h3 className="text-label-caps font-label-caps text-secondary-fixed uppercase tracking-wider">Matches</h3>
+              <h3 className="text-label-caps font-label-caps text-secondary-fixed uppercase tracking-wider">Partidos</h3>
             </div>
             <div className="text-headline-xl font-headline-xl font-extrabold z-10 relative mt-4">142</div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-surface-variant rounded-full opacity-10"></div>
           </div>
-          <div className="bg-inverse-surface text-on-secondary rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:-translate-y-1 transition-transform">
+          <div className="bg-inverse-surface text-on-ink-fixed rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden hover:-translate-y-1 transition-transform">
             <div className="z-10 relative">
               <span className="material-symbols-outlined text-primary-fixed mb-2 opacity-90" style={{ fontVariationSettings: "'FILL' 1" }}>
                 emoji_events
               </span>
-              <h3 className="text-label-caps font-label-caps text-primary-fixed uppercase tracking-wider">Win Rate</h3>
+              <h3 className="text-label-caps font-label-caps text-primary-fixed uppercase tracking-wider">% de Victorias</h3>
             </div>
             <div className="text-headline-xl font-headline-xl font-extrabold z-10 relative mt-4">
               68<span className="text-body-lg font-body-lg ml-1 text-secondary-fixed-dim">%</span>
@@ -131,8 +134,8 @@ export default function PerfilDeUsuario() {
           </div>
           <div className="col-span-2 bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-sm">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-label-caps font-label-caps text-secondary uppercase tracking-wider">Recent Form</h3>
-              <span className="text-label-muted font-label-muted text-text-secondary">Last 5 matches</span>
+              <h3 className="text-label-caps font-label-caps text-secondary uppercase tracking-wider">Forma Reciente</h3>
+              <span className="text-label-muted font-label-muted text-text-secondary">Últimos 5 partidos</span>
             </div>
             <div className="flex justify-between items-center px-4">
               {["W", "W", "L", "W", "W"].map((r, i) => (
@@ -152,8 +155,10 @@ export default function PerfilDeUsuario() {
           </div>
         </section>
 
+        <PerfilTorneosSection userId={user?.id} />
+
         <section className="flex flex-col gap-4">
-          <h3 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface mb-2">Recent Activity</h3>
+          <h3 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface mb-2">Actividad Reciente</h3>
           {actividad.map((a, i) => (
             <div
               key={i}
@@ -181,7 +186,7 @@ export default function PerfilDeUsuario() {
             onClick={() => setShowMore((v) => !v)}
             className="w-full py-4 mt-2 text-label-caps font-label-caps text-on-surface uppercase tracking-widest border border-border-subtle rounded-full hover:bg-surface-container-high active:scale-[0.98] transition-all"
           >
-            {showMore ? "Ver menos" : "View All History"}
+            {showMore ? "Ver menos" : "Ver Todo el Historial"}
           </button>
         </section>
       </main>

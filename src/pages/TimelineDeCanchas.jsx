@@ -4,21 +4,7 @@ import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
 import { useToast } from "../components/Toast.jsx";
-
-const sidebarLinks = [
-  { icon: "event_note", label: "Timeline", to: "/timeline-de-canchas" },
-  { icon: "home", label: "Dashboard", to: "/dashboard-administrador" },
-  { icon: "group", label: "Clientes", to: "/gestion-de-clientes" },
-  { icon: "point_of_sale", label: "Pagos", to: "/caja-y-cobros" },
-  { icon: "settings", label: "Configuración", action: "settings" },
-];
-
-const mobileNavItems = [
-  { icon: "home", to: "/dashboard-administrador" },
-  { icon: "sports_tennis", to: "/timeline-de-canchas" },
-  { icon: "event_note", to: "/caja-y-cobros" },
-  { icon: "person", to: "/gestion-de-clientes" },
-];
+import { adminNav, adminMobileNav } from "../config/nav.js";
 
 const dias = [
   { label: "Hoy, 24 Oct", sub: "Jueves" },
@@ -74,7 +60,7 @@ export default function TimelineDeCanchas() {
       <header className="md:hidden bg-surface flex justify-between items-center px-container-margin py-stack-sm w-full top-0 z-50">
         <div className="flex items-center gap-4">
           <img
-            alt="User profile photo"
+            alt="Foto de perfil del usuario"
             className="w-8 h-8 rounded-full object-cover border border-border-subtle"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZjrmE2e-ejnL-i7kfh6UuJNahu5C-apyEjBc-QOY8Aej8cFuK3NM9FTUonLLIgHkzKw7INXDiXI2QtftCVed1Ph1_F8LtoDuWs6urAdPyyzQ7iIZMp7iBMnaJgJHlvbR8VQLK5-aQuUdZF1Wu9SAwUIwyIXapCbWTo4Y11Ss63y-pjVrEAEyrN-5fZNBJ_trkawYzFkVbQLF4ttgTdUzi7Sd-ezURco6avkdoSbpBAK40ZFm6gIU"
           />
@@ -93,7 +79,7 @@ export default function TimelineDeCanchas() {
           <span className="text-headline-lg font-headline-lg font-bold text-on-surface">Padel Pro</span>
         </div>
         <div className="flex flex-col gap-2 px-inline-gutter flex-grow">
-          {sidebarLinks.map((item) => {
+          {adminNav.map((item) => {
             const active = item.to === pathname;
             const classes =
               "flex items-center gap-3 px-4 py-3 rounded-xl transition-all active:scale-95 " +
@@ -106,13 +92,13 @@ export default function TimelineDeCanchas() {
             );
             if (item.action === "settings") {
               return (
-                <button key={item.label} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
+                <button key={item.key} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
                   {content}
                 </button>
               );
             }
             return (
-              <Link key={item.label} to={item.to} className={classes}>
+              <Link key={item.key} to={item.to} className={classes}>
                 {content}
               </Link>
             );
@@ -343,11 +329,11 @@ export default function TimelineDeCanchas() {
       </main>
 
       <nav className="md:hidden flex justify-around items-end pb-6 pt-2 px-6 w-full fixed bottom-0 z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg">
-        {mobileNavItems.map((item) => {
+        {adminMobileNav.map((item) => {
           const active = pathname === item.to;
           return (
             <Link
-              key={item.icon}
+              key={item.key}
               to={item.to}
               className={
                 active

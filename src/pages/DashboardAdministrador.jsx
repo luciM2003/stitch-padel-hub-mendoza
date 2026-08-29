@@ -2,22 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
-
-const navItems = [
-  { icon: "dashboard", label: "Dashboard", to: "/dashboard-administrador" },
-  { icon: "event_note", label: "Reservas", to: "/timeline-de-canchas" },
-  { icon: "sports_tennis", label: "Canchas", to: "/timeline-de-canchas" },
-  { icon: "group", label: "Clientes", to: "/gestion-de-clientes" },
-  { icon: "point_of_sale", label: "Caja", to: "/caja-y-cobros" },
-  { icon: "settings", label: "Configuración", action: "settings" },
-];
-
-const mobileNavItems = [
-  { icon: "home", to: "/dashboard-administrador" },
-  { icon: "sports_tennis", to: "/timeline-de-canchas" },
-  { icon: "event_note", to: "/caja-y-cobros" },
-  { icon: "person", to: "/gestion-de-clientes" },
-];
+import { adminNav, adminMobileNav } from "../config/nav.js";
 
 const chartBars = [
   { day: "Lu", height: 60 },
@@ -46,7 +31,7 @@ export default function DashboardAdministrador() {
           </button>
         </div>
         <nav className="flex-1 px-inline-gutter py-stack-sm space-y-2 overflow-y-auto">
-          {navItems.map((item) => {
+          {adminNav.map((item) => {
             const active = item.to && pathname === item.to;
             const classes =
               "flex items-center gap-4 p-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 " +
@@ -63,13 +48,13 @@ export default function DashboardAdministrador() {
             );
             if (item.action === "settings") {
               return (
-                <button key={item.label} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
+                <button key={item.key} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
                   {content}
                 </button>
               );
             }
             return (
-              <Link key={item.label} to={item.to} className={classes}>
+              <Link key={item.key} to={item.to} className={classes}>
                 {content}
               </Link>
             );
@@ -115,10 +100,10 @@ export default function DashboardAdministrador() {
         <div className="flex-1 overflow-y-auto p-container-margin md:p-stack-lg space-y-stack-lg">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-inline-gutter">
             {[
-              { label: "Ocupación Hoy", icon: "monitoring", value: "85%", size: "56px", color: "text-primary-container" },
-              { label: "Ingresos del Día", icon: "payments", value: "$450k", size: "48px", color: "text-on-primary" },
-              { label: "Reservas Activas", icon: "calendar_today", value: "12", size: "56px", color: "text-primary-container" },
-              { label: "Nuevos Clientes", icon: "person_add", value: "4", size: "56px", color: "text-on-primary" },
+              { label: "Ocupación Hoy", icon: "monitoring", value: "85%", size: "56px", color: "text-primary-fixed" },
+              { label: "Ingresos del Día", icon: "payments", value: "$450k", size: "48px", color: "text-on-ink-fixed" },
+              { label: "Reservas Activas", icon: "calendar_today", value: "12", size: "56px", color: "text-primary-fixed" },
+              { label: "Nuevos Clientes", icon: "person_add", value: "4", size: "56px", color: "text-on-ink-fixed" },
             ].map((m, i) => (
               <div
                 key={m.label}
@@ -127,7 +112,7 @@ export default function DashboardAdministrador() {
               >
                 <div className="absolute -right-6 -top-6 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl group-hover:bg-primary-container/20 transition-all"></div>
                 <div className="flex justify-between items-start mb-8 relative z-10">
-                  <h3 className="font-label-caps text-label-caps text-surface-container-high uppercase">{m.label}</h3>
+                  <h3 className="font-label-caps text-label-caps text-on-ink-fixed/70 uppercase">{m.label}</h3>
                   <span className={"material-symbols-outlined " + m.color}>{m.icon}</span>
                 </div>
                 <div className="relative z-10 flex items-baseline gap-2">
@@ -219,11 +204,11 @@ export default function DashboardAdministrador() {
       </main>
 
       <nav className="md:hidden bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md fixed bottom-0 w-full z-50 rounded-t-xl border-t border-border-subtle dark:border-outline-variant shadow-lg flex justify-around items-end pb-6 pt-2 px-6">
-        {mobileNavItems.map((item) => {
+        {adminMobileNav.map((item) => {
           const active = pathname === item.to;
           return (
             <Link
-              key={item.icon}
+              key={item.key}
               to={item.to}
               className={
                 active

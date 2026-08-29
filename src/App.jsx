@@ -13,6 +13,15 @@ import DashboardAdministrador from "./pages/DashboardAdministrador.jsx";
 import CajaYCobros from "./pages/CajaYCobros.jsx";
 import GestionDeClientes from "./pages/GestionDeClientes.jsx";
 import TimelineDeCanchas from "./pages/TimelineDeCanchas.jsx";
+import TorneosCalendario from "./pages/TorneosCalendario.jsx";
+import DetalleDelTorneo from "./pages/DetalleDelTorneo.jsx";
+import InscripcionATorneo from "./pages/InscripcionATorneo.jsx";
+import FixtureDelTorneo from "./pages/FixtureDelTorneo.jsx";
+import GaleriaDelTorneo from "./pages/GaleriaDelTorneo.jsx";
+import AdminTorneos from "./pages/AdminTorneos.jsx";
+import AdminSponsors from "./pages/AdminSponsors.jsx";
+import AdminSanciones from "./pages/AdminSanciones.jsx";
+import RequireAuth from "./auth/RequireAuth.jsx";
 
 const screens = [
   ["/", "Login / Registro"],
@@ -29,6 +38,10 @@ const screens = [
   ["/caja-y-cobros", "Caja y Cobros"],
   ["/gestion-de-clientes", "Gestión de Clientes"],
   ["/timeline-de-canchas", "Timeline de Canchas"],
+  ["/torneos", "Torneos (calendario)"],
+  ["/admin/torneos", "Admin: Torneos"],
+  ["/admin/sponsors", "Admin: Sponsors"],
+  ["/admin/sanciones", "Admin: Sanciones y Reglamento"],
 ];
 
 function ScreensIndex() {
@@ -55,19 +68,57 @@ export default function App() {
       <Routes location={location}>
         <Route path="/" element={<LoginRegistro />} />
         <Route path="/screens" element={<ScreensIndex />} />
-        <Route path="/home-jugador" element={<HomeJugador />} />
-        <Route path="/partidos-abiertos" element={<PartidosAbiertos />} />
-        <Route path="/perfil-de-usuario" element={<PerfilDeUsuario />} />
-        <Route path="/mis-reservas" element={<MisReservas />} />
-        <Route path="/selector-de-horarios" element={<SelectorDeHorarios />} />
-        <Route path="/resumen-y-pago" element={<ResumenYPago />} />
-        <Route path="/detalle-del-complejo" element={<DetalleDelComplejo />} />
-        <Route path="/detalle-del-partido" element={<DetalleDelPartido />} />
-        <Route path="/chat-del-partido" element={<ChatDelPartido />} />
-        <Route path="/dashboard-administrador" element={<DashboardAdministrador />} />
-        <Route path="/caja-y-cobros" element={<CajaYCobros />} />
-        <Route path="/gestion-de-clientes" element={<GestionDeClientes />} />
-        <Route path="/timeline-de-canchas" element={<TimelineDeCanchas />} />
+        <Route path="/home-jugador" element={<RequireAuth><HomeJugador /></RequireAuth>} />
+        <Route path="/partidos-abiertos" element={<RequireAuth><PartidosAbiertos /></RequireAuth>} />
+        <Route path="/perfil-de-usuario" element={<RequireAuth><PerfilDeUsuario /></RequireAuth>} />
+        <Route path="/mis-reservas" element={<RequireAuth><MisReservas /></RequireAuth>} />
+        <Route path="/selector-de-horarios" element={<RequireAuth><SelectorDeHorarios /></RequireAuth>} />
+        <Route path="/resumen-y-pago" element={<RequireAuth><ResumenYPago /></RequireAuth>} />
+        <Route path="/detalle-del-complejo" element={<RequireAuth><DetalleDelComplejo /></RequireAuth>} />
+        <Route path="/detalle-del-partido" element={<RequireAuth><DetalleDelPartido /></RequireAuth>} />
+        <Route path="/chat-del-partido" element={<RequireAuth><ChatDelPartido /></RequireAuth>} />
+        <Route path="/torneos" element={<RequireAuth><TorneosCalendario /></RequireAuth>} />
+        <Route path="/torneos/:torneoId" element={<RequireAuth><DetalleDelTorneo /></RequireAuth>} />
+        <Route path="/torneos/:torneoId/inscripcion" element={<RequireAuth><InscripcionATorneo /></RequireAuth>} />
+        <Route path="/torneos/:torneoId/fixture" element={<RequireAuth><FixtureDelTorneo /></RequireAuth>} />
+        <Route path="/torneos/:torneoId/galeria" element={<RequireAuth><GaleriaDelTorneo /></RequireAuth>} />
+        {/* Sin adminOnly a propósito: estas páginas muestran su propio gate (ClubSetupCard) para
+            que cualquier usuario autenticado pueda crear su club la primera vez que entra. */}
+        <Route path="/admin/torneos" element={<RequireAuth><AdminTorneos /></RequireAuth>} />
+        <Route path="/admin/sponsors" element={<RequireAuth><AdminSponsors /></RequireAuth>} />
+        <Route path="/admin/sanciones" element={<RequireAuth><AdminSanciones /></RequireAuth>} />
+        <Route
+          path="/dashboard-administrador"
+          element={
+            <RequireAuth adminOnly>
+              <DashboardAdministrador />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/caja-y-cobros"
+          element={
+            <RequireAuth adminOnly>
+              <CajaYCobros />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/gestion-de-clientes"
+          element={
+            <RequireAuth adminOnly>
+              <GestionDeClientes />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/timeline-de-canchas"
+          element={
+            <RequireAuth adminOnly>
+              <TimelineDeCanchas />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

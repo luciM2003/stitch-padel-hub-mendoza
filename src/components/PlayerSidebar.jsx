@@ -1,11 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-
-const items = [
-  { key: "home", to: "/home-jugador", icon: "home", label: "Inicio" },
-  { key: "play", to: "/partidos-abiertos", icon: "sports_tennis", label: "Partidos" },
-  { key: "events", to: "/mis-reservas", icon: "event_note", label: "Mis Reservas" },
-  { key: "profile", to: "/perfil-de-usuario", icon: "person", label: "Perfil" },
-];
+import { playerNav } from "../config/nav.js";
 
 export default function PlayerSidebar() {
   const { pathname } = useLocation();
@@ -22,7 +16,7 @@ export default function PlayerSidebar() {
       </div>
 
       <nav className="flex flex-col gap-2 flex-1">
-        {items.map((item) => {
+        {playerNav.map((item) => {
           const active = pathname === item.to;
           return (
             <Link

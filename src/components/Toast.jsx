@@ -34,12 +34,12 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={showToast}>
       {children}
-      <div className="fixed z-[200] bottom-24 md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col gap-2 items-center w-full px-4 pointer-events-none">
+      <div className="fixed inset-0 z-[200] flex flex-col gap-2 items-center justify-center px-4 pointer-events-none">
         {toasts.map((t) => (
           <div
             key={t.id}
             className={
-              "animate-item pointer-events-auto max-w-sm w-full sm:w-auto shadow-lg rounded-full px-5 py-3 flex items-center gap-2 font-body-md text-body-md " +
+              "animate-scale-in pointer-events-auto max-w-sm w-full sm:w-auto shadow-2xl rounded-full px-5 py-3 flex items-center gap-2 font-body-md text-body-md " +
               (colors[t.type] || colors.success)
             }
           >

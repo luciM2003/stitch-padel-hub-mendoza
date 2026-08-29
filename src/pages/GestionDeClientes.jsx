@@ -4,21 +4,7 @@ import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
 import { useToast } from "../components/Toast.jsx";
-
-const sidebarLinks = [
-  { icon: "dashboard", label: "Dashboard", to: "/dashboard-administrador" },
-  { icon: "sports_tennis", label: "Canchas", to: "/timeline-de-canchas" },
-  { icon: "groups", label: "Clientes", to: "/gestion-de-clientes" },
-  { icon: "payments", label: "Pagos", to: "/caja-y-cobros" },
-  { icon: "settings", label: "Ajustes", action: "settings" },
-];
-
-const mobileNavItems = [
-  { icon: "home", to: "/dashboard-administrador" },
-  { icon: "sports_tennis", to: "/timeline-de-canchas" },
-  { icon: "event_note", to: "/caja-y-cobros" },
-  { icon: "person", to: "/gestion-de-clientes" },
-];
+import { adminNav, adminMobileNav } from "../config/nav.js";
 
 const WhatsAppIcon = (props) => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -168,7 +154,7 @@ export default function GestionDeClientes() {
         <div className="flex items-center gap-inline-gutter">
           <div className="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle">
             <img
-              alt="User Profile"
+              alt="Perfil de usuario"
               className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW_6NGqbmbshoPKoC-QQborubi7Z-KwDp1rOvmaqQDYhGDTICGkeguWyaTxUx4gjBl3NZYFGXD84pw3gpsStkO4s4GJGl7G48buD51vmvPyaVeG8T0GsFU0ovnl3NG4F-QFUwn2wBj4zrSTcNAdXLVAwqsN9ScS1-HbofNq7lvLsivKAduRfZOYTZ1VF1wAu98wLepkCXCH285JIVpmU9dWLe_OMwgnlmsr4wTNNt2l76E0Aan-fk"
             />
@@ -184,18 +170,18 @@ export default function GestionDeClientes() {
       </header>
 
       <aside className="hidden md:flex flex-col w-64 bg-surface border-r border-border-subtle h-screen sticky top-0 p-container-margin shrink-0">
-        <div className="mb-stack-lg flex items-center gap-inline-gutter px-4">
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle">
+        <div className="mb-stack-lg flex items-center gap-inline-gutter">
+          <div className="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle shrink-0">
             <img
-              alt="User Profile"
+              alt="Perfil de usuario"
               className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg1e_SufaXHcQvaemwes3rzhpDMqxGuW_b-KdY6jGxyPzrelSFkyeOjlQLrQS4j7OCPaurlEL2s_0p8w4u6fu8KyHJgCcijbd761sc23VmUY_g6cdDY7dJ5gPpR1O7DUxG76IYnOSHCfHQfiGFdDd4FzJCxfL-DdhgB6TMNdjxb1koI58RKBv0eoGNNqLsGahDBU9__Jjrqk9ZwC79wQnuLS0LahIjYNCR8qbK3HcFiawSDagFsKM"
             />
           </div>
-          <h1 className="text-headline-lg font-headline-lg text-on-surface">Padel Pro</h1>
+          <h1 className="text-headline-lg-mobile font-headline-lg-mobile text-on-surface whitespace-nowrap">Padel Pro</h1>
         </div>
         <nav className="flex-1 flex flex-col gap-2">
-          {sidebarLinks.map((item) => {
+          {adminNav.map((item) => {
             const active = item.to === pathname;
             const classes =
               "flex items-center gap-inline-gutter px-4 py-3 rounded-lg transition-all active:scale-95 " +
@@ -208,13 +194,13 @@ export default function GestionDeClientes() {
             );
             if (item.action === "settings") {
               return (
-                <button key={item.label} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
+                <button key={item.key} onClick={() => setShowSettings(true)} className={classes + " w-full text-left"}>
                   {content}
                 </button>
               );
             }
             return (
-              <Link key={item.label} to={item.to} className={classes}>
+              <Link key={item.key} to={item.to} className={classes}>
                 {content}
               </Link>
             );
@@ -385,11 +371,11 @@ export default function GestionDeClientes() {
       </main>
 
       <nav className="md:hidden flex justify-around items-end pb-6 pt-2 px-6 w-full fixed bottom-0 z-50 rounded-t-xl bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-border-subtle dark:border-outline-variant shadow-lg">
-        {mobileNavItems.map((item) => {
+        {adminMobileNav.map((item) => {
           const active = pathname === item.to;
           return (
             <Link
-              key={item.icon}
+              key={item.key}
               to={item.to}
               className={
                 active
