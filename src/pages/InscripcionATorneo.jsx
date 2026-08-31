@@ -30,6 +30,7 @@ export default function InscripcionATorneo() {
   const [procesando, setProcesando] = useState(false);
 
   const cargar = useCallback(async () => {
+    if (!user) return;
     setLoading(true);
     const { data: tcRow } = await supabase
       .from("torneo_categorias")
@@ -62,7 +63,7 @@ export default function InscripcionATorneo() {
       setEsperando(enEspera || []);
     }
     setLoading(false);
-  }, [torneoCategoriaId, user.id]);
+  }, [torneoCategoriaId, user]);
 
   useEffect(() => {
     cargar();

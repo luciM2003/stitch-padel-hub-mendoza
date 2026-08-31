@@ -222,7 +222,11 @@ body {
   animation: slideInRight 0.25s ease both;
 }
 .animate-item {
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* "backwards" (no "both"): mismo problema que .animate-page-in — un transform: translateY(0)
+     persistente después de terminar la animación crea un stacking context nuevo en cada tarjeta,
+     lo que hacía que tarjetas comunes (ej. sedes) se dibujaran por encima de dropdowns con z-index
+     más alto (notificaciones/configuración). */
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 .animate-pulse-soft {
   animation: pulseSoft 2s ease-in-out infinite;

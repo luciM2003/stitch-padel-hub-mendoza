@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function Modal({ open, onClose, title, children, footer }) {
   useEffect(() => {
@@ -16,7 +17,9 @@ export default function Modal({ open, onClose, title, children, footer }) {
 
   if (!open) return null;
 
-  return (
+  // Portal a document.body por la misma razón que DropdownPanel: evita quedar atrapado dentro
+  // del stacking context de un ancestro con position:sticky (sidebar) o transform.
+  return createPortal(
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 animate-fade-in" onClick={onClose}></div>
       <div className="relative w-full max-w-md bg-surface-container-lowest rounded-2xl shadow-2xl max-h-[85vh] flex flex-col animate-scale-in">
@@ -32,6 +35,7 @@ export default function Modal({ open, onClose, title, children, footer }) {
         <div className="px-6 py-4 overflow-y-auto">{children}</div>
         {footer && <div className="px-6 py-4 border-t border-border-subtle shrink-0">{footer}</div>}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

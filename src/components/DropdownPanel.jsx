@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 const POSICIONES = {
   "top-right": "top-16 right-3 sm:right-6 origin-top-right",
@@ -20,7 +21,11 @@ export default function DropdownPanel({ open, onClose, title, children, footer, 
 
   if (!open) return null;
 
-  return (
+  // Portal a document.body: si este panel se renderiza dentro del sidebar (position:sticky,
+  // que crea su propio stacking context), su z-index queda atrapado compitiendo solo contra
+  // el resto del sidebar en vez de contra toda la página, y tarjetas comunes del contenido
+  // terminan tapándolo pese a tener un z-index mucho más alto.
+  return createPortal(
     <>
       <div className="fixed inset-0 z-[150]" onClick={onClose}></div>
       <div
@@ -41,6 +46,7 @@ export default function DropdownPanel({ open, onClose, title, children, footer, 
         <div className="px-3 py-2 overflow-y-auto">{children}</div>
         {footer && <div className="px-5 py-3 border-t border-border-subtle shrink-0">{footer}</div>}
       </div>
-    </>
+    </>,
+    document.body
   );
 }

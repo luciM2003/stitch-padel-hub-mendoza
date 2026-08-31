@@ -33,7 +33,7 @@ export default function GaleriaDelTorneo() {
 
   async function subirFoto(e) {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file || !user) return;
     setSubiendo(true);
     try {
       const path = `${torneoId}/${Date.now()}-${file.name}`;
