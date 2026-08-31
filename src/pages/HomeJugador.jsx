@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/BottomNav.jsx";
 import PlayerSidebar from "../components/PlayerSidebar.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
+
+const AVATAR_DEMO =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8";
 
 const sedesBase = [
   {
@@ -33,10 +37,12 @@ const sedesBase = [
 
 export default function HomeJugador() {
   const navigate = useNavigate();
+  const { profile } = useAuth();
   const [showAll, setShowAll] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
 
   const sedes = showAll ? sedesBase : sedesBase.slice(0, 2);
+  const primerNombre = (profile?.nombre || "Mateo").trim().split(" ")[0];
 
   return (
     <div className="md:flex">
@@ -45,15 +51,11 @@ export default function HomeJugador() {
         <header className="flex justify-between items-center px-container-margin py-stack-md w-full bg-surface sticky top-0 z-40">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest border border-border-subtle">
-              <img
-                alt="Perfil de usuario"
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8"
-              />
+              <img alt="Perfil de usuario" className="w-full h-full object-cover" src={profile?.avatar_url || AVATAR_DEMO} />
             </div>
             <div>
               <p className="text-label-muted font-label-muted text-secondary">Buen día,</p>
-              <h1 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-text-primary">Hola, Mateo 👋</h1>
+              <h1 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-text-primary">Hola, {primerNombre} 👋</h1>
             </div>
           </div>
           <button

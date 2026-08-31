@@ -56,7 +56,7 @@ const actividadExtra = [
 
 export default function PerfilDeUsuario() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const [showSettings, setShowSettings] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
@@ -92,14 +92,17 @@ export default function PerfilDeUsuario() {
             <div className="relative">
               <img
                 className="w-32 h-32 rounded-full object-cover border-4 border-surface-container shadow-md"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdl56wQuhbAKUQoVNMPDfngkjD8_5iUylW7Eeviwugi4w3ABvUJLF4v0HeP7s5-OMnNgfDgPbTkzYm5kfUO9ep2E2HTvGYjzGQJ9PzKqWgyQ8taSiJbHj7PWM-N6oME4oBMfpUJQgXusHOTxcjLnfTR7BWCuVB95ECesDjdy1tXedzfxWxrZBZDbbVWM0DM7BqZZZk232FMBKd99jSUq7V37z0HoBnOnbX-1O1u5ZJNQEaIjvdjYw"
+                src={
+                  profile?.avatar_url ||
+                  "https://lh3.googleusercontent.com/aida-public/AB6AXuDdl56wQuhbAKUQoVNMPDfngkjD8_5iUylW7Eeviwugi4w3ABvUJLF4v0HeP7s5-OMnNgfDgPbTkzYm5kfUO9ep2E2HTvGYjzGQJ9PzKqWgyQ8taSiJbHj7PWM-N6oME4oBMfpUJQgXusHOTxcjLnfTR7BWCuVB95ECesDjdy1tXedzfxWxrZBZDbbVWM0DM7BqZZZk232FMBKd99jSUq7V37z0HoBnOnbX-1O1u5ZJNQEaIjvdjYw"
+                }
               />
               <div className="absolute -bottom-2 -right-2 bg-primary text-on-primary font-headline-lg-mobile text-headline-lg-mobile font-bold w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
-                4.5
+                {profile?.nivel || "4.5"}
               </div>
             </div>
             <div className="mt-2">
-              <h2 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface">Mateo R.</h2>
+              <h2 className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-on-surface">{profile?.nombre || "Mateo R."}</h2>
               <p className="text-body-md font-body-md text-text-secondary mt-1 flex items-center justify-center gap-1">
                 <span className="material-symbols-outlined text-sm">location_on</span>
                 Madrid, ES
