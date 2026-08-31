@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 
@@ -30,6 +30,10 @@ export default function ChatDelPartido() {
   const [texto, setTexto] = useState("");
   const [showNotifs, setShowNotifs] = useState(false);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+  }, [messages]);
 
   function adjuntarArchivo(e) {
     const file = e.target.files?.[0];

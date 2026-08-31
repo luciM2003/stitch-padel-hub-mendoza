@@ -79,14 +79,14 @@ export default function LoginRegistro() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md lg:max-w-lg animate-item max-h-full overflow-y-auto sm:overflow-visible hide-scrollbar">
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/30 backdrop-blur-2xl shadow-2xl shadow-black/40 p-5 sm:p-10">
+      <div className="relative z-10 w-full max-w-[300px] sm:max-w-md lg:max-w-lg animate-item max-h-full overflow-y-auto sm:overflow-visible hide-scrollbar">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/30 backdrop-blur-2xl shadow-2xl shadow-black/40 p-4 sm:p-10">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent"></div>
 
           <div className="relative">
             <div className="mb-stack-sm sm:mb-stack-lg text-center">
-              <h1 className="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-xl sm:text-headline-xl text-[#141414] mb-1 sm:mb-stack-sm tracking-tight">
-                Bienvenido al Club
+              <h1 className="text-[22px] leading-tight font-headline-lg-mobile sm:font-headline-xl sm:text-headline-xl sm:leading-[1.1] text-[#141414] mb-1 sm:mb-stack-sm tracking-tight">
+                Bienvenido a Padel Pro
               </h1>
               <p className="font-body-md text-body-md text-[#4a4a4a]">
                 {modo === "login" ? "Ingresá tu email para comenzar a jugar." : "Creá tu cuenta para empezar a jugar."}
