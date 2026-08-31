@@ -2,10 +2,16 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import NotificationsModal from "./NotificationsModal.jsx";
 import SettingsModal from "./SettingsModal.jsx";
+import SidebarProfileMenu from "./SidebarProfileMenu.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { adminNav, adminMobileNav } from "../config/nav.js";
+
+const AVATAR_DEMO_ADMIN =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
 
 export default function AdminLayout({ title, subtitle, actions, children }) {
   const { pathname } = useLocation();
+  const { profile } = useAuth();
   const [showNotifs, setShowNotifs] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -56,6 +62,11 @@ export default function AdminLayout({ title, subtitle, actions, children }) {
             );
           })}
         </nav>
+        <SidebarProfileMenu
+          nombre={profile?.nombre || "Admin User"}
+          subtitulo={profile?.telefono || "Club Central"}
+          avatarUrl={profile?.avatar_url || AVATAR_DEMO_ADMIN}
+        />
       </aside>
 
       <main className="flex-1 p-container-margin md:p-stack-lg overflow-x-hidden mb-24 md:mb-0">
@@ -93,7 +104,7 @@ export default function AdminLayout({ title, subtitle, actions, children }) {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
-      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} anchor="bottom-left" />
     </div>
   );
 }

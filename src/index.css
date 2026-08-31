@@ -45,16 +45,16 @@
 
 :root[data-theme="dark"],
 :root.dark {
-  --color-background: 18 18 18;
+  --color-background: 14 14 15;
   --color-on-background: 233 234 228;
-  --color-surface: 18 18 18;
-  --color-surface-dim: 18 18 18;
-  --color-surface-bright: 56 56 56;
-  --color-surface-container-lowest: 13 13 13;
-  --color-surface-container-low: 26 28 28;
-  --color-surface-container: 30 32 32;
-  --color-surface-container-high: 40 42 42;
-  --color-surface-container-highest: 51 51 51;
+  --color-surface: 14 14 15;
+  --color-surface-dim: 10 10 11;
+  --color-surface-bright: 62 62 66;
+  --color-surface-container-lowest: 24 24 26;
+  --color-surface-container-low: 32 32 35;
+  --color-surface-container: 40 40 44;
+  --color-surface-container-high: 50 50 55;
+  --color-surface-container-highest: 62 62 68;
   --color-surface-variant: 69 73 53;
   --color-surface-tint: 178 212 36;
   --color-on-surface: 226 227 220;
@@ -80,7 +80,7 @@
   --color-on-error-container: 255 218 214;
   --color-text-primary: 241 241 241;
   --color-text-secondary: 168 168 168;
-  --color-border-subtle: 51 51 51;
+  --color-border-subtle: 74 74 80;
 }
 
 body {
@@ -93,6 +93,28 @@ body {
 
 .input {
   @apply w-full px-4 py-3 rounded-lg border border-border-subtle bg-surface text-text-primary focus:outline-none focus:border-primary-container transition-colors;
+}
+
+/* Scrollbar prolija en toda la app (los .hide-scrollbar de chips/fechas la siguen ocultando) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-outline-variant)) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-outline-variant));
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-outline));
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -182,7 +204,10 @@ body {
 }
 
 .animate-page-in {
-  animation: slideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* "backwards" (no "both"): al terminar la animación el transform vuelve a "none" en vez de
+     quedar pegado en translateY(0) — un transform persistente en este wrapper (que envuelve
+     toda página) rompe position:sticky en todos los sidebars de la app. */
+  animation: slideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 .animate-fade-in {
   animation: fadeIn 0.2s ease both;

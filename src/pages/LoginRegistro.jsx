@@ -7,7 +7,7 @@ const HERO_IMAGES = ["/fotos/padel1.jpg", "/fotos/padel2.jpg", "/fotos/padel3.jp
 const HERO_INTERVAL_MS = 5000;
 
 const glassInput =
-  "w-full border border-white/40 rounded-xl bg-white/40 backdrop-blur-sm py-4 px-4 font-body-lg text-body-lg text-[#141414] placeholder-[#5a5a5a]/80 focus:outline-none focus:border-primary-fixed focus:bg-white/60 transition-all";
+  "w-full border border-white/40 rounded-xl bg-white/40 backdrop-blur-sm py-3 sm:py-4 px-4 font-body-lg text-body-lg text-[#141414] placeholder-[#5a5a5a]/80 focus:outline-none focus:border-primary-fixed focus:bg-white/60 transition-all";
 
 export default function LoginRegistro() {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function LoginRegistro() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-ink-fixed font-body-md antialiased px-container-margin py-stack-lg">
+    <div className="relative h-dvh flex items-center justify-center overflow-hidden bg-ink-fixed font-body-md antialiased px-container-margin py-3 sm:py-stack-lg">
       <div className="absolute inset-0">
         {HERO_IMAGES.map((src, i) => (
           <img
@@ -79,13 +79,13 @@ export default function LoginRegistro() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md lg:max-w-lg animate-item">
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/30 backdrop-blur-2xl shadow-2xl shadow-black/40 p-6 sm:p-10">
+      <div className="relative z-10 w-full max-w-md lg:max-w-lg animate-item max-h-full overflow-y-auto sm:overflow-visible hide-scrollbar">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/30 backdrop-blur-2xl shadow-2xl shadow-black/40 p-5 sm:p-10">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent"></div>
 
           <div className="relative">
-            <div className="mb-stack-lg text-center">
-              <h1 className="font-headline-xl text-headline-xl text-[#141414] mb-stack-sm tracking-tight">
+            <div className="mb-stack-sm sm:mb-stack-lg text-center">
+              <h1 className="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-xl sm:text-headline-xl text-[#141414] mb-1 sm:mb-stack-sm tracking-tight">
                 Bienvenido al Club
               </h1>
               <p className="font-body-md text-body-md text-[#4a4a4a]">
@@ -93,7 +93,7 @@ export default function LoginRegistro() {
               </p>
             </div>
 
-            <form className="space-y-stack-md w-full" onSubmit={handleSubmit}>
+            <form className="space-y-3 sm:space-y-stack-md w-full" onSubmit={handleSubmit}>
               {modo === "registro" && (
                 <div className="flex flex-col space-y-2">
                   <label className="font-label-caps text-label-caps text-[#1a1a1a] uppercase" htmlFor="nombre">
@@ -145,7 +145,7 @@ export default function LoginRegistro() {
 
               <button
                 disabled={loading}
-                className="w-full bg-primary-fixed text-on-primary-fixed font-body-lg text-body-lg font-bold py-4 rounded-full flex items-center justify-center space-x-2 transition-all active:scale-[0.98] disabled:opacity-70 shadow-lg shadow-black/20 hover:brightness-105"
+                className="w-full bg-primary-fixed text-on-primary-fixed font-body-lg text-body-lg font-bold py-3 sm:py-4 rounded-full flex items-center justify-center space-x-2 transition-all active:scale-[0.98] disabled:opacity-70 shadow-lg shadow-black/20 hover:brightness-105"
                 type="submit"
               >
                 {loading ? (
@@ -164,12 +164,12 @@ export default function LoginRegistro() {
             <button
               type="button"
               onClick={() => setModo(modo === "login" ? "registro" : "login")}
-              className="mt-4 text-center text-label-caps font-label-caps text-[#4a4a4a] hover:text-[#141414] transition-colors w-full"
+              className="mt-3 sm:mt-4 text-center text-label-caps font-label-caps text-[#4a4a4a] hover:text-[#141414] transition-colors w-full"
             >
               {modo === "login" ? "¿No tenés cuenta? Registrate" : "¿Ya tenés cuenta? Iniciá sesión"}
             </button>
 
-            <div className="relative flex items-center my-stack-lg">
+            <div className="relative flex items-center my-3 sm:my-stack-lg">
               <div className="flex-grow border-t border-white/40"></div>
               <span className="flex-shrink-0 mx-4 font-label-muted text-label-muted text-[#4a4a4a]">o</span>
               <div className="flex-grow border-t border-white/40"></div>
@@ -177,7 +177,7 @@ export default function LoginRegistro() {
 
             <button
               disabled={loading}
-              className="w-full bg-white/50 border border-white/40 text-[#141414] font-body-md text-body-md font-semibold py-4 rounded-full flex items-center justify-center space-x-3 transition-all active:scale-[0.98] disabled:opacity-50 hover:bg-white/70"
+              className="w-full bg-white/50 border border-white/40 text-[#141414] font-body-md text-body-md font-semibold py-3 sm:py-4 rounded-full flex items-center justify-center space-x-3 transition-all active:scale-[0.98] disabled:opacity-50 hover:bg-white/70"
               type="button"
               onClick={handleGoogle}
             >
@@ -191,14 +191,14 @@ export default function LoginRegistro() {
             </button>
 
             {!isSupabaseConfigured && (
-              <p className="mt-6 text-center text-label-muted font-label-muted text-[#4a4a4a]">
+              <p className="mt-3 sm:mt-6 text-center text-label-muted font-label-muted text-[#4a4a4a]">
                 Backend en configuración — por ahora podés navegar la app en modo demo.
               </p>
             )}
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-3 sm:mt-6">
           {HERO_IMAGES.map((src, i) => (
             <button
               key={src}

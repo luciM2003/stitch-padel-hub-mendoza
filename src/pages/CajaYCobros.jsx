@@ -3,7 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
+import SidebarProfileMenu from "../components/SidebarProfileMenu.jsx";
 import { useToast } from "../components/Toast.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { adminNav, adminMobileNav } from "../config/nav.js";
 
 const transaccionesIniciales = [
@@ -24,6 +26,7 @@ const fmt = (n) => "$" + n.toLocaleString("es-AR");
 export default function CajaYCobros() {
   const { pathname } = useLocation();
   const showToast = useToast();
+  const { profile } = useAuth();
   const [transacciones, setTransacciones] = useState(transaccionesIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [showSearch, setShowSearch] = useState(false);
@@ -154,16 +157,15 @@ export default function CajaYCobros() {
             );
           })}
         </div>
-        <div className="mt-auto flex items-center gap-3 px-4 py-3 border-t border-border-subtle pt-4">
-          <img
-            alt="Foto de perfil del usuario"
-            className="w-10 h-10 rounded-full object-cover border border-border-subtle"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDst4I8x_Eax7n8gmPcCCwJpiPq1DZE_WYLfdOd-MVqZUW9o3Jcs5oV7qXd149mwL93U_tKjCm9Jthw75sjdsnRiQQJkhmiDeynHNakzTCmfh9eWOlJzK3m0JXV8mvM89Y8_lNGM1jxuO_CAxdDzZXYqrIQs-bTw4BXU2ljZqL7-Q6h19fBZxgHkZgj_oeuqBUE4HE7RmV3aidAcKT6Apu8Vv27FjGupROFkrOr425Kf9hVdHRTxZU"
+        <div className="mt-auto pt-4">
+          <SidebarProfileMenu
+            nombre={profile?.nombre || "Admin User"}
+            subtitulo={profile?.telefono || "Club Central"}
+            avatarUrl={
+              profile?.avatar_url ||
+              "https://lh3.googleusercontent.com/aida-public/AB6AXuDst4I8x_Eax7n8gmPcCCwJpiPq1DZE_WYLfdOd-MVqZUW9o3Jcs5oV7qXd149mwL93U_tKjCm9Jthw75sjdsnRiQQJkhmiDeynHNakzTCmfh9eWOlJzK3m0JXV8mvM89Y8_lNGM1jxuO_CAxdDzZXYqrIQs-bTw4BXU2ljZqL7-Q6h19fBZxgHkZgj_oeuqBUE4HE7RmV3aidAcKT6Apu8Vv27FjGupROFkrOr425Kf9hVdHRTxZU"
+            }
           />
-          <div>
-            <p className="font-body-md text-body-md font-semibold text-text-primary">Admin User</p>
-            <p className="font-label-muted text-label-muted text-text-secondary">Club Central</p>
-          </div>
         </div>
       </nav>
 
@@ -353,7 +355,7 @@ export default function CajaYCobros() {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
-      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} anchor="bottom-left" />
 
       <Modal open={showFiltro} onClose={() => setShowFiltro(false)} title="Filtrar por método">
         <div className="flex flex-col gap-1">

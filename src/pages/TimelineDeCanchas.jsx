@@ -3,8 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
+import SidebarProfileMenu from "../components/SidebarProfileMenu.jsx";
 import { useToast } from "../components/Toast.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { adminNav, adminMobileNav } from "../config/nav.js";
+
+const AVATAR_ADMIN =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
 
 const dias = [
   { label: "Hoy, 24 Oct", sub: "Jueves" },
@@ -33,6 +38,7 @@ const tiposCancha = ["Todos", "Cristal", "Muro"];
 export default function TimelineDeCanchas() {
   const { pathname } = useLocation();
   const showToast = useToast();
+  const { profile } = useAuth();
   const [tipo, setTipo] = useState("Todos");
   const [diaIndex, setDiaIndex] = useState(0);
   const [showNotifs, setShowNotifs] = useState(false);
@@ -103,6 +109,13 @@ export default function TimelineDeCanchas() {
               </Link>
             );
           })}
+        </div>
+        <div className="px-inline-gutter pt-4">
+          <SidebarProfileMenu
+            nombre={profile?.nombre || "Admin User"}
+            subtitulo={profile?.telefono || "Club Central"}
+            avatarUrl={profile?.avatar_url || AVATAR_ADMIN}
+          />
         </div>
       </nav>
 
@@ -350,7 +363,7 @@ export default function TimelineDeCanchas() {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
-      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} anchor="bottom-left" />
 
       <Modal open={showFecha} onClose={() => setShowFecha(false)} title="Seleccionar Fecha">
         <div className="flex flex-col gap-2">

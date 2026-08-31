@@ -70,7 +70,7 @@ export default {
     "on-tertiary-fixed-variant": "#384858",
     // Tarjetas de acento "siempre oscuras" (ej. hero de próxima reserva): no deben invertirse
     // en modo oscuro, a diferencia de text-primary/text-secondary que sí son texto adaptable.
-    "ink-fixed": "#111111",
+    "ink-fixed": "#1c1c1e",
     "on-ink-fixed": "#ffffff",
     // inverse-surface/inverse-on-surface: en este codebase se usan siempre como "tarjeta de
     // acento oscura con texto claro" (stats, burbujas de chat), nunca como el rol M3 real de

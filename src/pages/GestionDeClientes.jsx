@@ -3,8 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import Modal from "../components/Modal.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
+import SidebarProfileMenu from "../components/SidebarProfileMenu.jsx";
 import { useToast } from "../components/Toast.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { adminNav, adminMobileNav } from "../config/nav.js";
+
+const AVATAR_ADMIN =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
 
 const WhatsAppIcon = (props) => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -65,6 +70,7 @@ const clientesIniciales = [
 export default function GestionDeClientes() {
   const { pathname } = useLocation();
   const showToast = useToast();
+  const { profile } = useAuth();
   const [clientes, setClientes] = useState(clientesIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [filtroNivel, setFiltroNivel] = useState("");
@@ -206,6 +212,13 @@ export default function GestionDeClientes() {
             );
           })}
         </nav>
+        <div className="pt-4">
+          <SidebarProfileMenu
+            nombre={profile?.nombre || "Admin User"}
+            subtitulo={profile?.telefono || "Club Central"}
+            avatarUrl={profile?.avatar_url || AVATAR_ADMIN}
+          />
+        </div>
       </aside>
 
       <main className="flex-1 p-container-margin md:p-stack-lg overflow-x-hidden mb-24 md:mb-0">
@@ -390,7 +403,7 @@ export default function GestionDeClientes() {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
-      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} anchor="bottom-left" />
 
       <Modal open={showNuevo} onClose={() => setShowNuevo(false)} title={editando ? "Editar Cliente" : "Nuevo Cliente"}>
         <form onSubmit={guardarCliente} className="flex flex-col gap-4">

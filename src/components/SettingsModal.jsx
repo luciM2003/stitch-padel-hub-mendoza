@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "./Modal.jsx";
+import DropdownPanel from "./DropdownPanel.jsx";
 import { useToast } from "./Toast.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { useTheme } from "../theme/ThemeContext.jsx";
@@ -10,7 +10,7 @@ const info = {
   "Ayuda y soporte": "¿Tenés un problema con una reserva o un pago? Escribinos a soporte@padelhub.app o por WhatsApp al +54 261 555-0000, te respondemos en el día.",
 };
 
-export default function SettingsModal({ open, onClose }) {
+export default function SettingsModal({ open, onClose, anchor = "top-right" }) {
   const navigate = useNavigate();
   const showToast = useToast();
   const { signOut } = useAuth();
@@ -35,7 +35,7 @@ export default function SettingsModal({ open, onClose }) {
   }
 
   return (
-    <Modal open={open} onClose={onClose} title="Configuración">
+    <DropdownPanel open={open} onClose={onClose} title="Configuración" anchor={anchor}>
       <div className="flex flex-col gap-1">
         <button
           onClick={toggleNotifs}
@@ -92,6 +92,6 @@ export default function SettingsModal({ open, onClose }) {
           <span className="text-body-md font-body-md font-semibold">Cerrar sesión</span>
         </button>
       </div>
-    </Modal>
+    </DropdownPanel>
   );
 }

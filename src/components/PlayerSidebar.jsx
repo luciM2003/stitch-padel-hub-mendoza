@@ -1,8 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { playerNav } from "../config/nav.js";
+import { useAuth } from "../auth/AuthContext.jsx";
+import SidebarProfileMenu from "./SidebarProfileMenu.jsx";
+
+const AVATAR_DEMO =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8";
 
 export default function PlayerSidebar() {
   const { pathname } = useLocation();
+  const { profile } = useAuth();
 
   return (
     <aside className="hidden md:flex flex-col w-64 bg-surface border-r border-border-subtle h-screen sticky top-0 shrink-0 py-stack-md px-inline-gutter">
@@ -36,16 +42,12 @@ export default function PlayerSidebar() {
         })}
       </nav>
 
-      <div className="flex items-center gap-3 px-3 py-3 border-t border-border-subtle pt-4">
-        <img
-          className="w-10 h-10 rounded-full object-cover border border-border-subtle"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV9jtoStxOAlRpzXXf43OWAdu-_YJgJTKcwBpyVSH7eBsS_7k_aRDnPaueHGU_niW3hlbMK5dQF_aazzy694sdIe_cyNu4yhtYovlwgAGgEg0GG0Jkudx9_7aHZZpmR_5W6SntsEJdlPrDpTm_qLhsZUJsSkTKCtK_ySYPtEVtY9vpvgCBJ4vIpZRoThwCrR2QDvW0oC39a8CZgk01xCBtX_a61u71fvQd7O285RvLd920ty27NA8"
-        />
-        <div className="overflow-hidden">
-          <p className="font-label-caps text-label-caps text-text-primary truncate">Mateo R.</p>
-          <p className="font-label-muted text-label-muted text-text-secondary truncate">Nivel 4.5</p>
-        </div>
-      </div>
+      <SidebarProfileMenu
+        nombre={profile?.nombre || "Mateo R."}
+        subtitulo={profile?.nivel ? `Nivel ${profile.nivel}` : "Nivel 4.5"}
+        avatarUrl={profile?.avatar_url || AVATAR_DEMO}
+        verPerfilTo="/perfil-de-usuario"
+      />
     </aside>
   );
 }

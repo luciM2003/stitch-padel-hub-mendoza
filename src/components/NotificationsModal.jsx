@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Modal from "./Modal.jsx";
+import DropdownPanel from "./DropdownPanel.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { supabase, isSupabaseConfigured } from "../lib/supabaseClient.js";
 
@@ -44,7 +44,7 @@ export default function NotificationsModal({ open, onClose }) {
     : notifs.map((n) => ({ icon: ICONO_POR_TIPO[n.tipo] || "notifications", title: n.titulo, desc: n.mensaje, time: tiempoRelativo(n.created_at) }));
 
   return (
-    <Modal open={open} onClose={onClose} title="Notificaciones">
+    <DropdownPanel open={open} onClose={onClose} title="Notificaciones" anchor="top-right">
       <div className="flex flex-col gap-3">
         {!usandoMock && loading && <p className="text-center text-text-secondary py-6">Cargando...</p>}
         {!usandoMock && !loading && items.length === 0 && <p className="text-center text-text-secondary py-6">No tenés notificaciones.</p>}
@@ -65,7 +65,7 @@ export default function NotificationsModal({ open, onClose }) {
           </div>
         ))}
       </div>
-    </Modal>
+    </DropdownPanel>
   );
 }
 

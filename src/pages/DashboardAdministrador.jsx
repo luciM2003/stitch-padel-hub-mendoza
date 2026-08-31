@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
+import SidebarProfileMenu from "../components/SidebarProfileMenu.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { adminNav, adminMobileNav } from "../config/nav.js";
+
+const AVATAR_ADMIN =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
 
 const chartBars = [
   { day: "Lu", height: 60 },
@@ -17,6 +22,7 @@ const chartBars = [
 export default function DashboardAdministrador() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { profile } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -61,20 +67,13 @@ export default function DashboardAdministrador() {
           })}
         </nav>
         <div className="p-stack-md border-t border-border-subtle mt-auto">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0">
-              <img
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY"
-              />
+          {collapsed ? (
+            <div className="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 mx-auto">
+              <img className="w-full h-full object-cover" src={AVATAR_ADMIN} alt="Admin" />
             </div>
-            {!collapsed && (
-              <div className="overflow-hidden">
-                <p className="font-label-caps text-label-caps text-text-primary truncate">Admin User</p>
-                <p className="font-label-muted text-label-muted text-text-secondary truncate">admin@padelpro.com</p>
-              </div>
-            )}
-          </div>
+          ) : (
+            <SidebarProfileMenu nombre={profile?.nombre || "Admin User"} subtitulo={profile?.telefono || "admin@padelpro.com"} avatarUrl={profile?.avatar_url || AVATAR_ADMIN} />
+          )}
         </div>
       </aside>
 
@@ -223,7 +222,7 @@ export default function DashboardAdministrador() {
       </nav>
 
       <NotificationsModal open={showNotifs} onClose={() => setShowNotifs(false)} />
-      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} anchor="bottom-left" />
     </div>
   );
 }
