@@ -150,9 +150,13 @@ export default function InscripcionATorneo() {
   async function pagarConMercadoPago(miFilaId, inscripcionId) {
     setProcesando(true);
     try {
-      await crearPreferenciaMP({ monto: tc.torneo.precio_inscripcion, concepto: tc.torneo.nombre });
-      const res = await simularPagoAprobado();
       const comision = (tc.torneo.precio_inscripcion * tc.torneo.comision_pct) / 100;
+      const total = tc.torneo.precio_inscripcion + comision;
+      // El jugador paga el precio del torneo + el cargo por servicio; el club sigue
+      // cobrando el precio de inscripción completo (monto), sin descuentos — el cargo
+      // por servicio es un adicional que se cobra aparte, no una comisión que se le resta.
+      await crearPreferenciaMP({ monto: total, concepto: tc.torneo.nombre });
+      const res = await simularPagoAprobado();
       await supabase.from("pagos").insert({
         inscripcion_jugador_id: miFilaId,
         monto: tc.torneo.precio_inscripcion,
@@ -308,11 +312,23 @@ export default function InscripcionATorneo() {
             {(() => {
               const miFila = miInscripcion.jugadores.find((j) => j.profile_id === user.id);
               if (!miFila || miFila.estado_pago === "pagado") return null;
+              const cargoServicio = (tc.torneo.precio_inscripcion * tc.torneo.comision_pct) / 100;
+              const totalAPagar = tc.torneo.precio_inscripcion + cargoServicio;
               return (
                 <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col gap-4">
                   <div>
                     <h3 className="text-body-lg font-body-lg font-bold text-text-primary">Tu parte</h3>
                     <p className="text-headline-lg-mobile font-headline-lg-mobile font-bold text-text-primary mt-1">{fmt(tc.torneo.precio_inscripcion)}</p>
+                  </div>
+                  <div className="flex flex-col gap-1 pt-3 border-t border-border-subtle">
+                    <div className="flex justify-between text-label-muted font-label-muted text-text-secondary">
+                      <span>Cargo por servicio</span>
+                      <span>{fmt(cargoServicio)}</span>
+                    </div>
+                    <div className="flex justify-between text-body-md font-body-md font-bold text-text-primary">
+                      <span>Total a pagar</span>
+                      <span>{fmt(totalAPagar)}</span>
+                    </div>
                   </div>
                   <button
                     disabled={procesando}
@@ -326,6 +342,9 @@ export default function InscripcionATorneo() {
                     <span className="mx-3 text-label-muted font-label-muted text-text-secondary">o transferencia</span>
                     <div className="flex-grow border-t border-border-subtle"></div>
                   </div>
+                  <p className="text-label-muted font-label-muted text-text-secondary -mt-2">
+                    Transferí el total ({fmt(totalAPagar)}) y subí el comprobante.
+                  </p>
                   <input
                     value={comprobanteUrl}
                     onChange={(e) => setComprobanteUrl(e.target.value)}

@@ -41,6 +41,8 @@ export default function AdminTorneos() {
   const [categoriaTarget, setCategoriaTarget] = useState(null);
   const [sedeCanchaTarget, setSedeCanchaTarget] = useState(null);
   const [canchaForm, setCanchaForm] = useState({ nombre: "", tipo: "Cristal" });
+  const [torneoEditando, setTorneoEditando] = useState(null);
+  const [editForm, setEditForm] = useState({ nombre: "", sedeId: "", fechaInicio: "", fechaCierre: "", precio: "", comision: "8", premios: "" });
   const [form, setForm] = useState({
     nombre: "",
     sedeId: "",
@@ -109,6 +111,43 @@ export default function AdminTorneos() {
     showToast("Torneo creado con inscripciones abiertas");
     setShowNuevo(false);
     setForm({ nombre: "", sedeId: "", fechaInicio: "", fechaCierre: "", precio: "", comision: "8", cupoParejas: "16", premios: "", categoriaId: "", formato: "zonas_y_llave" });
+    cargarTodo();
+  }
+
+  function abrirEdicion(torneo) {
+    setEditForm({
+      nombre: torneo.nombre || "",
+      sedeId: torneo.sede_id || "",
+      fechaInicio: torneo.fecha_inicio ? torneo.fecha_inicio.slice(0, 10) : "",
+      fechaCierre: torneo.fecha_cierre_inscripcion ? torneo.fecha_cierre_inscripcion.slice(0, 10) : "",
+      precio: torneo.precio_inscripcion ?? "",
+      comision: torneo.comision_pct ?? "8",
+      premios: torneo.premios || "",
+    });
+    setTorneoEditando(torneo.id);
+  }
+
+  async function guardarEdicion(e) {
+    e.preventDefault();
+    if (!editForm.nombre || !editForm.sedeId || !editForm.fechaInicio) return;
+    const { error } = await supabase
+      .from("torneos")
+      .update({
+        nombre: editForm.nombre,
+        sede_id: editForm.sedeId,
+        fecha_inicio: editForm.fechaInicio,
+        fecha_cierre_inscripcion: editForm.fechaCierre || null,
+        precio_inscripcion: Number(editForm.precio) || 0,
+        comision_pct: Number(editForm.comision) || 8,
+        premios: editForm.premios,
+      })
+      .eq("id", torneoEditando);
+    if (error) {
+      showToast(error.message, "error");
+      return;
+    }
+    showToast("Torneo actualizado");
+    setTorneoEditando(null);
     cargarTodo();
   }
 
@@ -260,6 +299,13 @@ export default function AdminTorneos() {
               </div>
               <div className="flex flex-wrap gap-2 justify-end">
                 <button
+                  onClick={() => abrirEdicion(t)}
+                  className="px-4 py-2 rounded-full border border-border-subtle text-text-primary hover:bg-surface-container-high active:scale-95 transition-all text-label-caps font-label-caps flex items-center gap-1"
+                >
+                  <span className="material-symbols-outlined text-[16px]">edit</span>
+                  Editar
+                </button>
+                <button
                   onClick={() => navigate(`/torneos/${t.id}/fixture`)}
                   className="px-4 py-2 rounded-full border border-border-subtle text-text-primary hover:bg-surface-container-high active:scale-95 transition-all text-label-caps font-label-caps"
                 >
@@ -364,6 +410,46 @@ export default function AdminTorneos() {
 
           <button type="submit" className="w-full bg-primary-fixed text-on-primary-fixed font-body-md font-bold py-3 rounded-full mt-2 hover:opacity-90 active:scale-[0.98] transition-all">
             Crear Torneo
+          </button>
+        </form>
+      </Modal>
+
+      <Modal open={Boolean(torneoEditando)} onClose={() => setTorneoEditando(null)} title="Editar Torneo">
+        <form onSubmit={guardarEdicion} className="flex flex-col gap-3">
+          <Campo label="Nombre">
+            <input required value={editForm.nombre} onChange={(e) => setEditForm({ ...editForm, nombre: e.target.value })} className="input" />
+          </Campo>
+          <Campo label="Sede / Cancha">
+            <select required value={editForm.sedeId} onChange={(e) => setEditForm({ ...editForm, sedeId: e.target.value })} className="input">
+              <option value="">Elegir sede</option>
+              {sedes.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.nombre}
+                </option>
+              ))}
+            </select>
+          </Campo>
+          <div className="grid grid-cols-2 gap-3">
+            <Campo label="Fecha inicio">
+              <input required type="date" value={editForm.fechaInicio} onChange={(e) => setEditForm({ ...editForm, fechaInicio: e.target.value })} className="input" />
+            </Campo>
+            <Campo label="Cierre inscripción">
+              <input type="date" value={editForm.fechaCierre} onChange={(e) => setEditForm({ ...editForm, fechaCierre: e.target.value })} className="input" />
+            </Campo>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <Campo label="Precio x jugador">
+              <input type="number" min="0" value={editForm.precio} onChange={(e) => setEditForm({ ...editForm, precio: e.target.value })} className="input" />
+            </Campo>
+            <Campo label="Comisión %">
+              <input type="number" min="5" max="10" value={editForm.comision} onChange={(e) => setEditForm({ ...editForm, comision: e.target.value })} className="input" />
+            </Campo>
+          </div>
+          <Campo label="Premios">
+            <input value={editForm.premios} onChange={(e) => setEditForm({ ...editForm, premios: e.target.value })} className="input" placeholder="Ej: Trofeo + $50.000" />
+          </Campo>
+          <button type="submit" className="w-full bg-primary-fixed text-on-primary-fixed font-body-md font-bold py-3 rounded-full mt-2 hover:opacity-90 active:scale-[0.98] transition-all">
+            Guardar cambios
           </button>
         </form>
       </Modal>
