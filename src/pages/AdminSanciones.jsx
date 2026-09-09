@@ -106,7 +106,7 @@ export default function AdminSanciones() {
   }
 
   return (
-    <AdminLayout title="Sanciones y Reglamento" subtitle="Gestioná sanciones a jugadores y publicá las reglas del club.">
+    <AdminLayout title="Sanciones y Reglamento" club={club} subtitle="Gestioná sanciones a jugadores y publicá las reglas del club.">
       <div className="flex gap-2 mb-stack-md">
         <button
           onClick={() => setTab("sanciones")}

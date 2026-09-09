@@ -234,6 +234,7 @@ export default function AdminTorneos() {
   return (
     <AdminLayout
       title="Torneos"
+      club={club}
       subtitle="Creá y gestioná los torneos de tu club."
       actions={
         club && (

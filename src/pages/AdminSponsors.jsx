@@ -74,6 +74,7 @@ export default function AdminSponsors() {
   return (
     <AdminLayout
       title="Sponsors"
+      club={club}
       subtitle="Patrocinadores del club, visibles en los torneos."
       actions={
         club && (

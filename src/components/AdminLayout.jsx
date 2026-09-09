@@ -9,7 +9,7 @@ import { adminNav, adminMobileNav } from "../config/nav.js";
 const AVATAR_DEMO_ADMIN =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
 
-export default function AdminLayout({ title, subtitle, actions, children }) {
+export default function AdminLayout({ title, subtitle, actions, children, club }) {
   const { pathname } = useLocation();
   const { profile } = useAuth();
   const [showNotifs, setShowNotifs] = useState(false);
@@ -64,7 +64,7 @@ export default function AdminLayout({ title, subtitle, actions, children }) {
         </nav>
         <SidebarProfileMenu
           nombre={profile?.nombre || "Admin User"}
-          subtitulo={profile?.telefono || "Club Central"}
+          subtitulo={club?.nombre || profile?.telefono || "Club Admin"}
           avatarUrl={profile?.avatar_url || AVATAR_DEMO_ADMIN}
         />
       </aside>
