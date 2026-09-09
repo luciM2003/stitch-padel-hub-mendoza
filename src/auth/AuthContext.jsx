@@ -24,20 +24,22 @@ export function AuthProvider({ children }) {
       return;
     }
 
-    supabase.auth.getSession().then(({ data: { session: current } }) => {
-      setSession(current);
-      if (current?.user) loadProfile(current.user.id);
-      setLoading(false);
-    });
-
+    // Una sola fuente de verdad: onAuthStateChange se dispara una vez de entrada con el
+    // estado ya conocido (evento INITIAL_SESSION) y de nuevo ante cualquier cambio real.
+    // Antes había una llamada separada a getSession() corriendo en paralelo — dos caminos
+    // async independientes escribiendo el mismo estado podían pisarse entre sí (ej. si
+    // onAuthStateChange disparaba de nuevo con la sesión ya resuelta justo después de que
+    // "loading" pasara a false), y eso podía mandar a un usuario ya logueado de vuelta al
+    // login al entrar directo a una ruta interna o refrescar la página.
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, current) => {
       setSession(current);
       if (current?.user) {
-        loadProfile(current.user.id);
+        loadProfile(current.user.id).finally(() => setLoading(false));
       } else {
         setProfile(null);
+        setLoading(false);
       }
     });
 
