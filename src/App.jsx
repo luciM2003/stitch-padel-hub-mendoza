@@ -15,6 +15,7 @@ import CajaYCobros from "./pages/CajaYCobros.jsx";
 import GestionDeClientes from "./pages/GestionDeClientes.jsx";
 import TimelineDeCanchas from "./pages/TimelineDeCanchas.jsx";
 import TorneosCalendario from "./pages/TorneosCalendario.jsx";
+import RankingDeJugadores from "./pages/RankingDeJugadores.jsx";
 import DetalleDelTorneo from "./pages/DetalleDelTorneo.jsx";
 import InscripcionATorneo from "./pages/InscripcionATorneo.jsx";
 import FixtureDelTorneo from "./pages/FixtureDelTorneo.jsx";
@@ -41,6 +42,7 @@ const screens = [
   ["/gestion-de-clientes", "Gestión de Clientes"],
   ["/timeline-de-canchas", "Timeline de Canchas"],
   ["/torneos", "Torneos (calendario)"],
+  ["/ranking", "Ranking"],
   ["/admin/torneos", "Admin: Torneos"],
   ["/admin/sponsors", "Admin: Sponsors"],
   ["/admin/sanciones", "Admin: Sanciones y Reglamento"],
@@ -81,6 +83,7 @@ export default function App() {
         <Route path="/detalle-del-partido" element={<RequireAuth><DetalleDelPartido /></RequireAuth>} />
         <Route path="/chat-del-partido" element={<RequireAuth><ChatDelPartido /></RequireAuth>} />
         <Route path="/torneos" element={<RequireAuth><TorneosCalendario /></RequireAuth>} />
+        <Route path="/ranking" element={<RequireAuth><RankingDeJugadores /></RequireAuth>} />
         <Route path="/torneos/:torneoId" element={<RequireAuth><DetalleDelTorneo /></RequireAuth>} />
         <Route path="/torneos/:torneoId/inscripcion" element={<RequireAuth><InscripcionATorneo /></RequireAuth>} />
         <Route path="/torneos/:torneoId/fixture" element={<RequireAuth><FixtureDelTorneo /></RequireAuth>} />

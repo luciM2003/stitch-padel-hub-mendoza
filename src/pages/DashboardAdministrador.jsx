@@ -1,31 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
 import SidebarProfileMenu from "../components/SidebarProfileMenu.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
+import { useClubAdmin } from "../hooks/useClubAdmin.js";
+import { supabase } from "../lib/supabaseClient.js";
+import { fmtFecha } from "../lib/format.js";
 import { adminNav, adminMobileNav } from "../config/nav.js";
+
+const ESTADO_LABEL = { borrador: "Borrador", abierto: "Inscripciones abiertas", en_curso: "En curso", finalizado: "Finalizado", cancelado: "Cancelado" };
+const ESTADO_STYLE = {
+  borrador: "bg-surface-container-high text-text-secondary",
+  abierto: "bg-status-ok/10 text-status-ok",
+  en_curso: "bg-primary-container text-text-primary",
+  finalizado: "bg-surface-container-high text-text-secondary",
+  cancelado: "bg-status-error/10 text-status-error",
+};
 
 const AVATAR_ADMIN =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBFzjDKTmd9DbUJw1ck2b4jD2cXRZLvH3fxeUkKXF8oG-OUZS1rtx45lAZdl3ZfFP5JhmZbG1a6r6ToL0iciFdMx3GqkLNSYWXOi_zlRbCXeyiaBRVMu3o3aLrdDRWfc6c9QvoSgZuGtjVlxN463aC1up9a-z7fWA-hMv2O3jJ-GilisFghTlMQzqZG1vg6Tnx8WrQTCsvZHXbEo-7rNtE_voFZO5NKhuGvRJSggnRyK_IAUY_ondY";
-
-const chartBars = [
-  { day: "Lu", height: 60 },
-  { day: "Ma", height: 75 },
-  { day: "Mi", height: 50 },
-  { day: "Ju", height: 90, highlight: true },
-  { day: "Vi", height: 100 },
-  { day: "Sa", height: 85 },
-  { day: "Do", height: 40 },
-];
 
 export default function DashboardAdministrador() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { profile } = useAuth();
+  const { club } = useClubAdmin();
   const [collapsed, setCollapsed] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [torneos, setTorneos] = useState([]);
+
+  useEffect(() => {
+    if (!club) return;
+    supabase
+      .from("torneos")
+      .select("id, nombre, estado, fecha_inicio, torneo_categorias(id)")
+      .eq("club_id", club.id)
+      .order("fecha_inicio", { ascending: false })
+      .limit(5)
+      .then(({ data }) => setTorneos(data || []));
+  }, [club]);
+
+  const torneosActivos = torneos.filter((t) => t.estado === "abierto" || t.estado === "en_curso").length;
 
   return (
     <div className="bg-background text-text-primary font-body-md min-h-screen flex antialiased">
@@ -102,7 +119,7 @@ export default function DashboardAdministrador() {
               { label: "Ocupación Hoy", icon: "monitoring", value: "85%", size: "56px", color: "text-primary-fixed" },
               { label: "Ingresos del Día", icon: "payments", value: "$450k", size: "48px", color: "text-on-ink-fixed" },
               { label: "Reservas Activas", icon: "calendar_today", value: "12", size: "56px", color: "text-primary-fixed" },
-              { label: "Nuevos Clientes", icon: "person_add", value: "4", size: "56px", color: "text-on-ink-fixed" },
+              { label: "Torneos Activos", icon: "emoji_events", value: String(torneosActivos), size: "56px", color: "text-on-ink-fixed" },
             ].map((m, i) => (
               <div
                 key={m.label}
@@ -175,26 +192,35 @@ export default function DashboardAdministrador() {
             </div>
 
             <div className="bg-surface-container-lowest rounded-kondor p-stack-md shadow-sm border border-border-subtle h-full flex flex-col">
-              <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-stack-md">Ocupación Semanal</h2>
-              <div className="flex-1 min-h-[250px] flex items-end gap-2 justify-between pt-8">
-                {chartBars.map((b, i) => (
-                  <div
-                    key={b.day}
-                    className="animate-item self-stretch flex flex-col items-center gap-2 w-full group"
-                    style={{ animationDelay: `${i * 50}ms` }}
+              <div className="flex justify-between items-center mb-stack-md">
+                <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Tus Torneos</h2>
+                <button
+                  onClick={() => navigate("/admin/torneos")}
+                  className="font-label-caps text-label-caps text-primary hover:text-primary-container active:scale-95 transition-all uppercase"
+                >
+                  Ver Todos
+                </button>
+              </div>
+              <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
+                {torneos.length === 0 && (
+                  <p className="text-body-md font-body-md text-text-secondary py-6 text-center">Todavía no creaste ningún torneo.</p>
+                )}
+                {torneos.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => navigate("/admin/torneos")}
+                    className="text-left bg-surface-container-low hover:bg-surface-container-high rounded-lg p-3 transition-colors"
                   >
-                    <div className="w-full bg-surface-container rounded-t-sm relative flex-1 flex items-end">
-                      <div
-                        title={`${b.height}% de ocupación`}
-                        className={
-                          "w-full rounded-t-sm transition-all duration-500 origin-bottom cursor-default hover:opacity-80 " +
-                          (b.highlight ? "bg-primary-container" : "bg-inverse-surface group-hover:bg-primary")
-                        }
-                        style={{ height: `${b.height}%` }}
-                      ></div>
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="font-body-md font-body-md font-bold text-on-surface truncate">{t.nombre}</span>
+                      <span className={"shrink-0 px-2 py-0.5 rounded-full text-[10px] font-label-caps uppercase " + ESTADO_STYLE[t.estado]}>
+                        {ESTADO_LABEL[t.estado]}
+                      </span>
                     </div>
-                    <span className={"font-label-caps text-[10px] uppercase " + (b.highlight ? "text-text-primary font-bold" : "text-text-secondary")}>{b.day}</span>
-                  </div>
+                    <p className="font-label-muted text-label-muted text-text-secondary mt-1">
+                      {fmtFecha(t.fecha_inicio)} • {(t.torneo_categorias || []).length} categorías
+                    </p>
+                  </button>
                 ))}
               </div>
             </div>

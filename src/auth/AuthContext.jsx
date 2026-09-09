@@ -71,6 +71,10 @@ export function AuthProvider({ children }) {
     setProfile(null);
   }
 
+  async function refreshProfile() {
+    if (session?.user) await loadProfile(session.user.id);
+  }
+
   async function resetPassword(email) {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: window.location.origin + "/restablecer-contrasena",
@@ -95,6 +99,7 @@ export function AuthProvider({ children }) {
     signOut,
     resetPassword,
     updatePassword,
+    refreshProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

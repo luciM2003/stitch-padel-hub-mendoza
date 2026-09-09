@@ -1,7 +1,8 @@
 export const playerNav = [
   { key: "home", to: "/home-jugador", icon: "home", label: "Inicio" },
-  { key: "play", to: "/partidos-abiertos", icon: "sports_tennis", label: "Partidos" },
   { key: "torneos", to: "/torneos", icon: "emoji_events", label: "Torneos" },
+  { key: "ranking", to: "/ranking", icon: "leaderboard", label: "Ranking" },
+  { key: "play", to: "/partidos-abiertos", icon: "sports_tennis", label: "Partidos" },
   { key: "events", to: "/mis-reservas", icon: "event_note", label: "Mis Reservas" },
   { key: "profile", to: "/perfil-de-usuario", icon: "person", label: "Perfil" },
 ];

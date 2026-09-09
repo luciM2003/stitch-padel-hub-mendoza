@@ -4,6 +4,7 @@ import AdminLayout from "../components/AdminLayout.jsx";
 import ClubSetupCard from "../components/ClubSetupCard.jsx";
 import Modal from "../components/Modal.jsx";
 import { useToast } from "../components/Toast.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { useClubAdmin } from "../hooks/useClubAdmin.js";
 import { supabase } from "../lib/supabaseClient.js";
 import { fmt, fmtFecha } from "../lib/format.js";
@@ -31,11 +32,13 @@ const SIGUIENTE_LABEL = { borrador: "Abrir inscripciones", abierto: "Iniciar tor
 export default function AdminTorneos() {
   const navigate = useNavigate();
   const showToast = useToast();
+  const { user } = useAuth();
   const { club, loading: loadingClub, crearClub } = useClubAdmin();
 
   const [torneos, setTorneos] = useState([]);
   const [sedes, setSedes] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [solicitudes, setSolicitudes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showNuevo, setShowNuevo] = useState(false);
   const [categoriaTarget, setCategoriaTarget] = useState(null);
@@ -72,8 +75,31 @@ export default function AdminTorneos() {
     setTorneos(t || []);
     setSedes(s || []);
     setCategorias(c || []);
+
+    const { data: sol } = await supabase
+      .from("solicitudes_categoria")
+      .select(
+        "id, motivo, estado, created_at, jugador:profiles!solicitudes_categoria_profile_id_fkey(nombre), torneo_categoria:torneo_categorias(categoria:categorias(nombre), torneo:torneos(id, nombre, club_id))"
+      )
+      .eq("estado", "pendiente")
+      .order("created_at");
+    setSolicitudes((sol || []).filter((s) => s.torneo_categoria?.torneo?.club_id === club.id));
+
     setLoading(false);
   }, [club]);
+
+  async function resolverSolicitud(id, estado) {
+    const { error } = await supabase
+      .from("solicitudes_categoria")
+      .update({ estado, resuelto_por: user.id, resuelto_en: new Date().toISOString() })
+      .eq("id", id);
+    if (error) {
+      showToast(error.message, "error");
+      return;
+    }
+    showToast(estado === "aprobada" ? "Excepción aprobada" : "Solicitud rechazada");
+    cargarTodo();
+  }
 
   useEffect(() => {
     cargarTodo();
@@ -180,8 +206,8 @@ export default function AdminTorneos() {
     if (nuevoEstado === "finalizado") {
       for (const tc of torneo.torneo_categorias || []) {
         try {
-          const categoriaId = await finalizarTorneoCategoria(tc.id, torneo.id);
-          if (categoriaId) await evaluarAscensosDescensos(categoriaId, club.id);
+          const categoriaId = await finalizarTorneoCategoria(tc.id, torneo.id, torneo.sede_id);
+          if (categoriaId) await evaluarAscensosDescensos(categoriaId, club.id, torneo.sede_id);
         } catch (err) {
           console.error(err);
         }
@@ -248,6 +274,39 @@ export default function AdminTorneos() {
         )
       }
     >
+      {!loading && !loadingClub && solicitudes.length > 0 && (
+        <div className="mb-stack-lg flex flex-col gap-3">
+          <h3 className="text-body-lg font-body-lg font-bold text-text-primary">Solicitudes de excepción de categoría</h3>
+          {solicitudes.map((s) => (
+            <div key={s.id} className="bg-surface-container-lowest border border-status-pending/30 rounded-xl p-4 flex flex-wrap justify-between items-center gap-3">
+              <div>
+                <p className="text-body-md font-body-md font-bold text-text-primary">
+                  {s.jugador?.nombre || "Jugador"} quiere anotarse en {s.torneo_categoria?.categoria?.nombre}
+                </p>
+                <p className="text-label-muted font-label-muted text-text-secondary">
+                  {s.torneo_categoria?.torneo?.nombre}
+                  {s.motivo ? ` — "${s.motivo}"` : ""}
+                </p>
+              </div>
+              <div className="flex gap-2 shrink-0">
+                <button
+                  onClick={() => resolverSolicitud(s.id, "rechazada")}
+                  className="px-4 py-2 rounded-full text-status-error hover:bg-status-error/10 active:scale-95 transition-all text-label-caps font-label-caps"
+                >
+                  Rechazar
+                </button>
+                <button
+                  onClick={() => resolverSolicitud(s.id, "aprobada")}
+                  className="px-4 py-2 rounded-full bg-status-ok text-on-primary hover:opacity-90 active:scale-95 transition-all text-label-caps font-label-caps font-bold"
+                >
+                  Aprobar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {!loading && !loadingClub && sedes.length > 0 && (
         <div className="mb-stack-lg flex flex-col gap-3">
           <h3 className="text-body-lg font-body-lg font-bold text-text-primary">Sedes y Canchas</h3>

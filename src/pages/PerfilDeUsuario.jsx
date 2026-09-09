@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/BottomNav.jsx";
 import PlayerSidebar from "../components/PlayerSidebar.jsx";
 import SettingsModal from "../components/SettingsModal.jsx";
 import PerfilTorneosSection from "../components/PerfilTorneosSection.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
+import { useToast } from "../components/Toast.jsx";
+import { supabase } from "../lib/supabaseClient.js";
 
 const actividadBase = [
   {
@@ -56,9 +58,34 @@ const actividadExtra = [
 
 export default function PerfilDeUsuario() {
   const navigate = useNavigate();
-  const { user, profile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
+  const showToast = useToast();
   const [showSettings, setShowSettings] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [categoriasGlobales, setCategoriasGlobales] = useState([]);
+  const [guardandoCategoria, setGuardandoCategoria] = useState(false);
+
+  useEffect(() => {
+    supabase
+      .from("categorias_globales")
+      .select("id, nombre, genero, orden")
+      .order("genero")
+      .order("orden")
+      .then(({ data }) => setCategoriasGlobales(data || []));
+  }, []);
+
+  async function cambiarCategoria(categoriaGlobalId) {
+    if (!user) return;
+    setGuardandoCategoria(true);
+    const { error } = await supabase.from("profiles").update({ categoria_global_id: categoriaGlobalId || null }).eq("id", user.id);
+    if (error) {
+      showToast(error.message, "error");
+    } else {
+      await refreshProfile();
+      showToast("¡Categoría actualizada!");
+    }
+    setGuardandoCategoria(false);
+  }
 
   const actividad = showMore ? [...actividadBase, ...actividadExtra] : actividadBase;
 
@@ -111,6 +138,42 @@ export default function PerfilDeUsuario() {
             <div className="flex gap-inline-gutter mt-2">
               <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Agresivo</span>
               <span className="bg-surface-container px-4 py-1 rounded-full text-label-caps font-label-caps text-on-surface uppercase border border-border-subtle">Diestro</span>
+            </div>
+
+            <div className="w-full mt-2 flex flex-col gap-1 text-left">
+              <label className="text-label-caps font-label-caps text-text-secondary uppercase" htmlFor="mi-categoria">
+                Mi categoría
+              </label>
+              <select
+                id="mi-categoria"
+                disabled={guardandoCategoria}
+                value={profile?.categoria_global_id || ""}
+                onChange={(e) => cambiarCategoria(e.target.value)}
+                className="input"
+              >
+                <option value="">Sin definir</option>
+                <optgroup label="Hombres">
+                  {categoriasGlobales
+                    .filter((c) => c.genero === "masculino")
+                    .map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.nombre}
+                      </option>
+                    ))}
+                </optgroup>
+                <optgroup label="Mujeres">
+                  {categoriasGlobales
+                    .filter((c) => c.genero === "femenino")
+                    .map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.nombre}
+                      </option>
+                    ))}
+                </optgroup>
+              </select>
+              <p className="text-label-muted font-label-muted text-text-secondary">
+                Se usa para habilitarte directo en torneos de tu categoría. Para anotarte en otra, vas a poder pedir una excepción.
+              </p>
             </div>
           </section>
 

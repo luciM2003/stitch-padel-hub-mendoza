@@ -2,8 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient.js";
 import { useAuth } from "../auth/AuthContext.jsx";
 
-const CATEGORIAS_BASE = ["1ra", "2da", "3ra", "4ta", "5ta", "6ta", "7ma", "8va"];
-
 // El rol profiles.role solo se usa como atajo de UI (a qué pantalla mandar al usuario tras
 // loguearse / qué nav mostrar). El control de acceso real a los datos del club queda en RLS
 // vía la tabla club_admins, así que promover el propio rol acá no otorga ningún permiso extra.
@@ -43,9 +41,18 @@ export function useClubAdmin() {
         ["Cancha 1", "Cancha 2", "Cancha 3", "Cancha 4"].map((nombre) => ({ sede_id: sedeRow.id, nombre, tipo: "Cristal" }))
       );
     }
-    await supabase.from("categorias").insert(
-      CATEGORIAS_BASE.map((catNombre, i) => ({ club_id: clubRow.id, nombre: catNombre, orden: i + 1, ranking_tipo: "club" }))
-    );
+    const { data: globales } = await supabase.from("categorias_globales").select("id, nombre, genero, orden").order("genero").order("orden");
+    if (globales?.length) {
+      await supabase.from("categorias").insert(
+        globales.map((g) => ({
+          club_id: clubRow.id,
+          nombre: `${g.nombre} ${g.genero === "masculino" ? "Hombres" : "Mujeres"}`,
+          orden: g.orden,
+          ranking_tipo: "club",
+          categoria_global_id: g.id,
+        }))
+      );
+    }
     if (profile?.role !== "club_admin") {
       await supabase.from("profiles").update({ role: "club_admin" }).eq("id", user.id);
     }
