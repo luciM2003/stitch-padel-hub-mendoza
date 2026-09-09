@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabaseClient.js";
 import { fmt } from "../lib/format.js";
 import { crearPreferenciaMP, simularPagoAprobado } from "../lib/mercadopago.js";
 import { notificar } from "../lib/notify.js";
+import { checkYConfirmar } from "../lib/inscripciones.js";
 
 const ESTADO_PAGO_STYLE = { pendiente: "text-status-pending", pagado: "text-status-ok", reembolsado: "text-text-secondary" };
 const ESTADO_PAGO_LABEL = { pendiente: "Pago pendiente", pagado: "Pagado", reembolsado: "Reembolsado" };
@@ -138,13 +139,6 @@ export default function InscripcionATorneo() {
     showToast("¡Publicado! Te avisamos cuando alguien se sume.");
     setProcesando(false);
     cargar();
-  }
-
-  async function checkYConfirmar(inscripcionId) {
-    const { data: filas } = await supabase.from("inscripcion_jugadores").select("estado_pago").eq("inscripcion_id", inscripcionId);
-    if (filas?.length === 2 && filas.every((f) => f.estado_pago === "pagado")) {
-      await supabase.from("inscripciones").update({ estado: "confirmada" }).eq("id", inscripcionId);
-    }
   }
 
   async function pagarConMercadoPago(miFilaId, inscripcionId) {

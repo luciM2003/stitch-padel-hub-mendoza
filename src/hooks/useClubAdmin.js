@@ -6,7 +6,7 @@ import { useAuth } from "../auth/AuthContext.jsx";
 // loguearse / qué nav mostrar). El control de acceso real a los datos del club queda en RLS
 // vía la tabla club_admins, así que promover el propio rol acá no otorga ningún permiso extra.
 export function useClubAdmin() {
-  const { user, profile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
   const [club, setClub] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,6 +55,10 @@ export function useClubAdmin() {
     }
     if (profile?.role !== "club_admin") {
       await supabase.from("profiles").update({ role: "club_admin" }).eq("id", user.id);
+      // Sin este refresh, el profile en memoria del AuthContext sigue con role="player"
+      // hasta el próximo login, y RequireAuth adminOnly rebota al admin recién creado
+      // fuera de /dashboard-administrador aunque en la base ya sea club_admin.
+      await refreshProfile();
     }
 
     setClub(clubRow);

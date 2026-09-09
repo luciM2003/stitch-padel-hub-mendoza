@@ -5,6 +5,7 @@ import PlayerSidebar from "../components/PlayerSidebar.jsx";
 import NotificationsModal from "../components/NotificationsModal.jsx";
 import { supabase, isSupabaseConfigured } from "../lib/supabaseClient.js";
 import { fmt, fmtFecha } from "../lib/format.js";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 const ESTADO_STYLE = {
   abierto: "bg-status-ok/10 text-status-ok",
@@ -16,11 +17,14 @@ const ESTADO_LABEL = { abierto: "Inscripciones abiertas", en_curso: "En curso", 
 
 export default function TorneosCalendario() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [showNotifs, setShowNotifs] = useState(false);
   const [torneos, setTorneos] = useState([]);
+  const [misTorneoIds, setMisTorneoIds] = useState(new Set());
   const [loading, setLoading] = useState(true);
   const [filtroSede, setFiltroSede] = useState("");
   const [filtroCategoria, setFiltroCategoria] = useState("");
+  const [soloMios, setSoloMios] = useState(false);
 
   useEffect(() => {
     async function cargar() {
@@ -34,10 +38,24 @@ export default function TorneosCalendario() {
         .neq("estado", "borrador")
         .order("fecha_inicio", { ascending: true });
       setTorneos(data || []);
+
+      if (user) {
+        const { data: misInscripciones } = await supabase
+          .from("inscripcion_jugadores")
+          .select("inscripcion:inscripciones(estado, torneo_categoria:torneo_categorias(torneo_id))")
+          .eq("profile_id", user.id);
+        const ids = new Set(
+          (misInscripciones || [])
+            .filter((i) => i.inscripcion?.estado !== "cancelada")
+            .map((i) => i.inscripcion?.torneo_categoria?.torneo_id)
+            .filter(Boolean)
+        );
+        setMisTorneoIds(ids);
+      }
       setLoading(false);
     }
     cargar();
-  }, []);
+  }, [user]);
 
   const sedes = useMemo(() => [...new Set(torneos.map((t) => t.sede?.nombre).filter(Boolean))], [torneos]);
   const categorias = useMemo(
@@ -46,6 +64,7 @@ export default function TorneosCalendario() {
   );
 
   const filtrados = torneos.filter((t) => {
+    if (soloMios && !misTorneoIds.has(t.id)) return false;
     if (filtroSede && t.sede?.nombre !== filtroSede) return false;
     if (filtroCategoria && !(t.torneo_categorias || []).some((tc) => tc.categoria?.nombre === filtroCategoria)) return false;
     return true;
@@ -66,6 +85,21 @@ export default function TorneosCalendario() {
         </header>
 
         <main className="px-container-margin flex flex-col gap-stack-md max-w-6xl mx-auto mt-4">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setSoloMios(false)}
+              className={"flex-1 py-2 rounded-full text-label-caps font-label-caps font-bold transition-all " + (!soloMios ? "bg-primary-fixed text-on-primary-fixed" : "bg-surface-container text-text-secondary")}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setSoloMios(true)}
+              className={"flex-1 py-2 rounded-full text-label-caps font-label-caps font-bold transition-all " + (soloMios ? "bg-primary-fixed text-on-primary-fixed" : "bg-surface-container text-text-secondary")}
+            >
+              Mis Torneos {misTorneoIds.size > 0 ? `(${misTorneoIds.size})` : ""}
+            </button>
+          </div>
+
           <div className="flex gap-3 overflow-x-auto hide-scrollbar pb-1">
             <select value={filtroSede} onChange={(e) => setFiltroSede(e.target.value)} className="input w-auto shrink-0">
               <option value="">Todas las sedes</option>
@@ -89,7 +123,11 @@ export default function TorneosCalendario() {
             <p className="text-center text-text-secondary py-4">El backend todavía se está configurando — pronto vas a ver acá los torneos disponibles.</p>
           )}
           {loading && <p className="text-center text-text-secondary py-12">Cargando torneos...</p>}
-          {!loading && isSupabaseConfigured && filtrados.length === 0 && <p className="text-center text-text-secondary py-12">No hay torneos que coincidan con estos filtros.</p>}
+          {!loading && isSupabaseConfigured && filtrados.length === 0 && (
+            <p className="text-center text-text-secondary py-12">
+              {soloMios ? "Todavía no te anotaste a ningún torneo." : "No hay torneos que coincidan con estos filtros."}
+            </p>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-inline-gutter pb-8">
             {filtrados.map((t, i) => (
@@ -99,9 +137,17 @@ export default function TorneosCalendario() {
                 className="animate-item bg-surface-container-lowest border border-border-subtle rounded-2xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <span className={"self-start px-3 py-1 rounded-full text-label-caps font-label-caps uppercase " + ESTADO_STYLE[t.estado]}>
-                  {ESTADO_LABEL[t.estado]}
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className={"self-start px-3 py-1 rounded-full text-label-caps font-label-caps uppercase " + ESTADO_STYLE[t.estado]}>
+                    {ESTADO_LABEL[t.estado]}
+                  </span>
+                  {misTorneoIds.has(t.id) && (
+                    <span className="px-3 py-1 rounded-full bg-primary-container text-text-primary text-label-caps font-label-caps uppercase font-bold flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[14px]">check_circle</span>
+                      Inscripto
+                    </span>
+                  )}
+                </div>
                 <h3 className="text-body-lg font-body-lg font-bold text-text-primary">{t.nombre}</h3>
                 <p className="text-label-muted font-label-muted text-text-secondary">
                   {t.club?.nombre} • {t.sede?.nombre}

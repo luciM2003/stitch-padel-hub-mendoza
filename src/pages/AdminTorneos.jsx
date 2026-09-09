@@ -45,6 +45,7 @@ export default function AdminTorneos() {
   const [sedeCanchaTarget, setSedeCanchaTarget] = useState(null);
   const [canchaForm, setCanchaForm] = useState({ nombre: "", tipo: "Cristal" });
   const [torneoEditando, setTorneoEditando] = useState(null);
+  const [procesandoTorneoId, setProcesandoTorneoId] = useState(null);
   const [editForm, setEditForm] = useState({ nombre: "", sedeId: "", fechaInicio: "", fechaCierre: "", precio: "", comision: "8", premios: "" });
   const [form, setForm] = useState({
     nombre: "",
@@ -196,27 +197,33 @@ export default function AdminTorneos() {
   }
 
   async function avanzarEstado(torneo) {
+    if (procesandoTorneoId) return;
     const nuevoEstado = SIGUIENTE_ESTADO[torneo.estado];
     if (!nuevoEstado) return;
-    const { error } = await supabase.from("torneos").update({ estado: nuevoEstado }).eq("id", torneo.id);
-    if (error) {
-      showToast(error.message, "error");
-      return;
-    }
-    if (nuevoEstado === "finalizado") {
-      for (const tc of torneo.torneo_categorias || []) {
-        try {
-          const categoriaId = await finalizarTorneoCategoria(tc.id, torneo.id, torneo.sede_id);
-          if (categoriaId) await evaluarAscensosDescensos(categoriaId, club.id, torneo.sede_id);
-        } catch (err) {
-          console.error(err);
-        }
+    setProcesandoTorneoId(torneo.id);
+    try {
+      const { error } = await supabase.from("torneos").update({ estado: nuevoEstado }).eq("id", torneo.id);
+      if (error) {
+        showToast(error.message, "error");
+        return;
       }
-      showToast("Torneo finalizado — ranking actualizado");
-    } else {
-      showToast(`Estado actualizado: ${ESTADO_LABEL[nuevoEstado]}`);
+      if (nuevoEstado === "finalizado") {
+        for (const tc of torneo.torneo_categorias || []) {
+          try {
+            const categoriaId = await finalizarTorneoCategoria(tc.id, torneo.id, torneo.sede_id);
+            if (categoriaId) await evaluarAscensosDescensos(categoriaId, club.id, torneo.sede_id);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        showToast("Torneo finalizado — ranking actualizado");
+      } else {
+        showToast(`Estado actualizado: ${ESTADO_LABEL[nuevoEstado]}`);
+      }
+      cargarTodo();
+    } finally {
+      setProcesandoTorneoId(null);
     }
-    cargarTodo();
   }
 
   async function agregarCancha(e) {
@@ -366,6 +373,12 @@ export default function AdminTorneos() {
                   Editar
                 </button>
                 <button
+                  onClick={() => navigate(`/torneos/${t.id}/participantes`)}
+                  className="px-4 py-2 rounded-full border border-border-subtle text-text-primary hover:bg-surface-container-high active:scale-95 transition-all text-label-caps font-label-caps"
+                >
+                  Participantes
+                </button>
+                <button
                   onClick={() => navigate(`/torneos/${t.id}/fixture`)}
                   className="px-4 py-2 rounded-full border border-border-subtle text-text-primary hover:bg-surface-container-high active:scale-95 transition-all text-label-caps font-label-caps"
                 >
@@ -374,9 +387,10 @@ export default function AdminTorneos() {
                 {SIGUIENTE_ESTADO[t.estado] && (
                   <button
                     onClick={() => avanzarEstado(t)}
-                    className="px-4 py-2 rounded-full bg-primary-container text-text-primary font-bold hover:opacity-90 active:scale-95 transition-all text-label-caps font-label-caps"
+                    disabled={Boolean(procesandoTorneoId)}
+                    className="px-4 py-2 rounded-full bg-primary-container text-text-primary font-bold hover:opacity-90 active:scale-95 transition-all text-label-caps font-label-caps disabled:opacity-50"
                   >
-                    {SIGUIENTE_LABEL[t.estado]}
+                    {procesandoTorneoId === t.id ? "Procesando..." : SIGUIENTE_LABEL[t.estado]}
                   </button>
                 )}
                 {t.estado !== "cancelado" && t.estado !== "finalizado" && (

@@ -21,6 +21,7 @@ import InscripcionATorneo from "./pages/InscripcionATorneo.jsx";
 import FixtureDelTorneo from "./pages/FixtureDelTorneo.jsx";
 import GaleriaDelTorneo from "./pages/GaleriaDelTorneo.jsx";
 import AdminTorneos from "./pages/AdminTorneos.jsx";
+import AdminParticipantes from "./pages/AdminParticipantes.jsx";
 import AdminSponsors from "./pages/AdminSponsors.jsx";
 import AdminSanciones from "./pages/AdminSanciones.jsx";
 import RequireAuth from "./auth/RequireAuth.jsx";
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="/torneos/:torneoId" element={<RequireAuth><DetalleDelTorneo /></RequireAuth>} />
         <Route path="/torneos/:torneoId/inscripcion" element={<RequireAuth><InscripcionATorneo /></RequireAuth>} />
         <Route path="/torneos/:torneoId/fixture" element={<RequireAuth><FixtureDelTorneo /></RequireAuth>} />
+        <Route path="/torneos/:torneoId/participantes" element={<RequireAuth><AdminParticipantes /></RequireAuth>} />
         <Route path="/torneos/:torneoId/galeria" element={<RequireAuth><GaleriaDelTorneo /></RequireAuth>} />
         {/* Sin adminOnly a propósito: estas páginas muestran su propio gate (ClubSetupCard) para
             que cualquier usuario autenticado pueda crear su club la primera vez que entra. */}
