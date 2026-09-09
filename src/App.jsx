@@ -1,5 +1,6 @@
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import LoginRegistro from "./pages/LoginRegistro.jsx";
+import RestablecerContrasena from "./pages/RestablecerContrasena.jsx";
 import HomeJugador from "./pages/HomeJugador.jsx";
 import PartidosAbiertos from "./pages/PartidosAbiertos.jsx";
 import PerfilDeUsuario from "./pages/PerfilDeUsuario.jsx";
@@ -25,6 +26,7 @@ import RequireAuth from "./auth/RequireAuth.jsx";
 
 const screens = [
   ["/", "Login / Registro"],
+  ["/restablecer-contrasena", "Restablecer Contraseña"],
   ["/home-jugador", "Home Jugador"],
   ["/partidos-abiertos", "Partidos Abiertos"],
   ["/perfil-de-usuario", "Perfil de Usuario"],
@@ -67,6 +69,7 @@ export default function App() {
     <div key={location.pathname} className="animate-page-in">
       <Routes location={location}>
         <Route path="/" element={<LoginRegistro />} />
+        <Route path="/restablecer-contrasena" element={<RequireAuth><RestablecerContrasena /></RequireAuth>} />
         <Route path="/screens" element={<ScreensIndex />} />
         <Route path="/home-jugador" element={<RequireAuth><HomeJugador /></RequireAuth>} />
         <Route path="/partidos-abiertos" element={<RequireAuth><PartidosAbiertos /></RequireAuth>} />
